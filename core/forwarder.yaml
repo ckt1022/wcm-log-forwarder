@@ -1,0 +1,57 @@
+# WCM Log Forwarder 範例設定
+# 相對路徑以「本檔所在目錄/plugin/」為基準，也可以填絕對路徑。
+
+plugins:
+  parse: "parse.wasm"
+  filter: "filter.wasm"
+  format: "format.wasm"
+  transport: "transport.wasm"
+
+# parse 一定啟用；關閉 format 時 transport 也必須關閉
+stages:
+  filter: true
+  format: true
+  transport: true
+
+input:
+  mode: tcp       # tcp | tail
+  tcp:
+    host: "0.0.0.0"
+    port: 5140
+  tail:
+    path: "/tmp/test-logs.log"
+
+batch:
+  # 每個 plugin instance 的線性記憶體上限
+  mem_limit_mb: 256
+  # 輸出 flush 時間窗 W：處理完的日誌最多在 router 等這麼久（可熱更新）
+  max_wait_ms: 100
+  # 處理批次：達到位元組上限、筆數上限或等待上限，任一成立就送出（可熱更新）
+  micro_batch_max_bytes_kib: 128
+  micro_batch_max_wait_ms: 5
+  channel_capacity: 50000
+  max_format_chunk: 10000
+  max_transport_bytes: 134217728
+  transport_workers: 1
+  # 每次 plugin 呼叫的時限（CPU 卡死保護）
+  stage_timeout_ms: 30000
+  # true＝instance 跨批重用；false＝每批用完即丟（Go／C# 等 GC 語言插件若累積記憶體可關閉）
+  plugin_instance_reuse: true
+
+# Transport 的送出與重試。重試用完仍失敗的資料寫入 error.txt，不會丟棄。
+transport:
+  connect_timeout_ms: 5000
+  request_timeout_ms: 30000
+  retry:
+    max_retries: 8
+    initial_backoff_ms: 1000
+    max_backoff_ms: 30000
+
+# targettag 的每個字母對應一個端點（例如 "AB" 會同時送到 A 與 B）
+endpoint:
+  A: "http://127.0.0.1:8080/ingest"
+
+config_reload_secs: 10
+
+# 即時狀態的輸出間隔（秒），0 為關閉；閒置時不輸出
+status_interval_secs: 0

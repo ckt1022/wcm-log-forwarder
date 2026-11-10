@@ -1,0 +1,305 @@
+package local:log-process@0.3.0;
+
+// ─────────────────────────────────────────────
+// 核心共享型別
+// ─────────────────────────────────────────────
+interface pipeline-process {
+
+    /// parser 回傳的原始解析結果，不含 id
+    /// host 收到後統一分配 id，轉換為 log-entry，再傳入後續插件
+    record parsed-entry {
+        timestamp: string,
+        level: log-level,
+        message: string,
+        tags: list<tuple<string,string>>,
+        targettag: string //用來route的標籤
+    }
+
+    /// 帶有 host 分配 id 的完整條目
+    /// id 由 host 保證在同一批次內唯一，插件不得修改 id
+    record log-entry {
+        id: u64,
+        timestamp: string,
+        level: log-level,
+        message: string,
+        tags: list<tuple<string, string>>,
+    }
+
+    /// 日誌層級（syslog 七級）
+    enum log-level {
+        debug,
+        info,
+        warn,
+        error,
+        crit,
+        alert,
+        emerg,
+    }
+
+    // ── 錯誤型別 ──────────────────────────────
+
+    /// parser 專屬錯誤，語意比通用錯誤更精確
+    variant parse-error {
+        invalid-format(string),
+        unsupported-version(u16),
+        corrupted-data,
+    }
+
+    /// 所有插件共用的通用錯誤
+    variant plugin-error {
+        invalid-input(string),
+        processing-failed(string),
+        config-error(string),
+        /// 插件回傳了輸入中不存在的 id，host 應視為嚴重錯誤
+        unknown-id(u64),
+        internal-error,
+    }
+
+    // ── id 配對結果型別 ────────────────────────
+    // 插件只回傳「決策」，host 負責對原始 log-entry 執行實際操作
+    // 這確保原始資料不被插件修改（masking-plugin 是唯一例外）
+
+    /// reduction-plugin 使用
+    record filter-result {
+        id: u64,
+        keep: bool,
+    }
+
+    /// enricher-plugin 使用
+    record enrich-result {
+        id: u64,
+        /// 要附加到對應 log-entry.tags 的額外標籤
+        additional-tags: list<tuple<string, string>>,
+    }
+
+    /// route-plugin 使用
+    record route-result {
+        id: u64,
+        /// 此條 log 的轉送目標 URL 列表
+        /// 空 list 表示不轉送（由插件主動決定跳過）
+        urls: list<string>,
+    }
+}
+
+// ─────────────────────────────────────────────
+// transport 專用型別（與核心型別分開，避免污染）
+// ─────────────────────────────────────────────
+interface transport-types {
+
+    variant auth-method {
+        none,
+        bearer-token(string),
+        basic-auth(basic-credential),
+        api-key(api-key-config),
+    }
+
+    record basic-credential {
+        username: string,
+        password: string,
+    }
+
+    record api-key-config {
+        /// HTTP 標頭名稱，例如 "X-API-Key"、"Authorization"
+        header-name: string,
+        key: string,
+    }
+
+    record retry-config {
+        max-retries: u32,
+        /// 第一次重試前的等待（毫秒）
+        initial-backoff-ms: u32,
+        /// 重試等待上限（毫秒）
+        max-backoff-ms: u32,
+    }
+
+    record tls-config {
+        /// false 代表跳過憑證驗證，僅用於內網測試
+        verify-peer: bool,
+        /// CA 憑證（PEM 格式），none 則使用系統預設 CA
+        ca-pem: option<string>,
+        /// mTLS 用戶端憑證（PEM 格式）
+        client-cert-pem: option<string>,
+        /// mTLS 用戶端私鑰（PEM 格式）
+        client-key-pem: option<string>,
+    }
+
+    record transport-config {
+        /// 目標端點，例如 "https://logs.example.com/ingest"
+        endpoint: string,
+        auth: auth-method,
+        /// TCP 連線超時（毫秒），0 = 無限等待
+        connect-timeout-ms: u32,
+        /// 完整請求超時（毫秒），0 = 無限等待
+        request-timeout-ms: u32,
+        retry: option<retry-config>,
+        tls: option<tls-config>,
+        /// 自訂 HTTP 標頭，例如追蹤 ID、來源標記
+        extra-headers: list<tuple<string, string>>,
+        /// 每批次最大位元組數，超過則分批發送，0 = 不限制
+        max-batch-bytes: u32,
+    }
+}
+
+// ─────────────────────────────────────────────
+// parser-plugin
+// 回傳 parsed-entry（無 id），host 統一分配 id 後轉為 log-entry
+// ─────────────────────────────────────────────
+world parser-plugin {
+    use pipeline-process.{parsed-entry, parse-error};
+
+    // 最小 WASI 集合（C／Go／Rust libc runtime 與 wasip1 reactor adapter 需要）。
+    // 刻意不含 wasi:filesystem、wasi:sockets、wasi:http。
+    //
+    // Host 實際強制的內容（src/capability.rs、src/app.rs build_runtime）：
+    //   1. 載入時檢查：讀取 component 的 import 清單，凡是不在 parse stage
+    //      allowlist 的 import（filesystem／sockets／http／未知介面／本套件中
+    //      帶函式的介面）一律以 `[capability]` 錯誤拒絕載入，訊息列出每一個違規 import。
+    //   2. linker 只連結 allowlist 內的介面，未授權介面在實例化時是 unknown import。
+    //   3. WasiCtx 只繼承 stdout／stderr；stdin 為空、不注入環境變數、沒有 preopen。
+    // 例外：wasip1 adapter 編出的 C／Go／C# plugin 會連帶 import filesystem，
+    // 需在 forwarder.yaml 明確設定 `capabilities.parse.filesystem: inert` 才能載入；
+    // inert 只連結介面、不給任何 preopen，plugin 仍然打不開任何檔案。
+    // （本 world 只約束 guest 端 bindgen；真正的邊界由上述 host 機制決定。）
+    import wasi:clocks/monotonic-clock@0.2.0;
+    import wasi:clocks/wall-clock@0.2.0;
+    import wasi:io/error@0.2.0;
+    import wasi:io/poll@0.2.0;
+    import wasi:io/streams@0.2.0;
+    import wasi:cli/environment@0.2.0;
+    import wasi:cli/exit@0.2.0;
+    import wasi:cli/stdin@0.2.0;
+    import wasi:cli/stdout@0.2.0;
+    import wasi:cli/stderr@0.2.0;
+    import wasi:cli/terminal-input@0.2.0;
+    import wasi:cli/terminal-output@0.2.0;
+    import wasi:cli/terminal-stdin@0.2.0;
+    import wasi:cli/terminal-stdout@0.2.0;
+    import wasi:cli/terminal-stderr@0.2.0;
+    import wasi:random/random@0.2.0;
+    import wasi:random/insecure@0.2.0;
+    import wasi:random/insecure-seed@0.2.0;
+
+    export parse: func(raw-data: list<string>) -> result<list<parsed-entry>, parse-error>;
+    export report-usage: func() -> u64;
+}
+
+
+// ─────────────────────────────────────────────
+// reduction-plugin
+// 回傳 filter-result，host 依 id 決定是否將該條 log 移出後續流程
+// ─────────────────────────────────────────────
+world reduction-plugin {
+    use pipeline-process.{log-entry, filter-result, plugin-error};
+
+    // 與 parser-plugin 相同的最小 WASI 集合。舊版 `include wasi:cli/imports`
+    // 會連帶引入 filesystem 與 sockets；現已改為逐一列出，host 端
+    // filter stage 同樣預設拒絕 filesystem／sockets／http（src/capability.rs）。
+    import wasi:clocks/monotonic-clock@0.2.0;
+    import wasi:clocks/wall-clock@0.2.0;
+    import wasi:io/error@0.2.0;
+    import wasi:io/poll@0.2.0;
+    import wasi:io/streams@0.2.0;
+    import wasi:cli/environment@0.2.0;
+    import wasi:cli/exit@0.2.0;
+    import wasi:cli/stdin@0.2.0;
+    import wasi:cli/stdout@0.2.0;
+    import wasi:cli/stderr@0.2.0;
+    import wasi:cli/terminal-input@0.2.0;
+    import wasi:cli/terminal-output@0.2.0;
+    import wasi:cli/terminal-stdin@0.2.0;
+    import wasi:cli/terminal-stdout@0.2.0;
+    import wasi:cli/terminal-stderr@0.2.0;
+    import wasi:random/random@0.2.0;
+    import wasi:random/insecure@0.2.0;
+    import wasi:random/insecure-seed@0.2.0;
+
+    export filter: func(
+        struct-data: list<log-entry>
+    ) -> result<list<filter-result>, plugin-error>;
+
+    export report-usage: func() -> u64;
+}
+
+// ─────────────────────────────────────────────
+// format-plugin
+// ─────────────────────────────────────────────
+world format-plugin {
+    use pipeline-process.{log-entry, plugin-error};
+
+    // 與 parser-plugin 相同的最小 WASI 集合（理由同 reduction-plugin）。
+    import wasi:clocks/monotonic-clock@0.2.0;
+    import wasi:clocks/wall-clock@0.2.0;
+    import wasi:io/error@0.2.0;
+    import wasi:io/poll@0.2.0;
+    import wasi:io/streams@0.2.0;
+    import wasi:cli/environment@0.2.0;
+    import wasi:cli/exit@0.2.0;
+    import wasi:cli/stdin@0.2.0;
+    import wasi:cli/stdout@0.2.0;
+    import wasi:cli/stderr@0.2.0;
+    import wasi:cli/terminal-input@0.2.0;
+    import wasi:cli/terminal-output@0.2.0;
+    import wasi:cli/terminal-stdin@0.2.0;
+    import wasi:cli/terminal-stdout@0.2.0;
+    import wasi:cli/terminal-stderr@0.2.0;
+    import wasi:random/random@0.2.0;
+    import wasi:random/insecure@0.2.0;
+    import wasi:random/insecure-seed@0.2.0;
+
+    export format: func(
+        struct-data: list<log-entry>
+    ) -> result<list<u8>, plugin-error>;
+    export report-usage: func() -> u64;
+}
+
+// ─────────────────────────────────────────────
+// transport-plugin
+// ─────────────────────────────────────────────
+world transport-plugin {
+    use pipeline-process.{plugin-error};
+    use transport-types.{transport-config};
+
+    // ── 共用基礎（stdio / env / clock / random 等）─────────────────────────
+    // 舊版 `include wasi:cli/imports` 會連帶引入 filesystem 與 sockets，現改為逐一列出。
+    import wasi:clocks/monotonic-clock@0.2.0;
+    import wasi:clocks/wall-clock@0.2.0;
+    import wasi:io/error@0.2.0;
+    import wasi:io/poll@0.2.0;
+    import wasi:io/streams@0.2.0;
+    import wasi:cli/environment@0.2.0;
+    import wasi:cli/exit@0.2.0;
+    import wasi:cli/stdin@0.2.0;
+    import wasi:cli/stdout@0.2.0;
+    import wasi:cli/stderr@0.2.0;
+    import wasi:cli/terminal-input@0.2.0;
+    import wasi:cli/terminal-output@0.2.0;
+    import wasi:cli/terminal-stdin@0.2.0;
+    import wasi:cli/terminal-stdout@0.2.0;
+    import wasi:cli/terminal-stderr@0.2.0;
+    import wasi:random/random@0.2.0;
+    import wasi:random/insecure@0.2.0;
+    import wasi:random/insecure-seed@0.2.0;
+
+    // ── 唯一的對外通道：wasi:http（host 管理 TCP/TLS）─────────────────────────
+    // 插件只需建立 OutgoingRequest 並呼叫 outgoing-handler.handle()。
+    // 無 4096 B 寫入限制，body 大小不受限。
+    // Host 端強制：transport stage 只連結 wasi:http，且覆寫 send_request，
+    // 只放行 forwarder.yaml `endpoint:` map 中的 host:port（src/app.rs）。
+    //
+    // 原本的「路徑 B：wasi:sockets（插件自行實作 HTTP/1.1）」已自本 world 移除：
+    // transport 預設不連結 raw sockets；舊版 C transport（test-plugins/c-plugin/transport，
+    // 其 WIT 複本仍保留 sockets）只能在 YAML 明確設定
+    // `capabilities.transport.sockets: endpoint` 時載入，且只允許 TCP connect 到 endpoint。
+    import wasi:http/outgoing-handler@0.2.0;
+    import wasi:http/types@0.2.0;
+
+    /// 插件初始化，必須在 transport 之前呼叫一次
+    /// 重複呼叫視為重新設定（不累加舊設定）
+    export init: func(config: transport-config) -> result<_, plugin-error>;
+
+    /// 批次傳送已格式化的 bytes
+    /// 若設定了 max-batch-bytes，插件需自行分批處理
+    export transport: func(output-data: list<list<u8>>) -> result<_, plugin-error>;
+
+    export report-usage: func() -> u64;
+}

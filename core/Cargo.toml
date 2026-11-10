@@ -1,0 +1,16 @@
+[package]
+name = "wcm-base-log-forwarder"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# mem-guard 暫停期間用 malloc_trim(0) 把空閒 heap 還給 OS；SIGTERM／SIGINT handler 也用它註冊
+libc = "0.2"
+wasmtime = "42.0.1"
+wasmtime-wasi = "42.0.1"
+wasmtime-wasi-http = "42.0.1"
+tokio = { version = "1", features = ["rt", "rt-multi-thread", "time", "net", "io-util"] }
+serde = { version = "1", features = ["derive"] }
+serde_yaml = "0.9"
+# plugin.rs 覆寫 WasiHttpView::send_request 時需要 hyper::Request 型別
+hyper = "1"
