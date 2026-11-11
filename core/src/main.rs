@@ -1,13 +1,17 @@
-mod capability;
-mod config;
-mod dead_letter;
-mod input;
-mod isolation;
-mod metrics;
-mod output;
-mod pipeline;
-mod plugin;
-mod shutdown;
+//////    基礎的程式碼，輸入、輸出、統計資料、關閉系統
+mod config;             // 設定檔案讀取
+mod input;              // 輸入
+mod output;             // 啟動資訊與結束時的統計。
+mod metrics;            // 執行中的計數器與即時狀態輸出。
+mod dead_letter;        // 錯誤資料的處裡
+mod shutdown;           // 系統結束後，關閉輸入並完成剩餘日誌的處理。
+
+//////    Host的核心   
+mod pipeline;           // [核心] 四階段的初始化、運作
+mod plugin;             // Wasmtime 相關的共用部分：WIT 綁定、記憶體限制、host state、plugin 的載入與熱更換。
+mod isolation;          // Pattern 4的二分隔離錯誤
+mod capability;         // Pattern 5插件能力檢查
+
 
 use std::sync::{Arc, RwLock};
 use std::thread;
@@ -91,6 +95,7 @@ fn load_slots(config_path: &str, cfg: &AppConfig) -> wasmtime::Result<PluginSlot
 }
 
 fn main() -> wasmtime::Result<()> {
+    // 讀取測定的forwarder.yaml檔案
     let argv: Vec<String> = std::env::args().collect();
     if argv.get(1).map(String::as_str) == Some("--check-plugin") {
         check_plugin_cli(&argv[2..]);
@@ -121,7 +126,10 @@ fn main() -> wasmtime::Result<()> {
     shutdown::install_handlers();
 
     let metrics = Arc::new(metrics::Metrics::default());
+    // 輸入的cahnnel
     let (tx, rx) = std::sync::mpsc::sync_channel::<String>(cfg.batch.channel_capacity);
+
+    // 兩種輸入模式(讀檔案與TCP)
     match &cfg.input.mode {
         InputMode::Tcp => {
             let tcp = cfg.input.tcp.as_ref().unwrap_or_else(|| {
@@ -139,7 +147,10 @@ fn main() -> wasmtime::Result<()> {
         }
     }
 
+    // 持續監控.yaml檔案，在元件有更新時，啟動熱更換
     let shared_cfg = Arc::new(RwLock::new(cfg));
     spawn_config_watcher(config_path, Arc::clone(&shared_cfg), slots.clone());
+
+    // 啟動後續的四階段資料處理流程
     pipeline::run_pipeline(rx, slots, shared_cfg, metrics)
 }

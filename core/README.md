@@ -18,39 +18,47 @@ TCP／tail 輸入 → Parse → Filter → Format → Transport → HTTP 端點
 |---|---|
 | OS | Linux（已在 Ubuntu 24.04／WSL2 驗證） |
 | Rust | 1.93.1 |
-| 建置工具 | `build-essential` |
+| 建置工具 | `build-essential`（`ring` 等相依套件需要 C 編譯器） |
+| 其他 | `git`、`curl` |
 | Python | 3.x（只有範例工具需要，不需要額外套件） |
+
+在全新的 Ubuntu 上安裝：
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y build-essential python3
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+sudo apt-get install -y build-essential git curl python3
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain 1.93.1
 source "$HOME/.cargo/env"
-rustup toolchain install 1.93.1
-rustup default 1.93.1
+rustc --version    # 應顯示 rustc 1.93.1
 ```
+
+已經裝過 rustup 的話，執行 `rustup toolchain install 1.93.1 && rustup default 1.93.1` 即可。
 
 `plugin/` 內已附編譯好的 Rust 插件，執行時不需要 WASM 工具鏈。插件的原始碼與建置方式在 `../plugins/`。
 
 ## 從頭到尾跑一次
 
-以下需要三個終端機，都在 repo 根目錄執行。會用到 TCP 5140 和 8080 兩個連接埠。
+以下需要三個終端機，**都在 `core/` 目錄執行**（repo 根目錄沒有 `Cargo.toml`，在根目錄執行 `cargo` 會失敗）。會用到 TCP 5140 和 8080 兩個連接埠。
 
 ### 1. 取得程式碼並建置
 
 ```bash
 git clone <repo-url>
-cd <repo>
-cargo build --release
+cd <repo>/core
+cargo build --release --locked
 ```
 
-第一次約需數分鐘，執行檔在 `target/release/wcm-base-log-forwarder`。
+`--locked` 會照 `Cargo.lock` 的版本建置，和 Docker 映像一致。第一次約需 3～10 分鐘，依 CPU 核心數而定。執行檔在 `core/target/release/wcm-base-log-forwarder`。
+
+另外兩個終端機也要先 `cd <repo>/core`。
 
 ### 2. 啟動接收端（終端機 A）
 
 ```bash
 python3 examples/sink.py
 ```
+
+看到 `sink listening on 127.0.0.1:8080` 代表已就緒。
 
 ### 3. 啟動 forwarder（終端機 B）
 
@@ -222,9 +230,13 @@ Transport 另外依失敗原因區分：
 
 ## 測試
 
+在 `core/` 執行（會另外編譯 debug 版，第一次需要幾分鐘）：
+
 ```bash
-cargo test
+cargo test --locked
 ```
+
+部分測試會載入 `plugin/` 內的 `.wasm`，所以要在 `core/` 下、並保留 `plugin/` 目錄。
 
 ## 目錄結構
 
