@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Wit Include="../../../core/wit" World="format-plugin" />
+  </ItemGroup>
+</Project>

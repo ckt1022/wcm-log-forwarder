@@ -1,0 +1,26 @@
+# P3：parse 插件 @PARSE@、呼叫時限 @TIMEOUT_MS@ ms、watchdog @WATCHDOG@（run.sh 代入）
+plugins:
+  parse: @PARSE@
+  filter: filter.wasm
+  format: format.wasm
+  transport: transport.wasm
+stages: {filter: true, format: true, transport: true}
+input:
+  mode: tcp
+  tcp: {host: "0.0.0.0", port: @TCP_PORT@}
+batch:
+  mem_limit_mb: 256
+  max_wait_ms: @FLUSH_MS@
+  channel_capacity: 50000
+  max_format_chunk: 10000
+  max_transport_bytes: 134217728
+  transport_workers: 1
+  stage_timeout_ms: @TIMEOUT_MS@
+  # false 只供消融實驗：不設呼叫時限，卡死的插件會讓 parse 永久停住
+  watchdog: @WATCHDOG@
+endpoint:
+  A: "http://127.0.0.1:@SINK_PORT@/ingest"
+status_interval_secs: 0
+# fault 插件 import 檔案與 socket 介面；inert 只連結介面、不給任何資源（一般 parse.wasm 不受影響）
+capabilities:
+  parse: {filesystem: inert, sockets: inert}

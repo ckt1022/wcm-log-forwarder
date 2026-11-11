@@ -1,0 +1,21 @@
+[package]
+name = "format"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]          # component 必須編成動態庫（reactor 模式，無 main）
+
+[dependencies]
+wit-bindgen = { version = "=0.58.0", default-features = false, features = ["macros", "realloc"] }
+
+# 編碼格式（擇一，對應 C++ 版的 -D flag；都不選時預設 json-flat）
+#   cargo build                                    → json-flat
+#   cargo build --features json-nested             → JSON with tags under "attributes"
+#   cargo build --features syslog                  → RFC 5424 syslog line
+#   cargo build --features protobuf                → protobuf binary
+[features]
+json-flat = []
+json-nested = []
+syslog = []
+protobuf = []

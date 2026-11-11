@@ -1,0 +1,20 @@
+# Demo 3（第一部分）：四個階段都用故障測試插件，設定中沒有任何授權（預設全部拒絕）
+plugins:
+  parse: "fault/parse.wasm"
+  filter: "fault/filter.wasm"
+  format: "fault/format.wasm"
+  transport: "fault/transport.wasm"
+stages: {filter: true, format: true, transport: true}
+batch:
+  mem_limit_mb: 256
+  max_wait_ms: 100
+  channel_capacity: 50000
+  max_format_chunk: 10000
+  max_transport_bytes: 134217728
+  transport_workers: 1
+input:
+  mode: tcp
+  tcp: {host: "127.0.0.1", port: @INPUT_PORT@}
+endpoint:
+  A: "http://127.0.0.1:@SINK_PORT@/ingest"
+status_interval_secs: 0

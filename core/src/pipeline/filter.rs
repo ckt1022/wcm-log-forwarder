@@ -52,7 +52,7 @@ impl StageBackend for FilterBackend {
         items: &[LogEntry],
         ticks: u64,
     ) -> ProbeOutcome<FilterResult> {
-        inst.store.set_epoch_deadline(ticks);
+        plugin::arm_deadline(&mut inst.store, ticks);
         match inst.plugin.call_filter(&mut inst.store, items) {
             Ok(Ok(results)) if results.len() == items.len() => ProbeOutcome::Accepted(results),
             Ok(Ok(results)) => ProbeOutcome::Rejected(format!(
@@ -81,7 +81,7 @@ pub fn run(
         let c = cfg.read().unwrap();
         (
             plugin::ticks_for(c.batch.stage_timeout()),
-            c.batch.plugin_instance_reuse,
+            c.batch.instance_policy(),
             c.batch.mem_limit_bytes(),
         )
     };

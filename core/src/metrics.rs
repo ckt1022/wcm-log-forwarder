@@ -43,6 +43,8 @@ pub struct StageStats {
     pub isolation_calls: Counter,
     pub budget_exhausted: Counter,
     pub delivery_retries: Counter,
+    /// 因記憶體超過門檻而換新的 instance 數
+    pub recycled_instances: Counter,
     /// router 無法分流、直接寫入 dead-letter 的筆數
     pub unroutable_records: Counter,
     pub wasm_mem_peak: Counter,

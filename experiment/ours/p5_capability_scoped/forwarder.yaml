@@ -1,0 +1,28 @@
+# P5：四個階段都用 fault 插件（訊息含 FAULT_FILE／FAULT_ENV／FAULT_NET 時嘗試讀檔、讀環境變數、連線）
+# 授權：parse／filter／format 只給 inert（連結介面但不給任何資源）；transport 的 sockets 為 endpoint（只能連到 endpoint 列出的位址）
+# run.sh 的「啟動時拒絕」情境會刪掉整個 capabilities 區塊（全部拒絕）
+plugins:
+  parse: fault/parse.wasm
+  filter: fault/filter.wasm
+  format: fault/format.wasm
+  transport: fault/transport.wasm
+stages: {filter: true, format: true, transport: true}
+input:
+  mode: tcp
+  tcp: {host: "0.0.0.0", port: @TCP_PORT@}
+batch:
+  mem_limit_mb: 256
+  max_wait_ms: @FLUSH_MS@
+  channel_capacity: 50000
+  max_format_chunk: 10000
+  max_transport_bytes: 134217728
+  transport_workers: 1
+  stage_timeout_ms: 2000
+endpoint:
+  A: "http://127.0.0.1:@SINK_PORT@/ingest"
+status_interval_secs: 0
+capabilities:
+  parse: {filesystem: inert, sockets: inert}
+  filter: {filesystem: inert, sockets: inert}
+  format: {filesystem: inert, sockets: inert}
+  transport: {filesystem: inert, sockets: endpoint}

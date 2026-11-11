@@ -71,7 +71,7 @@ impl StageBackend for FormatBackend {
         items: &[LogEntry],
         ticks: u64,
     ) -> ProbeOutcome<Vec<u8>> {
-        inst.store.set_epoch_deadline(ticks);
+        plugin::arm_deadline(&mut inst.store, ticks);
         match inst.plugin.call_format(&mut inst.store, items) {
             Ok(Ok(bytes)) => match decode_frames(&bytes) {
                 Ok(lines) if lines.len() == items.len() => ProbeOutcome::Accepted(lines),
@@ -103,7 +103,7 @@ pub fn run(
         let c = cfg.read().unwrap();
         (
             plugin::ticks_for(c.batch.stage_timeout()),
-            c.batch.plugin_instance_reuse,
+            c.batch.instance_policy(),
             c.batch.mem_limit_bytes(),
             c.batch.max_format_chunk,
         )

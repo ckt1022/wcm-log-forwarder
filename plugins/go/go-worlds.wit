@@ -1,0 +1,23 @@
+package local:log-process@0.3.0;
+
+// TinyGo 的 wasip2 標準函式庫會 import wasi:cli 等介面，world 必須宣告它們才能產生 component。
+// component 只會 import 實際用到的介面；host 仍依 capabilities 決定是否允許。
+world parser-plugin-go {
+    include parser-plugin;
+    include wasi:cli/imports@0.2.0;
+}
+
+world reduction-plugin-go {
+    include reduction-plugin;
+    include wasi:cli/imports@0.2.0;
+}
+
+world format-plugin-go {
+    include format-plugin;
+    include wasi:cli/imports@0.2.0;
+}
+
+world transport-plugin-go {
+    include transport-plugin;
+    include wasi:cli/imports@0.2.0;
+}

@@ -30,7 +30,7 @@ rustup toolchain install 1.93.1
 rustup default 1.93.1
 ```
 
-`plugin/` 內已附編譯好的插件，執行時不需要 WASM 工具鏈。
+`plugin/` 內已附編譯好的 Rust 插件，執行時不需要 WASM 工具鏈。插件的原始碼與建置方式在 `../plugins/`。
 
 ## 從頭到尾跑一次
 
@@ -155,7 +155,7 @@ python3 examples/sink.py --fail-first 3
 
 ```bash
 ./target/release/wcm-base-log-forwarder --check-plugin parse plugin/parse.wasm
-./target/release/wcm-base-log-forwarder --check-plugin parse plugin/chaos/parse_chaos.wasm
+./target/release/wcm-base-log-forwarder --check-plugin parse plugin/fault/parse.wasm
 ```
 
 第一個回報 `LOAD_OK`。第二個插件要求了未授權的檔案與網路能力，回報 `LOAD_REFUSED` 並列出違規的 import。
@@ -175,6 +175,9 @@ python3 examples/sink.py --fail-first 3
 | `batch.stage_timeout_ms` | 每次插件呼叫的時限 | `30000` |
 | `batch.mem_limit_mb` | 每個 instance 的記憶體上限 | `256` |
 | `batch.plugin_instance_reuse` | 是否跨批重用 instance | `true` |
+| `batch.instance_recycle_percent` | 重用中的 instance 記憶體超過 `mem_limit_mb` 的這個百分比時換新，插件不必自行處理記憶體回收 | `50` |
+| `batch.watchdog` | 僅供實驗（消融）。`false` 時插件呼叫沒有時限，卡死的插件會讓該階段永久停住 | `true` |
+| `batch.bisection` | 僅供實驗（消融）。`false` 時失敗的整批直接寫入 dead-letter，不以二分法找出問題資料 | `true` |
 | `transport.request_timeout_ms` | 單次請求逾時 | `30000` |
 | `transport.retry.max_retries` | 端點失敗時的重試次數 | `8` |
 | `transport.retry.initial_backoff_ms` | 第一次重試的基準等待 | `1000` |
@@ -194,7 +197,7 @@ capabilities:
     sockets: inert
 ```
 
-Go 或 C# 插件若跨批累積記憶體或重用時出錯，請設定 `plugin_instance_reuse: false`。
+插件沒有釋放記憶體時，instance 會在記憶體達到 `instance_recycle_percent` 時自動換新，不需要改插件。
 
 ## 錯誤處理
 
@@ -245,7 +248,7 @@ src/
     ├── format.rs
     └── transport.rs
 wit/                   插件介面定義
-plugin/                編譯好的範例插件
+plugin/                編譯好的 Rust 插件（原始碼在 ../plugins/rust）
 examples/              範例接收端與日誌產生器
 ```
 

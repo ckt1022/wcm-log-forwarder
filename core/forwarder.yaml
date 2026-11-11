@@ -35,8 +35,13 @@ batch:
   transport_workers: 1
   # 每次 plugin 呼叫的時限（CPU 卡死保護）
   stage_timeout_ms: 30000
-  # true＝instance 跨批重用；false＝每批用完即丟（Go／C# 等 GC 語言插件若累積記憶體可關閉）
+  # true＝instance 跨批重用；false＝每批用完即丟
   plugin_instance_reuse: true
+  # 重用中的 instance 記憶體超過 mem_limit_mb 的這個百分比時換成新的（插件沒有釋放記憶體時也不會耗盡上限）
+  instance_recycle_percent: 50
+  # 以下兩個開關只供實驗（消融），正式使用請保持 true
+  # watchdog: true      # false：插件呼叫沒有時限
+  # bisection: true     # false：失敗的整批直接寫入 dead-letter
 
 # Transport 的送出與重試。重試用完仍失敗的資料寫入 error.txt，不會丟棄。
 transport:
@@ -54,4 +59,4 @@ endpoint:
 config_reload_secs: 10
 
 # 即時狀態的輸出間隔（秒），0 為關閉；閒置時不輸出
-status_interval_secs: 0
+status_interval_secs: 1

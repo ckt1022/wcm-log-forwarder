@@ -26,9 +26,22 @@ pub fn print_startup(cfg: &AppConfig) {
     );
     eprintln!("Flush Window : {} ms", cfg.batch.max_wait_ms);
     eprintln!("Stage Timeout: {} ms", cfg.batch.stage_timeout_ms);
-    eprintln!("Instance Reuse: {}", cfg.batch.plugin_instance_reuse);
+    eprintln!(
+        "Instance Reuse: {} (recycle at {}% of memory limit)",
+        cfg.batch.plugin_instance_reuse, cfg.batch.instance_recycle_percent
+    );
     if cfg.status_interval_secs > 0 {
         eprintln!("Status       : every {} s", cfg.status_interval_secs);
+    }
+    if !cfg.batch.watchdog {
+        eprintln!(
+            "[config] WARNING batch.watchdog=false：呼叫時限已關閉，卡死的插件會讓該階段永久停住（僅供實驗）"
+        );
+    }
+    if !cfg.batch.bisection {
+        eprintln!(
+            "[config] WARNING batch.bisection=false：不做二分隔離，失敗的整批寫入 dead-letter（僅供實驗）"
+        );
     }
     if !transport {
         eprintln!("[config] WARNING stages.transport=false：處理完的資料不會送出（僅供測試）");
@@ -39,7 +52,7 @@ pub fn print_startup(cfg: &AppConfig) {
 pub fn print_stage_summary(stage: &str, s: &StageStats) {
     eprintln!(
         "[summary] {stage:<9} batches={} input={} output={} bytes={} isolated_batches={} salvaged={} rejected={} \
-         isolation_calls={} budget_exhausted={} delivery_retries={} wasm_mem_peak_mb={:.1}",
+         isolation_calls={} budget_exhausted={} delivery_retries={} recycled_instances={} wasm_mem_peak_mb={:.1}",
         s.batches.get(),
         s.input_records.get(),
         s.output_records.get(),
@@ -50,6 +63,7 @@ pub fn print_stage_summary(stage: &str, s: &StageStats) {
         s.isolation_calls.get(),
         s.budget_exhausted.get(),
         s.delivery_retries.get(),
+        s.recycled_instances.get(),
         s.wasm_mem_peak.get() as f64 / 1_048_576.0,
     );
 }

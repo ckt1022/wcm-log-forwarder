@@ -1,0 +1,27 @@
+<Project>
+  <!-- 四個插件共用的設定；每個 .csproj 只需指定 WIT world -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RuntimeIdentifier>wasi-wasm</RuntimeIdentifier>
+    <UseAppHost>false</UseAppHost>
+    <PublishTrimmed>true</PublishTrimmed>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <SelfContained>true</SelfContained>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- 以 packages.lock.json 鎖定所有套件（含間接相依）的版本 -->
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <!-- 中間檔與產物放到 plugins/build，原始碼目錄保持乾淨 -->
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)../build/csharp/$(MSBuildProjectName)/obj/</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)../build/csharp/$(MSBuildProjectName)/bin/</BaseOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BytecodeAlliance.Componentize.DotNet.Wasm.SDK" Version="0.8.0-preview00011" />
+    <PackageReference Include="runtime.linux-x64.Microsoft.DotNet.ILCompiler.LLVM" Version="10.0.0-rc.1.26306.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Wit Remove="**\*.wit" />
+  </ItemGroup>
+</Project>

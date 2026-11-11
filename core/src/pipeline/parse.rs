@@ -181,7 +181,7 @@ impl StageBackend for ParseBackend {
         items: &[String],
         ticks: u64,
     ) -> ProbeOutcome<ParsedEntry> {
-        inst.store.set_epoch_deadline(ticks);
+        plugin::arm_deadline(&mut inst.store, ticks);
         match inst.plugin.call_parse(&mut inst.store, items) {
             Ok(Ok(parsed)) => ProbeOutcome::Accepted(parsed),
             Ok(Err(e)) => ProbeOutcome::Rejected(format!("{e:?}")),
@@ -237,7 +237,7 @@ pub fn run(
         let c = cfg.read().unwrap();
         (
             plugin::ticks_for(c.batch.stage_timeout()),
-            c.batch.plugin_instance_reuse,
+            c.batch.instance_policy(),
             c.batch.mem_limit_bytes(),
         )
     };
@@ -307,7 +307,11 @@ mod tests {
                 mem_limit_bytes: 64 * 1024 * 1024,
             },
             100_000,
-            reuse,
+            crate::config::InstancePolicy {
+                reuse,
+                recycle_bytes: usize::MAX,
+                bisection: true,
+            },
             Arc::default(),
         )
         .unwrap()
@@ -395,11 +399,9 @@ mod tests {
     #[test]
     fn restricted_linker_cannot_satisfy_filesystem_import() {
         let engine = plugin::engine();
-        let component = wasmtime::component::Component::from_file(
-            engine,
-            plugin_path("chaos/parse_chaos.wasm"),
-        )
-        .unwrap();
+        let component =
+            wasmtime::component::Component::from_file(engine, plugin_path("fault/parse.wasm"))
+                .unwrap();
         let mut linker: wasmtime::component::Linker<HostState> =
             wasmtime::component::Linker::new(engine);
         crate::capability::add_wasi_to_linker_sync(&mut linker, StageGrant::default()).unwrap();

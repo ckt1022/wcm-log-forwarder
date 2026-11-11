@@ -1,0 +1,10 @@
+[package]
+name = "filter"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]          # component 必須編成動態庫（reactor 模式，無 main）
+
+[dependencies]
+wit-bindgen = { version = "=0.58.0", default-features = false, features = ["macros", "realloc"] }

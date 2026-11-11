@@ -106,9 +106,19 @@ pub struct BatchConfig {
     /// 每次 plugin 呼叫的時限 T（ms）。
     #[serde(default = "default_stage_timeout_ms")]
     pub stage_timeout_ms: u64,
-    /// true＝instance 跨批重用；false＝每批用完即丟（防止 GC 語言插件累積記憶體）。
+    /// true＝instance 跨批重用；false＝每批用完即丟。
     #[serde(default = "default_plugin_instance_reuse")]
     pub plugin_instance_reuse: bool,
+    /// 重用中的 instance 線性記憶體超過 mem_limit_mb 的這個百分比時，換成新的 instance。
+    /// 插件沒有釋放記憶體（例如 TinyGo 不回收 host 傳入的參數）時，可在超過上限前換新，插件不必自行處理。
+    #[serde(default = "default_instance_recycle_percent")]
+    pub instance_recycle_percent: u8,
+    /// 僅供實驗（消融）：false 時關閉呼叫時限，卡死的插件會讓該階段永久停住。
+    #[serde(default = "default_true")]
+    pub watchdog: bool,
+    /// 僅供實驗（消融）：false 時不做二分隔離，失敗的整批直接寫入 dead-letter。
+    #[serde(default = "default_true")]
+    pub bisection: bool,
     /// 處理批次的位元組上限（KiB）；可熱更新。
     #[serde(default = "default_micro_batch_max_bytes_kib")]
     pub micro_batch_max_bytes_kib: usize,
@@ -128,6 +138,12 @@ fn default_stage_timeout_ms() -> u64 {
 }
 fn default_plugin_instance_reuse() -> bool {
     true
+}
+fn default_true() -> bool {
+    true
+}
+fn default_instance_recycle_percent() -> u8 {
+    50
 }
 fn default_micro_batch_max_bytes_kib() -> usize {
     128
@@ -152,7 +168,21 @@ impl BatchConfig {
         self.mem_limit_mb * 1024 * 1024
     }
 
+    pub fn instance_policy(&self) -> InstancePolicy {
+        InstancePolicy {
+            reuse: self.plugin_instance_reuse,
+            recycle_bytes: self.mem_limit_bytes() / 100 * self.instance_recycle_percent as usize,
+            bisection: self.bisection,
+        }
+    }
+
     fn validate(&self) -> Result<(), String> {
+        if !(1..=100).contains(&self.instance_recycle_percent) {
+            return Err(format!(
+                "instance_recycle_percent={} 需介於 1..100",
+                self.instance_recycle_percent
+            ));
+        }
         if self.mem_limit_mb < 64 {
             return Err(format!(
                 "mem_limit_mb={} 過小（建議 >= 64 MB）",
@@ -201,6 +231,17 @@ impl BatchConfig {
         }
         Ok(())
     }
+}
+
+/// instance 的重用方式。
+#[derive(Debug, Clone, Copy)]
+pub struct InstancePolicy {
+    /// 跨批重用 instance
+    pub reuse: bool,
+    /// 重用中的 instance 線性記憶體達到這個大小時換新
+    pub recycle_bytes: usize,
+    /// 失敗時以二分法找出問題資料；false 時整批拒絕（僅供實驗）
+    pub bisection: bool,
 }
 
 /// Transport 的送出與重試參數。

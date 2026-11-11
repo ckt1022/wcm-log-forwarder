@@ -1,0 +1,20 @@
+# Demo 1：一般插件，四個階段：parse（解析 JSON）→ filter（只留 warn 以上）→ format（json-flat）→ transport（HTTP POST）
+plugins:
+  parse: "parse.wasm"
+  filter: "filter.wasm"
+  format: "format.wasm"
+  transport: "transport.wasm"
+stages: {filter: true, format: true, transport: true}
+batch:
+  mem_limit_mb: 256
+  max_wait_ms: 100
+  channel_capacity: 50000
+  max_format_chunk: 10000
+  max_transport_bytes: 134217728
+  transport_workers: 1
+input:
+  mode: tcp
+  tcp: {host: "127.0.0.1", port: @INPUT_PORT@}
+endpoint:
+  A: "http://127.0.0.1:@SINK_PORT@/ingest"
+status_interval_secs: 0

@@ -1,0 +1,7 @@
+# C# 插件需要的權限。
+# .NET 的 WASI 執行環境會 import wasi:filesystem（不會實際開檔）。inert 只連結介面，不給任何目錄。
+capabilities:
+  parse: {filesystem: inert, sockets: deny}
+  filter: {filesystem: inert, sockets: deny}
+  format: {filesystem: inert, sockets: deny}
+  transport: {filesystem: inert, sockets: deny}

@@ -1,0 +1,25 @@
+# Demo 2：parse 換成故障測試插件；msg 含 FAULT_LOOP 時進入無窮迴圈
+plugins:
+  parse: "fault/parse.wasm"
+  filter: "filter.wasm"
+  format: "format.wasm"
+  transport: "transport.wasm"
+stages: {filter: true, format: true, transport: true}
+batch:
+  mem_limit_mb: 256
+  max_wait_ms: 100
+  channel_capacity: 50000
+  max_format_chunk: 10000
+  max_transport_bytes: 134217728
+  transport_workers: 1
+  # 每次插件呼叫最多 1 秒；超過就中止這次呼叫、丟掉這個 instance、換新的
+  stage_timeout_ms: 1000
+input:
+  mode: tcp
+  tcp: {host: "127.0.0.1", port: @INPUT_PORT@}
+endpoint:
+  A: "http://127.0.0.1:@SINK_PORT@/ingest"
+status_interval_secs: 0
+# 故障測試插件 import 了檔案與 socket 介面；inert 只連結介面、不給任何資源
+capabilities:
+  parse: {filesystem: inert, sockets: inert}

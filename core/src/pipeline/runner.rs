@@ -5,6 +5,7 @@ use std::collections::VecDeque;
 use std::panic::{self, AssertUnwindSafe};
 use std::sync::Arc;
 
+use crate::config::InstancePolicy;
 use crate::isolation::{
     self, FailureKind, IsolationLimits, IsolationReport, ProbeOutcome, RejectReason,
 };
@@ -46,7 +47,7 @@ pub struct StageRunner<B: StageBackend> {
     pub stats: Arc<StageStats>,
     ready: VecDeque<B::Instance>,
     deadline_ticks: u64,
-    reuse: bool,
+    policy: InstancePolicy,
     version: u64,
 }
 
@@ -55,7 +56,7 @@ impl<B: StageBackend> StageRunner<B> {
     pub fn new(
         mut backend: B,
         deadline_ticks: u64,
-        reuse: bool,
+        policy: InstancePolicy,
         stats: Arc<StageStats>,
     ) -> wasmtime::Result<Self> {
         let first = backend.instantiate()?;
@@ -65,7 +66,7 @@ impl<B: StageBackend> StageRunner<B> {
             stats,
             ready: VecDeque::from([first]),
             deadline_ticks,
-            reuse,
+            policy,
             version,
         };
         runner.replenish();
@@ -92,16 +93,19 @@ impl<B: StageBackend> StageRunner<B> {
     }
 
     /// 呼叫成功或 plugin 正常回傳錯誤後，依設定放回或丟棄。
+    /// 線性記憶體只會成長不會縮小，超過門檻代表插件可能沒有釋放記憶體，在用完上限前換新。
     fn release(&mut self, instance: B::Instance) {
-        self.stats
-            .wasm_mem_peak
-            .update_max(self.backend.memory_peak(&instance) as u64);
-        if self.reuse {
+        let memory = self.backend.memory_peak(&instance);
+        self.stats.wasm_mem_peak.update_max(memory as u64);
+        if self.policy.reuse && memory < self.policy.recycle_bytes {
             self.ready.push_front(instance);
-        } else {
-            drop(instance);
-            self.replenish();
+            return;
         }
+        if self.policy.reuse {
+            self.stats.recycled_instances.add(1);
+        }
+        drop(instance);
+        self.replenish();
     }
 
     /// instance 已污染（trap／逾時），丟棄並補充。
@@ -214,6 +218,19 @@ impl<B: StageBackend> StageRunner<B> {
         first_error: String,
     ) -> IsolationReport<B::Output> {
         let n = items.len();
+        if !self.policy.bisection {
+            // 消融實驗：不二分，整批拒絕
+            if let Some(instance) = first {
+                self.release(instance);
+            }
+            let reason = match kind {
+                FailureKind::Rejected => RejectReason::PluginError,
+                FailureKind::Trapped => RejectReason::Poison,
+            };
+            let report = IsolationReport::rejected_all(n, reason, first_error);
+            self.record_isolation(seq, n, "no-bisection", &report);
+            return report;
+        }
         let limits = self.backend.limits();
         let full_ticks = self.deadline_ticks;
         let mut current = first;
@@ -294,6 +311,9 @@ mod tests {
     const POISON: u32 = 666;
     const BAD: u32 = 13;
     const HOST_BUG: u32 = 999;
+    /// 測試用的換新門檻；Fake 處理到 GROW 時記憶體會超過它
+    const RECYCLE_AT: usize = 1000;
+    const GROW: u32 = 4242;
 
     /// 不需要 WASM 的假 backend：instance 記錄自己的編號，POISON 會 trap，BAD 會回傳錯誤。
     struct Fake {
@@ -307,6 +327,7 @@ mod tests {
         id: u32,
         version: u64,
         poisoned: bool,
+        memory: usize,
     }
 
     impl StageBackend for Fake {
@@ -329,6 +350,7 @@ mod tests {
                 id: self.created.get(),
                 version: self.version.get(),
                 poisoned: false,
+                memory: 0,
             })
         }
         fn invoke(
@@ -347,10 +369,13 @@ mod tests {
             if items.contains(&BAD) {
                 return ProbeOutcome::Rejected("bad".into());
             }
+            if items.contains(&GROW) {
+                inst.memory = RECYCLE_AT;
+            }
             ProbeOutcome::Accepted(items.to_vec())
         }
-        fn memory_peak(&self, _: &FakeInstance) -> usize {
-            0
+        fn memory_peak(&self, inst: &FakeInstance) -> usize {
+            inst.memory
         }
     }
 
@@ -373,7 +398,17 @@ mod tests {
             fail_instantiate: Rc::clone(&h.fail),
         };
         (
-            StageRunner::new(backend, 1000, reuse, Arc::default()).unwrap(),
+            StageRunner::new(
+                backend,
+                1000,
+                InstancePolicy {
+                    reuse,
+                    recycle_bytes: RECYCLE_AT,
+                    bisection: true,
+                },
+                Arc::default(),
+            )
+            .unwrap(),
             h,
         )
     }
@@ -395,6 +430,18 @@ mod tests {
                 .iter()
                 .all(|(id, _)| *id == r.backend.instances_used[0].0)
         );
+    }
+
+    #[test]
+    fn instance_over_memory_threshold_is_replaced() {
+        let (mut r, _) = runner(true);
+        r.process(0, &[1]);
+        r.process(1, &[GROW]);
+        r.process(2, &[1]);
+        let ids: Vec<u32> = r.backend.instances_used.iter().map(|(id, _)| *id).collect();
+        assert_eq!(ids[0], ids[1], "門檻以下沿用同一個 instance");
+        assert_ne!(ids[1], ids[2], "超過門檻後換新");
+        assert_eq!(r.stats.recycled_instances.get(), 1);
     }
 
     #[test]
@@ -437,6 +484,23 @@ mod tests {
             r.backend.instances_used.len(),
             1 + r.stats.isolation_calls.get() as usize
         );
+    }
+
+    #[test]
+    fn without_bisection_the_whole_batch_is_rejected() {
+        let (mut r, _) = runner(true);
+        r.policy.bisection = false;
+        let report = r.process(1, &[1, BAD, 3]);
+        assert!(report.accepted.is_empty());
+        assert_eq!(report.rejected.len(), 3);
+        let report = r.process(2, &[1, POISON, 3]);
+        assert!(
+            report
+                .rejected
+                .iter()
+                .all(|(_, why)| *why == RejectReason::Poison)
+        );
+        assert_eq!(report.rejected.len(), 3);
     }
 
     #[test]

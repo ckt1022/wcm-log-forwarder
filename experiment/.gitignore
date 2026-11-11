@@ -1,0 +1,9 @@
+# 由 common/setup.sh 產生
+common/venv/
+common/bin/
+five_product/*/products/fluentbit-wasm/filter/target/
+five_product/*/products/fluentbit-wasm/filter.wasm
+# 量測結果（每次執行重新產生）
+five_product/*/results/
+ours/*/results/
+__pycache__/

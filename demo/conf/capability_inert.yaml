@@ -1,0 +1,26 @@
+# Demo 3（第二部分）：同樣的插件，授權為 inert（介面存在但沒有任何資源）；
+# transport 的 sockets 為 endpoint：只能連到上面 endpoint 列出的位址
+plugins:
+  parse: "fault/parse.wasm"
+  filter: "fault/filter.wasm"
+  format: "fault/format.wasm"
+  transport: "fault/transport.wasm"
+stages: {filter: true, format: true, transport: true}
+batch:
+  mem_limit_mb: 256
+  max_wait_ms: 100
+  channel_capacity: 50000
+  max_format_chunk: 10000
+  max_transport_bytes: 134217728
+  transport_workers: 1
+input:
+  mode: tcp
+  tcp: {host: "127.0.0.1", port: @INPUT_PORT@}
+endpoint:
+  A: "http://127.0.0.1:@SINK_PORT@/ingest"
+status_interval_secs: 0
+capabilities:
+  parse: {filesystem: inert, sockets: inert}
+  filter: {filesystem: inert, sockets: inert}
+  format: {filesystem: inert, sockets: inert}
+  transport: {filesystem: inert, sockets: endpoint}

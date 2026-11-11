@@ -1,0 +1,16 @@
+[workspace]
+resolver = "3"
+members = [
+    "parse",
+    "filter",
+    "format",
+    "transport",
+    "fault/parse",
+    "fault/filter",
+    "fault/format",
+    "fault/transport",
+]
+
+[profile.release]
+opt-level = "s"
+strip = true

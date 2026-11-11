@@ -174,6 +174,25 @@ pub const EPOCH_TICK: Duration = Duration::from_millis(10);
 /// WASM 實例化（_initialize）期間使用的 epoch deadline（約 28 小時）。
 const INSTANTIATE_EPOCH_DEADLINE: u64 = 10_000_000;
 
+static WATCHDOG: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(true);
+
+/// 設定是否啟用呼叫時限（epoch interruption）。必須在第一次使用 Engine 之前呼叫。
+/// 關閉只供實驗：引擎不插入 epoch 檢查，卡死的插件會讓該階段永久停住。
+pub fn set_watchdog(enabled: bool) {
+    WATCHDOG.store(enabled, std::sync::atomic::Ordering::Relaxed);
+}
+
+pub fn watchdog_enabled() -> bool {
+    WATCHDOG.load(std::sync::atomic::Ordering::Relaxed)
+}
+
+/// 設定 store 的呼叫時限；watchdog 關閉時不做任何事。
+pub fn arm_deadline(store: &mut Store<HostState>, ticks: u64) {
+    if watchdog_enabled() {
+        store.set_epoch_deadline(ticks);
+    }
+}
+
 /// 整個 process 共用一個 Engine：熱更換只替換 component 與 linker，
 /// 舊 instance 也持續收到 epoch tick，時限保護不會中斷。
 pub fn engine() -> &'static Engine {
@@ -183,7 +202,7 @@ pub fn engine() -> &'static Engine {
         config.wasm_component_model(true);
         config.strategy(Strategy::Cranelift);
         config.cranelift_opt_level(OptLevel::Speed);
-        config.epoch_interruption(true);
+        config.epoch_interruption(watchdog_enabled());
         Engine::new(&config).expect("wasmtime engine")
     })
 }
@@ -192,6 +211,9 @@ pub fn engine() -> &'static Engine {
 pub fn spawn_epoch_ticker() {
     static STARTED: OnceLock<()> = OnceLock::new();
     STARTED.get_or_init(|| {
+        if !watchdog_enabled() {
+            return;
+        }
         spawn_named("epoch-ticker", || {
             loop {
                 std::thread::sleep(EPOCH_TICK);
@@ -220,7 +242,7 @@ pub fn new_store(
     };
     let mut store = Store::new(engine(), state);
     store.limiter(|s| &mut s.limiter);
-    store.set_epoch_deadline(INSTANTIATE_EPOCH_DEADLINE);
+    arm_deadline(&mut store, INSTANTIATE_EPOCH_DEADLINE);
     store
 }
 

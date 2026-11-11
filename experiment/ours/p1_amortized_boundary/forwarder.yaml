@@ -1,0 +1,22 @@
+# P1：處理批次上限 @K@ 筆／@BYTES_KIB@ KiB（run.sh 代入），其餘與 five_product/throughput 相同
+plugins:
+  parse: parse.wasm
+  filter: filter.wasm
+  format: format.wasm
+  transport: transport.wasm
+stages: {filter: true, format: true, transport: true}
+input:
+  mode: tcp
+  tcp: {host: "0.0.0.0", port: @TCP_PORT@}
+batch:
+  mem_limit_mb: 256
+  max_wait_ms: @FLUSH_MS@
+  micro_batch_records: @K@
+  micro_batch_max_bytes_kib: @BYTES_KIB@
+  channel_capacity: 50000
+  max_format_chunk: 10000
+  max_transport_bytes: 134217728
+  transport_workers: 1
+endpoint:
+  A: "http://127.0.0.1:@SINK_PORT@/ingest"
+status_interval_secs: 0

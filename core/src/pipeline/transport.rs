@@ -372,7 +372,7 @@ impl TransportBackend {
             return Ok(());
         }
         let config = self.plugin_config();
-        inst.store.set_epoch_deadline(ticks);
+        plugin::arm_deadline(&mut inst.store, ticks);
         match self
             .runtime
             .block_on(inst.plugin.call_init(&mut inst.store, &config))
@@ -451,7 +451,7 @@ impl StageBackend for TransportBackend {
             if let Err(outcome) = self.ensure_initialized(inst, ticks) {
                 return outcome;
             }
-            inst.store.set_epoch_deadline(ticks);
+            plugin::arm_deadline(&mut inst.store, ticks);
             let result = self.runtime.block_on(async {
                 tokio::time::timeout(
                     wall_timeout,
@@ -531,7 +531,7 @@ fn worker(
         let c = cfg.read().unwrap();
         (
             plugin::ticks_for(c.batch.stage_timeout()),
-            c.batch.plugin_instance_reuse,
+            c.batch.instance_policy(),
             c.batch.mem_limit_bytes(),
             c.batch.max_transport_bytes,
             c.transport.connect_timeout_ms,
