@@ -1,0 +1,98 @@
+parse,parse.wasm,none,LOAD_OK,""
+parse,parse.wasm,inert-fs,LOAD_OK,""
+parse,parse.wasm,inert-fs inert-sockets,LOAD_OK,""
+parse,fault/parse.wasm,none,LOAD_REFUSED,"[capability] 拒絕載入 stage=parse plugin=/app/plugin/fault/parse.wasm：9 個未授權 import [capability]   - wasi:filesystem/types@0.2.6 (filesystem：parse 預設拒絕；若只是 wasip1 adapt"
+parse,fault/parse.wasm,inert-fs,LOAD_REFUSED,"[capability] 拒絕載入 stage=parse plugin=/app/plugin/fault/parse.wasm：7 個未授權 import [capability]   - wasi:sockets/network@0.2.6 (raw sockets：parse 預設拒絕) "
+parse,fault/parse.wasm,inert-fs inert-sockets,LOAD_OK,""
+filter,filter.wasm,none,LOAD_OK,""
+filter,filter.wasm,inert-fs,LOAD_OK,""
+filter,filter.wasm,inert-fs inert-sockets,LOAD_OK,""
+filter,fault/filter.wasm,none,LOAD_REFUSED,"[capability] 拒絕載入 stage=filter plugin=/app/plugin/fault/filter.wasm：9 個未授權 import [capability]   - wasi:filesystem/types@0.2.6 (filesystem：filter 預設拒絕；若只是 wasip1 ad"
+filter,fault/filter.wasm,inert-fs,LOAD_REFUSED,"[capability] 拒絕載入 stage=filter plugin=/app/plugin/fault/filter.wasm：7 個未授權 import [capability]   - wasi:sockets/network@0.2.6 (raw sockets：filter 預設拒絕) "
+filter,fault/filter.wasm,inert-fs inert-sockets,LOAD_OK,""
+format,format.wasm,none,LOAD_OK,""
+format,format.wasm,inert-fs,LOAD_OK,""
+format,format.wasm,inert-fs inert-sockets,LOAD_OK,""
+format,fault/format.wasm,none,LOAD_REFUSED,"[capability] 拒絕載入 stage=format plugin=/app/plugin/fault/format.wasm：9 個未授權 import [capability]   - wasi:filesystem/types@0.2.6 (filesystem：format 預設拒絕；若只是 wasip1 ad"
+format,fault/format.wasm,inert-fs,LOAD_REFUSED,"[capability] 拒絕載入 stage=format plugin=/app/plugin/fault/format.wasm：7 個未授權 import [capability]   - wasi:sockets/network@0.2.6 (raw sockets：format 預設拒絕) "
+format,fault/format.wasm,inert-fs inert-sockets,LOAD_OK,""
+transport,transport.wasm,none,LOAD_OK,""
+transport,transport.wasm,inert-fs,LOAD_OK,""
+transport,transport.wasm,inert-fs inert-sockets,LOAD_OK,""
+transport,transport.wasm,inert-fs endpoint-sockets,LOAD_OK,""
+transport,fault/transport.wasm,none,LOAD_REFUSED,"[capability] 拒絕載入 stage=transport plugin=/app/plugin/fault/transport.wasm：9 個未授權 import [capability]   - wasi:filesystem/types@0.2.6 (filesystem：transport 預設拒絕；若只是 "
+transport,fault/transport.wasm,inert-fs,LOAD_REFUSED,"[capability] 拒絕載入 stage=transport plugin=/app/plugin/fault/transport.wasm：7 個未授權 import [capability]   - wasi:sockets/network@0.2.6 (raw sockets：transport 預設拒絕（transport "
+transport,fault/transport.wasm,inert-fs inert-sockets,LOAD_OK,""
+transport,fault/transport.wasm,inert-fs endpoint-sockets,LOAD_OK,""
+exit_code=1 elapsed_s=-0.44
+05:44:49 probe FAULT_FILE 4 probe lines, decoy connections: 0
+05:45:09 probe FAULT_ENV 4 probe lines, decoy connections: 0
+05:45:31 probe FAULT_NET 10 probe lines, decoy connections: 0
+# P5 結果
+
+## A. 載入時檢查（--check-plugin）
+
+| 階段 | 插件 | 授權 | 結果 |
+|---|---|---|---|
+| parse | parse.wasm | none | LOAD_OK |
+| parse | parse.wasm | inert-fs | LOAD_OK |
+| parse | parse.wasm | inert-fs inert-sockets | LOAD_OK |
+| parse | fault/parse.wasm | none | LOAD_REFUSED |
+| parse | fault/parse.wasm | inert-fs | LOAD_REFUSED |
+| parse | fault/parse.wasm | inert-fs inert-sockets | LOAD_OK |
+| filter | filter.wasm | none | LOAD_OK |
+| filter | filter.wasm | inert-fs | LOAD_OK |
+| filter | filter.wasm | inert-fs inert-sockets | LOAD_OK |
+| filter | fault/filter.wasm | none | LOAD_REFUSED |
+| filter | fault/filter.wasm | inert-fs | LOAD_REFUSED |
+| filter | fault/filter.wasm | inert-fs inert-sockets | LOAD_OK |
+| format | format.wasm | none | LOAD_OK |
+| format | format.wasm | inert-fs | LOAD_OK |
+| format | format.wasm | inert-fs inert-sockets | LOAD_OK |
+| format | fault/format.wasm | none | LOAD_REFUSED |
+| format | fault/format.wasm | inert-fs | LOAD_REFUSED |
+| format | fault/format.wasm | inert-fs inert-sockets | LOAD_OK |
+| transport | transport.wasm | none | LOAD_OK |
+| transport | transport.wasm | inert-fs | LOAD_OK |
+| transport | transport.wasm | inert-fs inert-sockets | LOAD_OK |
+| transport | transport.wasm | inert-fs endpoint-sockets | LOAD_OK |
+| transport | fault/transport.wasm | none | LOAD_REFUSED |
+| transport | fault/transport.wasm | inert-fs | LOAD_REFUSED |
+| transport | fault/transport.wasm | inert-fs inert-sockets | LOAD_OK |
+| transport | fault/transport.wasm | inert-fs endpoint-sockets | LOAD_OK |
+
+## B. 啟動時拒絕（fault 插件、沒有授權）
+
+exit code 1，-0.44 s 內結束；因能力檢查拒絕載入。
+
+    [capability] 拒絕載入 stage=parse plugin=/app/plugin/fault/parse.wasm：9 個未授權 import
+    [capability]   - wasi:filesystem/types@0.2.6 (filesystem：parse 預設拒絕；若只是 wasip1 adapter 的連帶 import，可明確設定 capabilities.parse.filesystem: inert（零 preopen）)
+    [capability]   - wasi:filesystem/preopens@0.2.6 (filesystem：parse 預設拒絕；若只是 wasip1 adapter 的連帶 import，可明確設定 capabilities.parse.filesystem: inert（零 preopen）)
+
+## C. 執行期探測
+
+| 標記 | 階段 | 探測 | 目標 | 結果 |
+|---|---|---|---|---|
+| FAULT_ENV | parse | env | -  | DENIED(empty) |
+| FAULT_ENV | filter | env | -  | DENIED(empty) |
+| FAULT_ENV | format | env | -  | DENIED(empty) |
+| FAULT_ENV | transport | env | -  | DENIED(empty) |
+| FAULT_ENV | decoy.py | connections_on_8081 | 0.0.0.0:8081 independent | none |
+| FAULT_FILE | parse | file | /etc/passwd  | DENIED |
+| FAULT_FILE | filter | file | /etc/passwd  | DENIED |
+| FAULT_FILE | format | file | /etc/passwd  | DENIED |
+| FAULT_FILE | transport | file | /etc/passwd  | DENIED |
+| FAULT_FILE | decoy.py | connections_on_8081 | 0.0.0.0:8081 independent | none |
+| FAULT_NET | parse | net | 127.0.0.1:8080  | DENIED |
+| FAULT_NET | filter | net_tcp | 127.0.0.1:8080 listed-endpoint | DENIED |
+| FAULT_NET | filter | net_tcp | 127.0.0.1:8081 not-listed | DENIED |
+| FAULT_NET | format | net_tcp | 127.0.0.1:8080 listed-endpoint | DENIED |
+| FAULT_NET | format | net_tcp | 127.0.0.1:8081 not-listed | DENIED |
+| FAULT_NET | transport | net_http | http://127.0.0.1:8081/ingest not-listed-port | DENIED |
+| FAULT_NET | transport | net_http | http://localhost:8080/ingest not-listed-name-same-socket | DENIED |
+| FAULT_NET | transport | net_tcp | 127.0.0.1:8080 listed-endpoint | CONNECTED |
+| FAULT_NET | transport | net_tcp | 127.0.0.1:8081 not-listed | DENIED |
+| FAULT_NET | transport | http_listed | 127.0.0.1:8080/ingest  | ACCEPTED |
+| FAULT_NET | decoy.py | connections_on_8081 | 0.0.0.0:8081 independent | none |
+
+未預期的存取：0 筆

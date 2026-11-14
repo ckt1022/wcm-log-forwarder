@@ -1,0 +1,144 @@
+02:57:02 count json-fields256 1 r1 status=running exit_code=0 oom=false restarts=0
+02:57:52 count json-fields256 4 r1 status=running exit_code=0 oom=false restarts=0
+02:58:40 count json-fields256 16 r1 status=running exit_code=0 oom=false restarts=0
+02:59:28 count json-fields256 64 r1 status=running exit_code=0 oom=false restarts=0
+03:00:16 count json-fields256 256 r1 status=running exit_code=0 oom=false restarts=0
+03:01:04 count json-fields256 1024 r1 status=running exit_code=0 oom=false restarts=0
+03:01:54 bytes json-fields256 1 r1 status=running exit_code=0 oom=false restarts=0
+03:02:41 bytes json-fields256 4 r1 status=running exit_code=0 oom=false restarts=0
+03:03:30 bytes json-fields256 16 r1 status=running exit_code=0 oom=false restarts=0
+03:04:18 bytes json-fields256 64 r1 status=running exit_code=0 oom=false restarts=0
+03:05:07 bytes json-fields256 128 r1 status=running exit_code=0 oom=false restarts=0
+03:05:55 bytes json-fields256 512 r1 status=running exit_code=0 oom=false restarts=0
+03:06:48 count json-fields1k 1 r1 status=running exit_code=0 oom=false restarts=0
+03:07:38 count json-fields1k 4 r1 status=running exit_code=0 oom=false restarts=0
+03:08:26 count json-fields1k 16 r1 status=running exit_code=0 oom=false restarts=0
+03:09:15 count json-fields1k 64 r1 status=running exit_code=0 oom=false restarts=0
+03:10:02 count json-fields1k 256 r1 status=running exit_code=0 oom=false restarts=0
+03:10:52 count json-fields1k 1024 r1 status=running exit_code=0 oom=false restarts=0
+03:11:46 bytes json-fields1k 1 r1 status=running exit_code=0 oom=false restarts=0
+03:12:35 bytes json-fields1k 4 r1 status=running exit_code=0 oom=false restarts=0
+03:13:24 bytes json-fields1k 16 r1 status=running exit_code=0 oom=false restarts=0
+03:14:11 bytes json-fields1k 64 r1 status=running exit_code=0 oom=false restarts=0
+03:15:00 bytes json-fields1k 128 r1 status=running exit_code=0 oom=false restarts=0
+03:15:49 bytes json-fields1k 512 r1 status=running exit_code=0 oom=false restarts=0
+03:16:44 count json-fields2k 1 r1 status=running exit_code=0 oom=false restarts=0
+03:17:35 count json-fields2k 4 r1 status=running exit_code=0 oom=false restarts=0
+03:18:25 count json-fields2k 16 r1 status=running exit_code=0 oom=false restarts=0
+03:19:16 count json-fields2k 64 r1 status=running exit_code=0 oom=false restarts=0
+03:20:07 count json-fields2k 256 r1 status=running exit_code=0 oom=false restarts=0
+03:21:02 count json-fields2k 1024 r1 status=running exit_code=0 oom=false restarts=0
+03:21:58 bytes json-fields2k 1 r1 status=running exit_code=0 oom=false restarts=0
+03:22:51 bytes json-fields2k 4 r1 status=running exit_code=0 oom=false restarts=0
+03:23:41 bytes json-fields2k 16 r1 status=running exit_code=0 oom=false restarts=0
+03:24:32 bytes json-fields2k 64 r1 status=running exit_code=0 oom=false restarts=0
+03:25:22 bytes json-fields2k 128 r1 status=running exit_code=0 oom=false restarts=0
+03:26:12 bytes json-fields2k 512 r1 status=running exit_code=0 oom=false restarts=0
+03:27:05 count json-fields256 1 r2 status=running exit_code=0 oom=false restarts=0
+03:27:53 count json-fields256 4 r2 status=running exit_code=0 oom=false restarts=0
+03:28:42 count json-fields256 16 r2 status=running exit_code=0 oom=false restarts=0
+03:29:30 count json-fields256 64 r2 status=running exit_code=0 oom=false restarts=0
+03:30:18 count json-fields256 256 r2 status=running exit_code=0 oom=false restarts=0
+03:31:06 count json-fields256 1024 r2 status=running exit_code=0 oom=false restarts=0
+03:31:55 bytes json-fields256 1 r2 status=running exit_code=0 oom=false restarts=0
+03:32:43 bytes json-fields256 4 r2 status=running exit_code=0 oom=false restarts=0
+03:33:31 bytes json-fields256 16 r2 status=running exit_code=0 oom=false restarts=0
+03:34:19 bytes json-fields256 64 r2 status=running exit_code=0 oom=false restarts=0
+03:35:07 bytes json-fields256 128 r2 status=running exit_code=0 oom=false restarts=0
+03:35:56 bytes json-fields256 512 r2 status=running exit_code=0 oom=false restarts=0
+03:36:48 count json-fields1k 1 r2 status=running exit_code=0 oom=false restarts=0
+03:37:37 count json-fields1k 4 r2 status=running exit_code=0 oom=false restarts=0
+03:38:26 count json-fields1k 16 r2 status=running exit_code=0 oom=false restarts=0
+03:39:13 count json-fields1k 64 r2 status=running exit_code=0 oom=false restarts=0
+03:40:02 count json-fields1k 256 r2 status=running exit_code=0 oom=false restarts=0
+03:40:51 count json-fields1k 1024 r2 status=running exit_code=0 oom=false restarts=0
+03:41:45 bytes json-fields1k 1 r2 status=running exit_code=0 oom=false restarts=0
+03:42:35 bytes json-fields1k 4 r2 status=running exit_code=0 oom=false restarts=0
+03:43:22 bytes json-fields1k 16 r2 status=running exit_code=0 oom=false restarts=0
+03:44:11 bytes json-fields1k 64 r2 status=running exit_code=0 oom=false restarts=0
+03:44:58 bytes json-fields1k 128 r2 status=running exit_code=0 oom=false restarts=0
+03:45:48 bytes json-fields1k 512 r2 status=running exit_code=0 oom=false restarts=0
+03:46:43 count json-fields2k 1 r2 status=running exit_code=0 oom=false restarts=0
+03:47:34 count json-fields2k 4 r2 status=running exit_code=0 oom=false restarts=0
+03:48:25 count json-fields2k 16 r2 status=running exit_code=0 oom=false restarts=0
+03:49:13 count json-fields2k 64 r2 status=running exit_code=0 oom=false restarts=0
+03:50:04 count json-fields2k 256 r2 status=running exit_code=0 oom=false restarts=0
+03:51:00 count json-fields2k 1024 r2 status=running exit_code=0 oom=false restarts=0
+03:51:55 bytes json-fields2k 1 r2 status=running exit_code=0 oom=false restarts=0
+03:52:48 bytes json-fields2k 4 r2 status=running exit_code=0 oom=false restarts=0
+03:53:39 bytes json-fields2k 16 r2 status=running exit_code=0 oom=false restarts=0
+03:54:28 bytes json-fields2k 64 r2 status=running exit_code=0 oom=false restarts=0
+03:55:17 bytes json-fields2k 128 r2 status=running exit_code=0 oom=false restarts=0
+03:56:09 bytes json-fields2k 512 r2 status=running exit_code=0 oom=false restarts=0
+03:56:59 count json-fields256 1 r3 status=running exit_code=0 oom=false restarts=0
+03:57:49 count json-fields256 4 r3 status=running exit_code=0 oom=false restarts=0
+03:58:37 count json-fields256 16 r3 status=running exit_code=0 oom=false restarts=0
+03:59:25 count json-fields256 64 r3 status=running exit_code=0 oom=false restarts=0
+04:00:13 count json-fields256 256 r3 status=running exit_code=0 oom=false restarts=0
+04:01:02 count json-fields256 1024 r3 status=running exit_code=0 oom=false restarts=0
+04:01:50 bytes json-fields256 1 r3 status=running exit_code=0 oom=false restarts=0
+04:02:39 bytes json-fields256 4 r3 status=running exit_code=0 oom=false restarts=0
+04:03:26 bytes json-fields256 16 r3 status=running exit_code=0 oom=false restarts=0
+04:04:14 bytes json-fields256 64 r3 status=running exit_code=0 oom=false restarts=0
+04:05:02 bytes json-fields256 128 r3 status=running exit_code=0 oom=false restarts=0
+04:05:50 bytes json-fields256 512 r3 status=running exit_code=0 oom=false restarts=0
+04:06:43 count json-fields1k 1 r3 status=running exit_code=0 oom=false restarts=0
+04:07:32 count json-fields1k 4 r3 status=running exit_code=0 oom=false restarts=0
+04:08:21 count json-fields1k 16 r3 status=running exit_code=0 oom=false restarts=0
+04:09:08 count json-fields1k 64 r3 status=running exit_code=0 oom=false restarts=0
+04:09:57 count json-fields1k 256 r3 status=running exit_code=0 oom=false restarts=0
+04:10:46 count json-fields1k 1024 r3 status=running exit_code=0 oom=false restarts=0
+04:11:39 bytes json-fields1k 1 r3 status=running exit_code=0 oom=false restarts=0
+04:12:29 bytes json-fields1k 4 r3 status=running exit_code=0 oom=false restarts=0
+04:13:17 bytes json-fields1k 16 r3 status=running exit_code=0 oom=false restarts=0
+04:14:06 bytes json-fields1k 64 r3 status=running exit_code=0 oom=false restarts=0
+04:14:53 bytes json-fields1k 128 r3 status=running exit_code=0 oom=false restarts=0
+04:15:41 bytes json-fields1k 512 r3 status=running exit_code=0 oom=false restarts=0
+04:16:37 count json-fields2k 1 r3 status=running exit_code=0 oom=false restarts=0
+04:17:28 count json-fields2k 4 r3 status=running exit_code=0 oom=false restarts=0
+04:18:17 count json-fields2k 16 r3 status=running exit_code=0 oom=false restarts=0
+04:19:08 count json-fields2k 64 r3 status=running exit_code=0 oom=false restarts=0
+04:19:58 count json-fields2k 256 r3 status=running exit_code=0 oom=false restarts=0
+04:20:53 count json-fields2k 1024 r3 status=running exit_code=0 oom=false restarts=0
+04:21:50 bytes json-fields2k 1 r3 status=running exit_code=0 oom=false restarts=0
+04:22:42 bytes json-fields2k 4 r3 status=running exit_code=0 oom=false restarts=0
+04:23:32 bytes json-fields2k 16 r3 status=running exit_code=0 oom=false restarts=0
+04:24:23 bytes json-fields2k 64 r3 status=running exit_code=0 oom=false restarts=0
+04:25:12 bytes json-fields2k 128 r3 status=running exit_code=0 oom=false restarts=0
+04:26:02 bytes json-fields2k 512 r3 status=running exit_code=0 oom=false restarts=0
+count json-fields256       1  processed/s=   12,014  records/call=    1.0
+count json-fields256       4  processed/s=   20,334  records/call=    4.0
+count json-fields256      16  processed/s=   37,897  records/call=   16.0
+count json-fields256      64  processed/s=   66,240  records/call=   64.0
+count json-fields256     256  processed/s=   76,800  records/call=  256.0
+count json-fields256    1024  processed/s=   81,920  records/call= 1021.9
+count json-fields1k        1  processed/s=    5,762  records/call=    1.0
+count json-fields1k        4  processed/s=    9,707  records/call=    4.0
+count json-fields1k       16  processed/s=   16,744  records/call=   16.0
+count json-fields1k       64  processed/s=   20,767  records/call=   64.0
+count json-fields1k      256  processed/s=   22,015  records/call=  255.9
+count json-fields1k     1024  processed/s=   22,525  records/call= 1016.9
+count json-fields2k        1  processed/s=    3,989  records/call=    1.0
+count json-fields2k        4  processed/s=    6,827  records/call=    4.0
+count json-fields2k       16  processed/s=    9,696  records/call=   16.0
+count json-fields2k       64  processed/s=   10,655  records/call=   64.0
+count json-fields2k      256  processed/s=   10,752  records/call=  255.8
+count json-fields2k     1024  processed/s=   11,262  records/call=  979.2
+bytes json-fields256       1  processed/s=   20,499  records/call=    4.0
+bytes json-fields256       4  processed/s=   36,455  records/call=   16.0
+bytes json-fields256      16  processed/s=   64,609  records/call=   64.0
+bytes json-fields256      64  processed/s=   78,462  records/call=  256.0
+bytes json-fields256     128  processed/s=   80,385  records/call=  511.9
+bytes json-fields256     512  processed/s=   83,967  records/call= 2018.4
+bytes json-fields1k        1  processed/s=    5,732  records/call=    1.0
+bytes json-fields1k        4  processed/s=    9,675  records/call=    4.0
+bytes json-fields1k       16  processed/s=   17,704  records/call=   16.0
+bytes json-fields1k       64  processed/s=   20,447  records/call=   64.0
+bytes json-fields1k      128  processed/s=   21,120  records/call=  128.0
+bytes json-fields1k      512  processed/s=   22,527  records/call=  511.7
+bytes json-fields2k        1  processed/s=    3,849  records/call=    1.0
+bytes json-fields2k        4  processed/s=    5,462  records/call=    2.0
+bytes json-fields2k       16  processed/s=    8,864  records/call=    8.0
+bytes json-fields2k       64  processed/s=   10,289  records/call=   32.0
+bytes json-fields2k      128  processed/s=   10,750  records/call=   64.0
+bytes json-fields2k      512  processed/s=   10,755  records/call=  255.8

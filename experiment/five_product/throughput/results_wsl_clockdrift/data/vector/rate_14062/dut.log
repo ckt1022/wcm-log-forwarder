@@ -1,0 +1,9 @@
+2026-11-12T16:24:26.841861Z  INFO vector::app: Log level is enabled. level="info"
+2026-11-12T16:24:26.842613Z  INFO vector::app: Loading configs. paths=["/etc/vector/vector.yaml"]
+2026-11-12T16:24:27.089889Z  INFO vector::topology::running: Running healthchecks.
+2026-11-12T16:24:27.090056Z  INFO vector: Vector has started. debug="false" version="0.49.0" arch="x86_64" revision="dc7e792 2025-08-12 13:47:08.632326804"
+2026-11-12T16:24:27.090072Z  INFO vector::app: API is disabled, enable by setting `api.enabled` to `true` and use commands like `vector top`.
+2026-11-12T16:24:27.090105Z  INFO vector::topology::builder: Healthcheck disabled.
+2026-11-12T16:24:27.090501Z  INFO source{component_kind="source" component_id=tcp_in component_type=socket}: vector::sources::util::net::tcp: Listening. addr=0.0.0.0:15140
+2026-11-12T16:25:48.824639Z  INFO vector::signal: Signal received. signal="SIGTERM"
+2026-11-12T16:25:48.824750Z  INFO vector: Vector has stopped.

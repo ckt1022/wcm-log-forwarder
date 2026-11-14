@@ -1,0 +1,8 @@
+00:12:56 fluentd rate=28000 PASS rate=28000 gen_avg=27999/s gen_mb_s=28.699 lag_p99=5ms lag_max=2.6ms sink_total=671991 expected=671990 backlog=21055 win_out_eps=11191 win_out_mb_s=11.796 oom=false
+00:14:23 fluentd rate=35000 PASS rate=35000 gen_avg=34999/s gen_mb_s=35.874 lag_p99=5ms lag_max=2.2ms sink_total=839987 expected=839985 backlog=27451 win_out_eps=14014 win_out_mb_s=14.770 oom=false
+00:15:51 fluentd rate=43750 PASS rate=43750 gen_avg=43749/s gen_mb_s=44.843 lag_p99=5ms lag_max=5.5ms sink_total=1050001 expected=1049999 backlog=35424 win_out_eps=17500 win_out_mb_s=18.446 oom=false
+00:17:17 fluentd rate=54687 FAIL rate=54687 gen_avg=49271/s gen_mb_s=50.503 lag_p99=5871ms lag_max=5871.4ms sink_total=1187232 expected=1187231 backlog=43496 win_out_eps=19770 win_out_mb_s=20.840 oom=false reasons=gen_blocked(av
+00:18:44 fluentd rate=49218 FAIL rate=49218 gen_avg=49217/s gen_mb_s=50.447 lag_p99=50ms lag_max=54.5ms sink_total=1181220 expected=1181219 backlog=36706 win_out_eps=19702 win_out_mb_s=20.769 oom=false reasons=gen_blocked(avg=49
+00:20:11 fluentd rate=46484 PASS rate=46484 gen_avg=46483/s gen_mb_s=47.645 lag_p99=5ms lag_max=2.4ms sink_total=1115599 expected=1115598 backlog=15387 win_out_eps=18587 win_out_mb_s=19.592 oom=false
+00:21:37 fluentd rate=47851 PASS rate=47851 gen_avg=47850/s gen_mb_s=49.047 lag_p99=5ms lag_max=3.0ms sink_total=1148421 expected=1148420 backlog=35579 win_out_eps=19178 win_out_mb_s=20.216 oom=false
+fluentd capacity=47851 first_fail=49218 trials=7

@@ -1,0 +1,7 @@
+00:04:30 fluentbit-wasm rate=3500 PASS rate=3500 gen_avg=3500/s gen_mb_s=3.587 lag_p99=5ms lag_max=2.1ms sink_total=84001 expected=83999 backlog=2491 win_out_eps=1400 win_out_mb_s=1.474 oom=false
+00:05:54 fluentbit-wasm rate=4375 PASS rate=4375 gen_avg=4375/s gen_mb_s=4.484 lag_p99=5ms lag_max=2.0ms sink_total=105001 expected=104999 backlog=3167 win_out_eps=1750 win_out_mb_s=1.843 oom=false
+00:07:18 fluentbit-wasm rate=5468 FAIL rate=5468 gen_avg=5363/s gen_mb_s=5.497 lag_p99=1183ms lag_max=1183.5ms sink_total=129838 expected=129837 backlog=3664 win_out_eps=2129 win_out_mb_s=2.242 oom=false reasons=gen_blocked(avg=5363/5
+00:08:43 fluentbit-wasm rate=4921 PASS rate=4921 gen_avg=4921/s gen_mb_s=5.044 lag_p99=5ms lag_max=3.1ms sink_total=118103 expected=118102 backlog=3506 win_out_eps=1968 win_out_mb_s=2.073 oom=false
+00:10:06 fluentbit-wasm rate=5194 PASS rate=5194 gen_avg=5194/s gen_mb_s=5.324 lag_p99=5ms lag_max=2.0ms sink_total=124656 expected=124655 backlog=3822 win_out_eps=2077 win_out_mb_s=2.188 oom=false
+00:11:30 fluentbit-wasm rate=5331 PASS rate=5331 gen_avg=5331/s gen_mb_s=5.464 lag_p99=5ms lag_max=2.0ms sink_total=127943 expected=127942 backlog=3883 win_out_eps=2132 win_out_mb_s=2.246 oom=false
+fluentbit-wasm capacity=5331 first_fail=5468 trials=6

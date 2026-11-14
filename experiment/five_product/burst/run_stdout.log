@@ -1,0 +1,30 @@
+00:01:03 wcm burst=5s base=13281
+00:03:22 fluentbit-lua burst=5s base=34277
+00:05:41 fluentbit-wasm burst=5s base=2734
+00:08:02 fluentd burst=5s base=23242
+00:10:21 vector burst=5s base=7250
+00:12:50 wcm burst=15s base=13281
+00:15:18 fluentbit-lua burst=15s base=34277
+00:17:44 fluentbit-wasm burst=15s base=2734
+00:20:14 fluentd burst=15s base=23242
+00:22:42 vector burst=15s base=7250
+00:25:25 wcm burst=30s base=13281
+00:28:06 fluentbit-lua burst=30s base=34277
+00:30:47 fluentbit-wasm burst=30s base=2734
+00:33:32 fluentd burst=30s base=23242
+00:36:15 vector burst=30s base=7250
+fluentbit-lua   burst=15s recovery=3.3s received=2096702/2096701 (1.0) oom=false
+fluentbit-lua   burst=30s recovery=3.1s received=2528040/2528039 (1.0) oom=false
+fluentbit-lua   burst= 5s recovery=1.8s received=1791015/1791014 (1.0) oom=false
+fluentbit-wasm  burst=15s recovery=2.3s received=163439/163436 (1.0) oom=false
+fluentbit-wasm  burst=30s recovery=8.2s received=202532/202528 (1.0) oom=false
+fluentbit-wasm  burst= 5s recovery=3.3s received=143807/143806 (1.0) oom=false
+fluentd         burst=15s recovery=3.1s received=1424745/1424744 (1.0) oom=false
+fluentd         burst=30s recovery=3.3s received=1736680/1736678 (1.0) oom=false
+fluentd         burst= 5s recovery=10.2s received=1226822/1226821 (1.0) oom=false
+vector          burst=15s recovery=14.3s received=453397/453395 (1.0) oom=false
+vector          burst=30s recovery=5.3s received=529226/529223 (1.0) oom=false
+vector          burst= 5s recovery=12.2s received=389135/389133 (1.0) oom=false
+wcm             burst=15s recovery=9.3s received=830232/830230 (1.0) oom=false
+wcm             burst=30s recovery=12.3s received=966262/966260 (1.0) oom=false
+wcm             burst= 5s recovery=7.1s received=714803/714801 (1.0) oom=false

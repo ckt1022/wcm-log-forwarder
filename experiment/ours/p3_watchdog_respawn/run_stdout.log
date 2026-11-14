@@ -1,0 +1,55 @@
+04:27:40 fault none r1 status=running exit_code=0 oom=false restarts=0
+04:29:05 fault loop_T1 r1 status=running exit_code=0 oom=false restarts=0
+04:30:28 fault loop_T2 r1 status=running exit_code=0 oom=false restarts=0
+04:31:50 fault loop_T5 r1 status=running exit_code=0 oom=false restarts=0
+04:33:43 fault loop_off r1 status=running exit_code=0 oom=false restarts=0
+04:35:06 fault panic r1 status=running exit_code=0 oom=false restarts=0
+04:36:28 fault oob r1 status=running exit_code=0 oom=false restarts=0
+04:37:53 fault mem r1 status=running exit_code=0 oom=false restarts=0
+04:39:05 overhead watchdog=on r1 PASS rate=10000 gen_avg=10000/s gen_mb_s=10.250 lag_p99=5ms lag_max=16.2ms sink_total=239997 expecte
+04:40:19 overhead watchdog=off r1 PASS rate=10000 gen_avg=10000/s gen_mb_s=10.250 lag_p99=5ms lag_max=21.2ms sink_total=239999 expecte
+04:41:42 fault none r2 status=running exit_code=0 oom=false restarts=0
+04:43:04 fault loop_T1 r2 status=running exit_code=0 oom=false restarts=0
+04:44:28 fault loop_T2 r2 status=running exit_code=0 oom=false restarts=0
+04:45:51 fault loop_T5 r2 status=running exit_code=0 oom=false restarts=0
+04:47:42 fault loop_off r2 status=running exit_code=0 oom=false restarts=0
+04:49:06 fault panic r2 status=running exit_code=0 oom=false restarts=0
+04:50:29 fault oob r2 status=running exit_code=0 oom=false restarts=0
+04:51:51 fault mem r2 status=running exit_code=0 oom=false restarts=0
+04:53:05 overhead watchdog=off r2 PASS rate=10000 gen_avg=10000/s gen_mb_s=10.250 lag_p99=5ms lag_max=21.8ms sink_total=239998 expecte
+04:54:19 overhead watchdog=on r2 PASS rate=10000 gen_avg=10000/s gen_mb_s=10.250 lag_p99=5ms lag_max=17.7ms sink_total=239999 expecte
+04:55:42 fault none r3 status=running exit_code=0 oom=false restarts=0
+04:57:04 fault loop_T1 r3 status=running exit_code=0 oom=false restarts=0
+04:58:28 fault loop_T2 r3 status=running exit_code=0 oom=false restarts=0
+04:59:50 fault loop_T5 r3 status=running exit_code=0 oom=false restarts=0
+05:01:41 fault loop_off r3 status=running exit_code=0 oom=false restarts=0
+05:03:05 fault panic r3 status=running exit_code=0 oom=false restarts=0
+05:04:27 fault oob r3 status=running exit_code=0 oom=false restarts=0
+05:05:50 fault mem r3 status=running exit_code=0 oom=false restarts=0
+05:07:04 overhead watchdog=on r3 FAIL rate=10000 gen_avg=10000/s gen_mb_s=10.250 lag_p99=5ms lag_max=17.0ms sink_total=239998 expecte
+05:08:16 overhead watchdog=off r3 PASS rate=10000 gen_avg=10000/s gen_mb_s=10.250 lag_p99=5ms lag_max=18.1ms sink_total=239999 expecte
+skip /home/ckt1022/wcm-log-forwarder/experiment/ours/p3_watchdog_respawn/results/data/fault/none_r1: 'marker'
+skip /home/ckt1022/wcm-log-forwarder/experiment/ours/p3_watchdog_respawn/results/data/fault/none_r2: 'marker'
+skip /home/ckt1022/wcm-log-forwarder/experiment/ours/p3_watchdog_respawn/results/data/fault/none_r3: 'marker'
+loop_T1   r1 ok         lost=1      stall=4s recovery=5.1s isolation_calls=10 dead_letter=1
+loop_T1   r2 ok         lost=1      stall=4s recovery=5.2s isolation_calls=10 dead_letter=1
+loop_T1   r3 ok         lost=1      stall=4s recovery=5.2s isolation_calls=10 dead_letter=1
+loop_T2   r1 ok         lost=1      stall=8s recovery=10.8s isolation_calls=10 dead_letter=1
+loop_T2   r2 ok         lost=1      stall=8s recovery=9.1s isolation_calls=10 dead_letter=1
+loop_T2   r3 ok         lost=1      stall=8s recovery=9.1s isolation_calls=10 dead_letter=1
+loop_T5   r1 ok         lost=1      stall=20s recovery=21.1s isolation_calls=10 dead_letter=1
+loop_T5   r2 ok         lost=1      stall=20s recovery=21.2s isolation_calls=10 dead_letter=1
+loop_T5   r3 ok         lost=1      stall=20s recovery=22.8s isolation_calls=10 dead_letter=1
+loop_off  r1 stalled    lost=28480  stall=64s recovery=s isolation_calls=0 dead_letter=
+loop_off  r2 stalled    lost=28480  stall=64s recovery=s isolation_calls=0 dead_letter=
+loop_off  r3 stalled    lost=28480  stall=64s recovery=s isolation_calls=0 dead_letter=
+panic     r1 ok         lost=1      stall=0s recovery=0.0s isolation_calls=10 dead_letter=1
+panic     r2 ok         lost=1      stall=0s recovery=0.0s isolation_calls=10 dead_letter=1
+panic     r3 ok         lost=1      stall=0s recovery=0.0s isolation_calls=10 dead_letter=1
+oob       r1 ok         lost=1      stall=0s recovery=0.0s isolation_calls=10 dead_letter=1
+oob       r2 ok         lost=1      stall=0s recovery=0.0s isolation_calls=10 dead_letter=1
+oob       r3 ok         lost=1      stall=0s recovery=0.0s isolation_calls=10 dead_letter=1
+mem       r1 ok         lost=1      stall=0s recovery=2.1s isolation_calls=10 dead_letter=1
+mem       r2 ok         lost=1      stall=1s recovery=2.1s isolation_calls=10 dead_letter=1
+mem       r3 ok         lost=1      stall=1s recovery=2.2s isolation_calls=10 dead_letter=1
+overhead: CPU watchdog on=57.2% off=51.5% ratio=1.111 (n=3/3)

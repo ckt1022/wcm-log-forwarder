@@ -1,0 +1,267 @@
+Fluent Bit v5.0.9
+* Copyright (C) 2015-2026 The Fluent Bit Authors
+* Fluent Bit is a CNCF graduated project under the Fluent organization
+* https://fluentbit.io
+
+______ _                  _    ______ _ _           _____  _____ 
+|  ___| |                | |   | ___ (_) |         |  ___||  _  |
+| |_  | |_   _  ___ _ __ | |_  | |_/ /_| |_  __   _|___ \ | |/' |
+|  _| | | | | |/ _ \ '_ \| __| | ___ \ | __| \ \ / /   \ \|  /| |
+| |   | | |_| |  __/ | | | |_  | |_/ / | |_   \ V //\__/ /\ |_/ /
+\_|   |_|\__,_|\___|_| |_|\__| \____/|_|\__|   \_/ \____(_)\___/
+
+
+[2026/11/12 17:53:46.120] [ info] [fluent bit] version=5.0.9, commit=a1e05fc1f7, pid=1
+[2026/11/12 17:53:46.120] [ info] [storage] ver=1.5.4, type=memory, sync=normal, checksum=off, max_chunks_up=128
+[2026/11/12 17:53:46.120] [ info] [simd    ] SSE2
+[2026/11/12 17:53:46.120] [ info] [cmetrics] version=2.1.5
+[2026/11/12 17:53:46.120] [ info] [ctraces ] version=0.7.1
+[2026/11/12 17:53:46.120] [ info] [input:tcp:tcp.0] initializing
+[2026/11/12 17:53:46.120] [ info] [input:tcp:tcp.0] storage_strategy='memory' (memory only)
+[2026/11/12 17:53:46.327] [ info] [sp] stream processor started
+[2026/11/12 17:53:46.327] [ info] [engine] Shutdown Grace Period=5, Shutdown Input Grace Period=2
+[2026/11/12 17:53:46.327] [ info] [output:http:http.0] worker #0 started
+[2026/11/12 17:53:49.619] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:53:50.631] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:53:51.625] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:53:52.625] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:53:53.626] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:53:54.648] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:53:54.578] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:53:55.609] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:53:56.579] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:53:57.575] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:53:58.578] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:53:59.584] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:00.575] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:01.580] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:02.621] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:03.579] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:04.575] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:05.596] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:06.580] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:07.575] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:08.578] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:09.577] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:10.575] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:11.581] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:12.582] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:13.589] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:14.581] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:15.582] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:16.578] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:17.583] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:18.577] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:19.604] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:20.586] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:21.577] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:22.581] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:23.578] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:24.577] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:25.577] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:26.581] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:26.542] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:27.550] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:28.546] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:29.540] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:30.543] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:31.549] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:32.545] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:33.545] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:34.546] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:35.541] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:36.550] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:37.545] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:38.542] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:39.541] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:40.551] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:41.546] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:42.546] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:43.546] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:44.547] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:45.545] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:46.541] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:47.543] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:48.561] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:49.541] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:50.544] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:51.541] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:52.545] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:53.542] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:54.541] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:55.545] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:56.544] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:57.547] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:57.538] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:58.539] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:54:59.544] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:00.545] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:01.537] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:02.541] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:03.535] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:04.580] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:05.550] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:06.538] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:07.535] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:08.537] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:09.566] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:10.542] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:11.536] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:12.542] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:13.541] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:14.544] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:15.541] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:16.542] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:17.541] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:18.542] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:19.540] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:20.540] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:21.537] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:22.542] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:23.536] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:24.537] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:25.542] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:26.577] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:27.542] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:28.540] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:29.561] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:29.488] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:30.481] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:31.474] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:32.476] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:33.486] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:34.476] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:35.480] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:36.510] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:37.477] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:38.507] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:39.472] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:40.479] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:41.475] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:42.476] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:43.478] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:44.476] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:45.471] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}
+[2026/11/12 17:55:46.473] [ info] [output:http:http.0] 127.0.0.1:18080, HTTP status=200
+{"status":"ok"}

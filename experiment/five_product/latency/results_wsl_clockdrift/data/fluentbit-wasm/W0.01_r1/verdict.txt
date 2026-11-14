@@ -1,0 +1,1 @@
+FAIL rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=28.6ms sink_total=288001 expected=288000 backlog=9349 win_out_eps=1600 win_out_mb_s=1.686 oom=false reasons=backlog=9349>4800

@@ -1,0 +1,20 @@
+# WCM（core/ 與 plugins/ 的 Rust 插件，插件已內建在映像的 /app/plugin）
+plugins:
+  parse: parse.wasm
+  filter: filter.wasm
+  format: format.wasm
+  transport: transport.wasm
+stages: {filter: true, format: true, transport: true}
+input:
+  mode: tcp
+  tcp: {host: "0.0.0.0", port: 15140}
+batch:
+  mem_limit_mb: 256
+  max_wait_ms: 100
+  channel_capacity: 50000
+  max_format_chunk: 10000
+  max_transport_bytes: 134217728
+  transport_workers: 1
+endpoint:
+  A: "http://127.0.0.1:18080/ingest"
+status_interval_secs: 0

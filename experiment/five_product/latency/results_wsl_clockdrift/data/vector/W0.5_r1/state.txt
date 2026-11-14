@@ -1,0 +1,1 @@
+status=running exit_code=0 oom=false restarts=0

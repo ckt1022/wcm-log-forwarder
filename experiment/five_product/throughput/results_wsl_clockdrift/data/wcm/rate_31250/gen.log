@@ -1,0 +1,41 @@
+[gen] output=tcp  addr=127.0.0.1:15140  send-unit=batch  conns=1  batch-lines=500
+[gen] start: rate=31250/s duration=60s mode=json-fields1k traffic=flat invalid-rate=0.05
+[gen] total=31261 inst=31250/s avg=31250/s mult=1.00x
+[gen] total=62534 inst=31250/s avg=31250/s mult=1.00x
+[gen] total=93796 inst=31251/s avg=31250/s mult=1.00x
+[gen] total=125066 inst=31250/s avg=31250/s mult=1.00x
+[gen] total=156340 inst=31250/s avg=31250/s mult=1.00x
+[gen] total=187627 inst=31249/s avg=31250/s mult=1.00x
+[gen] total=218884 inst=31250/s avg=31250/s mult=1.00x
+[gen] total=250153 inst=31250/s avg=31250/s mult=1.00x
+[gen] total=281416 inst=31250/s avg=31250/s mult=1.00x
+[gen] total=312698 inst=31250/s avg=31250/s mult=1.00x
+[gen] total=343966 inst=31250/s avg=31250/s mult=1.00x
+[gen] total=375234 inst=31250/s avg=31250/s mult=1.00x
+[gen] total=406903 inst=31250/s avg=31250/s mult=1.00x
+[gen] total=448660 inst=31250/s avg=31250/s mult=1.00x
+[gen-signal] t=15s: about to emit LOOP trigger log
+[gen] LOOP trigger emitted at t=15.65s
+[gen] total=488985 inst=31250/s avg=31250/s mult=1.00x
+[gen] total=563703 inst=31250/s avg=31250/s mult=1.00x
+[gen] total=613703 inst=26368/s avg=30786/s mult=1.00x
+[gen] total=663703 inst=22059/s avg=29895/s mult=1.00x
+[gen] total=713703 inst=22760/s avg=29252/s mult=1.00x
+[gen] total=763703 inst=22558/s avg=28695/s mult=1.00x
+[gen] total=813703 inst=25908/s avg=28506/s mult=1.00x
+[gen] total=863703 inst=22158/s avg=28041/s mult=1.00x
+[gen] total=913703 inst=23258/s avg=27729/s mult=1.00x
+[gen] total=963703 inst=22097/s avg=27367/s mult=1.00x
+[gen] total=1013703 inst=23465/s avg=27145/s mult=1.00x
+[gen] total=1063703 inst=22161/s avg=26861/s mult=1.00x
+[gen] total=1113703 inst=23307/s avg=26678/s mult=1.00x
+[gen] total=1163703 inst=23916/s avg=26546/s mult=1.00x
+[gen] total=1213703 inst=23777/s avg=26420/s mult=1.00x
+[gen] total=1263703 inst=22117/s avg=26218/s mult=1.00x
+[gen] total=1313703 inst=23371/s avg=26097/s mult=1.00x
+[gen] total=1363703 inst=22091/s avg=25924/s mult=1.00x
+[gen] total=1413703 inst=23214/s avg=25818/s mult=1.00x
+[gen] total=1463703 inst=22169/s avg=25674/s mult=1.00x
+[gen] total=1513703 inst=23638/s avg=25601/s mult=1.00x
+[gen] done: total=1513703 bytes=1551545575 elapsed=61.318s avg=24686/s avg_mb_s=25.303
+[gen] send_lag: n=1513703 p99<=12289ms p999<=12289ms max=12288.9ms hist=[ <=1ms:21.598% <=5ms:26.724% <=10ms:26.895% <=50ms:28.053% <=100ms:29.154% <=500ms:34.190% <=1000ms:37.948% >1000ms:100.000% ]

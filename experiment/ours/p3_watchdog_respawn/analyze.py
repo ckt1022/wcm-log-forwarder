@@ -36,6 +36,7 @@ def expected_deliveries(gen):
 
 def fault_row(run_dir):
     params = wcm_log.kv(open(os.path.join(run_dir, "p3_params.txt")).read())
+    params.setdefault("marker", "")  # 對照組 none 的 marker 是空值，kv() 不會產生這個鍵
     gen = wcm_log.load_json(run_dir)
     series = wcm_log.recv_series(run_dir)
     received = sum(n for _, n in series)

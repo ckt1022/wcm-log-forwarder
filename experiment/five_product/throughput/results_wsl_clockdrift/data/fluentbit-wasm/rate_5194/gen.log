@@ -1,0 +1,65 @@
+[gen] output=tcp  addr=127.0.0.1:15140  send-unit=batch  conns=1  batch-lines=500
+[gen] start: rate=5194/s duration=60s mode=json-fields1k traffic=flat invalid-rate=0.05
+[gen] total=5198 inst=5193/s avg=5193/s mult=1.00x
+[gen] total=10395 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=15593 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=20790 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=25984 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=31180 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=36378 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=41576 inst=5193/s avg=5194/s mult=1.00x
+[gen] total=46776 inst=5195/s avg=5194/s mult=1.00x
+[gen] total=51974 inst=5193/s avg=5194/s mult=1.00x
+[gen] total=57171 inst=5195/s avg=5194/s mult=1.00x
+[gen] total=62367 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=67565 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=72765 inst=5194/s avg=5194/s mult=1.00x
+[gen-signal] t=15s: about to emit LOOP trigger log
+[gen] LOOP trigger emitted at t=15.00s
+[gen] total=77962 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=83156 inst=5193/s avg=5194/s mult=1.00x
+[gen] total=88353 inst=5195/s avg=5194/s mult=1.00x
+[gen] total=93547 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=98745 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=103943 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=109139 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=114338 inst=5195/s avg=5194/s mult=1.00x
+[gen] total=119535 inst=5193/s avg=5194/s mult=1.00x
+[gen] total=124731 inst=5195/s avg=5194/s mult=1.00x
+[gen] total=129930 inst=5193/s avg=5194/s mult=1.00x
+[gen] total=135124 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=140321 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=145519 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=150718 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=155918 inst=5195/s avg=5194/s mult=1.00x
+[gen] total=161115 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=166311 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=171507 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=176702 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=181897 inst=5195/s avg=5194/s mult=1.00x
+[gen] total=187094 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=192290 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=197489 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=202684 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=207883 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=213082 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=218280 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=223477 inst=5193/s avg=5194/s mult=1.00x
+[gen] total=228676 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=233876 inst=5195/s avg=5194/s mult=1.00x
+[gen] total=239074 inst=5193/s avg=5194/s mult=1.00x
+[gen] total=244274 inst=5195/s avg=5194/s mult=1.00x
+[gen] total=249473 inst=5193/s avg=5194/s mult=1.00x
+[gen] total=254670 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=259865 inst=5195/s avg=5194/s mult=1.00x
+[gen] total=265060 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=270254 inst=5193/s avg=5194/s mult=1.00x
+[gen] total=275450 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=280649 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=285847 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=291045 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=296240 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=301437 inst=5194/s avg=5194/s mult=1.00x
+[gen] total=306637 inst=5194/s avg=5194/s mult=1.00x
+[gen] done: total=311637 bytes=319427925 elapsed=60.001s avg=5194/s avg_mb_s=5.324
+[gen] send_lag: n=311637 p99<=5ms p999<=5ms max=2.0ms hist=[ <=1ms:85.308% <=5ms:100.000% <=10ms:100.000% <=50ms:100.000% <=100ms:100.000% <=500ms:100.000% <=1000ms:100.000% >1000ms:100.000% ]

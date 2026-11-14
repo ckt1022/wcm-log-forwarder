@@ -1,0 +1,1 @@
+PASS rate=14501 gen_avg=14501/s gen_mb_s=14.863 lag_p99=5ms lag_max=3.4ms sink_total=348023 expected=348021 backlog=11005 win_out_eps=5805 win_out_mb_s=6.084 oom=false

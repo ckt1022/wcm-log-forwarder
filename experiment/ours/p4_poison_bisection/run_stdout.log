@@ -1,0 +1,78 @@
+05:09:13 malformed_0_on r1 status=running exit_code=0 oom=false restarts=0
+05:10:07 malformed_0.1_on r1 status=running exit_code=0 oom=false restarts=0
+05:11:01 malformed_1_on r1 status=running exit_code=0 oom=false restarts=0
+05:11:55 malformed_5_on r1 status=running exit_code=0 oom=false restarts=0
+05:12:51 malformed_0_off r1 status=running exit_code=0 oom=false restarts=0
+05:13:45 malformed_0.1_off r1 status=running exit_code=0 oom=false restarts=0
+05:14:44 malformed_1_off r1 status=running exit_code=0 oom=false restarts=0
+05:15:40 malformed_5_off r1 status=running exit_code=0 oom=false restarts=0
+05:16:34 panic_0.1_on r1 status=running exit_code=0 oom=false restarts=0
+05:17:30 panic_0.1_off r1 status=running exit_code=0 oom=false restarts=0
+05:18:25 stage_filter r1 status=running exit_code=0 oom=false restarts=0
+05:19:18 stage_format r1 status=running exit_code=0 oom=false restarts=0
+05:20:13 stage_transport r1 status=running exit_code=0 oom=false restarts=0
+05:21:07 malformed_0_on r2 status=running exit_code=0 oom=false restarts=0
+05:22:02 malformed_0.1_on r2 status=running exit_code=0 oom=false restarts=0
+05:22:56 malformed_1_on r2 status=running exit_code=0 oom=false restarts=0
+05:23:50 malformed_5_on r2 status=running exit_code=0 oom=false restarts=0
+05:24:44 malformed_0_off r2 status=running exit_code=0 oom=false restarts=0
+05:25:40 malformed_0.1_off r2 status=running exit_code=0 oom=false restarts=0
+05:26:39 malformed_1_off r2 status=running exit_code=0 oom=false restarts=0
+05:27:36 malformed_5_off r2 status=running exit_code=0 oom=false restarts=0
+05:28:30 panic_0.1_on r2 status=running exit_code=0 oom=false restarts=0
+05:29:24 panic_0.1_off r2 status=running exit_code=0 oom=false restarts=0
+05:30:20 stage_filter r2 status=running exit_code=0 oom=false restarts=0
+05:31:14 stage_format r2 status=running exit_code=0 oom=false restarts=0
+05:32:09 stage_transport r2 status=running exit_code=0 oom=false restarts=0
+05:33:03 malformed_0_on r3 status=running exit_code=0 oom=false restarts=0
+05:33:57 malformed_0.1_on r3 status=running exit_code=0 oom=false restarts=0
+05:34:52 malformed_1_on r3 status=running exit_code=0 oom=false restarts=0
+05:35:46 malformed_5_on r3 status=running exit_code=0 oom=false restarts=0
+05:36:42 malformed_0_off r3 status=running exit_code=0 oom=false restarts=0
+05:37:36 malformed_0.1_off r3 status=running exit_code=0 oom=false restarts=0
+05:38:33 malformed_1_off r3 status=running exit_code=0 oom=false restarts=0
+05:39:32 malformed_5_off r3 status=running exit_code=0 oom=false restarts=0
+05:40:26 panic_0.1_on r3 status=running exit_code=0 oom=false restarts=0
+05:41:22 panic_0.1_off r3 status=running exit_code=0 oom=false restarts=0
+05:42:17 stage_filter r3 status=running exit_code=0 oom=false restarts=0
+05:43:11 stage_format r3 status=running exit_code=0 oom=false restarts=0
+05:44:04 stage_transport r3 status=running exit_code=0 oom=false restarts=0
+malformed_0.1_off  r1 bad=201   delivered=88.56% dead_letter=23061 collateral=22860 calls/bad=0.0 cpu=12.4%
+malformed_0.1_off  r2 bad=201   delivered=88.624% dead_letter=22933 collateral=22732 calls/bad=0.0 cpu=12.2%
+malformed_0.1_off  r3 bad=201   delivered=88.561% dead_letter=23060 collateral=22859 calls/bad=0.0 cpu=12.2%
+malformed_0.1_on   r1 bad=201   delivered=100.0% dead_letter=201 collateral=0 calls/bad=13.7 cpu=12.9%
+malformed_0.1_on   r2 bad=201   delivered=100.0% dead_letter=201 collateral=0 calls/bad=13.7 cpu=13.1%
+malformed_0.1_on   r3 bad=201   delivered=100.0% dead_letter=201 collateral=0 calls/bad=13.7 cpu=12.9%
+malformed_0_off    r1 bad=0     delivered=100.0% dead_letter=0 collateral=0 calls/bad= cpu=12.1%
+malformed_0_off    r2 bad=0     delivered=100.0% dead_letter=0 collateral=0 calls/bad= cpu=12.7%
+malformed_0_off    r3 bad=0     delivered=100.0% dead_letter=0 collateral=0 calls/bad= cpu=12.6%
+malformed_0_on     r1 bad=0     delivered=100.0% dead_letter=0 collateral=0 calls/bad= cpu=12.7%
+malformed_0_on     r2 bad=0     delivered=100.0% dead_letter=0 collateral=0 calls/bad= cpu=12.2%
+malformed_0_on     r3 bad=0     delivered=100.0% dead_letter=0 collateral=0 calls/bad= cpu=12.4%
+malformed_1_off    r1 bad=2006  delivered=29.043% dead_letter=142485 collateral=140479 calls/bad=0.0 cpu=11.2%
+malformed_1_off    r2 bad=2006  delivered=29.373% dead_letter=141833 collateral=139827 calls/bad=0.0 cpu=12.1%
+malformed_1_off    r3 bad=2006  delivered=29.388% dead_letter=141804 collateral=139798 calls/bad=0.0 cpu=11.6%
+malformed_1_on     r1 bad=2006  delivered=100.0% dead_letter=2006 collateral=0 calls/bad=12.0 cpu=15.3%
+malformed_1_on     r2 bad=2006  delivered=100.0% dead_letter=2006 collateral=0 calls/bad=12.0 cpu=15.8%
+malformed_1_on     r3 bad=2006  delivered=100.0% dead_letter=2006 collateral=0 calls/bad=12.0 cpu=15.8%
+malformed_5_off    r1 bad=9911  delivered=0.269% dead_letter=199488 collateral=189577 calls/bad=0.0 cpu=9.3%
+malformed_5_off    r2 bad=9911  delivered=0.202% dead_letter=199616 collateral=189705 calls/bad=0.0 cpu=10.2%
+malformed_5_off    r3 bad=9911  delivered=0.269% dead_letter=199488 collateral=189577 calls/bad=0.0 cpu=10.0%
+malformed_5_on     r1 bad=9911  delivered=100.0% dead_letter=9911 collateral=0 calls/bad=8.8 cpu=17.2%
+malformed_5_on     r2 bad=9911  delivered=100.0% dead_letter=9911 collateral=0 calls/bad=8.8 cpu=17.6%
+malformed_5_on     r3 bad=9911  delivered=100.0% dead_letter=9911 collateral=0 calls/bad=8.8 cpu=17.6%
+panic_0.1_off      r1 bad=201   delivered=88.571% dead_letter=23040 collateral=22839 calls/bad=0.0 cpu=13.4%
+panic_0.1_off      r2 bad=201   delivered=88.699% dead_letter=22784 collateral=22583 calls/bad=0.0 cpu=13.5%
+panic_0.1_off      r3 bad=201   delivered=88.571% dead_letter=23040 collateral=22839 calls/bad=0.0 cpu=14.1%
+panic_0.1_on       r1 bad=201   delivered=100.0% dead_letter=201 collateral=0 calls/bad=13.6 cpu=15.8%
+panic_0.1_on       r2 bad=201   delivered=100.0% dead_letter=201 collateral=0 calls/bad=13.6 cpu=15.5%
+panic_0.1_on       r3 bad=201   delivered=100.0% dead_letter=201 collateral=0 calls/bad=13.6 cpu=15.4%
+stage_filter       r1 bad=1     delivered=100.0% dead_letter=1 collateral=0 calls/bad=14.0 cpu=13.8%
+stage_filter       r2 bad=1     delivered=100.0% dead_letter=1 collateral=0 calls/bad=14.0 cpu=14.0%
+stage_filter       r3 bad=1     delivered=100.0% dead_letter=1 collateral=0 calls/bad=14.0 cpu=14.6%
+stage_format       r1 bad=1     delivered=100.0% dead_letter=1 collateral=0 calls/bad=12.0 cpu=13.0%
+stage_format       r2 bad=1     delivered=100.0% dead_letter=1 collateral=0 calls/bad=12.0 cpu=13.1%
+stage_format       r3 bad=1     delivered=100.0% dead_letter=1 collateral=0 calls/bad=12.0 cpu=13.1%
+stage_transport    r1 bad=1     delivered=100.0% dead_letter=1 collateral=0 calls/bad=16.0 cpu=17.7%
+stage_transport    r2 bad=1     delivered=100.0% dead_letter=1 collateral=0 calls/bad=16.0 cpu=17.6%
+stage_transport    r3 bad=1     delivered=100.0% dead_letter=1 collateral=0 calls/bad=16.0 cpu=17.1%

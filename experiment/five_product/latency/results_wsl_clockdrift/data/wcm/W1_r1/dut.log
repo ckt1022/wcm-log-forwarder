@@ -1,0 +1,19 @@
+=== WCM Log Forwarder ===
+Stages       : parse → filter → format → transport
+Memory Limit : 256 MB per instance
+Micro-batch  : 128 KiB / 99999 records / 5 ms
+Flush Window : 1000 ms
+Stage Timeout: 30000 ms
+Instance Reuse: true (recycle at 50% of memory limit)
+========================
+[mem-guard] enabled: limit=512MB high=70% low=55% current=9MB
+[tcp-input] listening on 0.0.0.0:15140
+[tcp-input] accepted 127.0.0.1:45856
+[tcp-input] 127.0.0.1:45856 disconnected
+[tcp-input] accepted 127.0.0.1:48992
+[tcp-input] 127.0.0.1:48992 disconnected
+[summary] parse     batches=8787 input=899999 output=899999 bytes=921598046 isolated_batches=0 salvaged=0 rejected=0 isolation_calls=0 budget_exhausted=0 delivery_retries=0 recycled_instances=0 wasm_mem_peak_mb=1.6
+[summary] filter    batches=8787 input=899999 output=360001 bytes=0 isolated_batches=0 salvaged=0 rejected=0 isolation_calls=0 budget_exhausted=0 delivery_retries=0 recycled_instances=0 wasm_mem_peak_mb=1.4
+[summary] format    batches=8784 input=360001 output=360001 bytes=0 isolated_batches=0 salvaged=0 rejected=0 isolation_calls=0 budget_exhausted=0 delivery_retries=0 recycled_instances=0 wasm_mem_peak_mb=1.2
+[summary] transport batches=181 input=360001 output=360001 bytes=380474625 isolated_batches=0 salvaged=0 rejected=0 isolation_calls=0 budget_exhausted=0 delivery_retries=0 recycled_instances=0 wasm_mem_peak_mb=9.4
+[summary] dead-letter records=0

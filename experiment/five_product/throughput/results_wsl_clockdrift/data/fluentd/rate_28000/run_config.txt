@@ -1,0 +1,48 @@
+date=2026-11-13T00:11:30+08:00
+product=fluentd image=fluent/fluentd:v1.16-debian-1 image_id=sha256:4f65d55e8f24de4c59c75d4fdd702fb73e4bbe3a25f3fdd77f3c34dc9cec1930
+rate=28000 load_secs=60 drain_secs=20 flush=0.1 gen_mode=json-fields1k
+cpus=1 mem=512m keep_ratio=0.4
+kernel=6.6.87.2-microsoft-standard-WSL2 clocksource=hyperv_clocksource_tsc_page
+----- conf -----
+# Fluentd + Ruby filter（plugins/）。flush_interval 小於 1 時 Fluentd 實際以 flush_thread_interval 為時間窗。
+
+<source>
+  @type tcp
+  bind 0.0.0.0
+  port 15140
+  tag latency
+
+  <parse>
+    @type json
+  </parse>
+</source>
+
+<filter latency>
+  @type latency_test
+</filter>
+
+<match latency>
+  @type http
+  endpoint http://127.0.0.1:18080/ingest
+  open_timeout 30
+  read_timeout 30
+
+  <format>
+    @type json
+  </format>
+  json_array false
+
+  <buffer>
+    @type memory
+    flush_mode interval
+    flush_interval 0.1
+    chunk_limit_size 128m
+    total_limit_size 256m
+    flush_thread_count 1
+    flush_thread_interval 0.1
+    flush_thread_burst_interval 0.01
+    flush_at_shutdown true
+    retry_max_times 0
+    overflow_action block
+  </buffer>
+</match>

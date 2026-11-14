@@ -34,7 +34,15 @@ def collect(product):
     for run_dir in sorted(glob.glob(os.path.join(DATA, product, "W*_r*"))):
         window = float(re.match(r"W([\d.]+)_r\d+", os.path.basename(run_dir)).group(1))
         verdict_path = os.path.join(run_dir, "verdict.txt")
-        if not os.path.exists(verdict_path) or not open(verdict_path).read().startswith("PASS"):
+        if not os.path.exists(verdict_path):
+            continue
+        verdict_text = open(verdict_path).read().strip()
+        m_reasons = re.search(r"reasons=(\S+)", verdict_text)
+        # 與 five_product/latency/analyze.py 相同：backlog 是吞吐量的判定條件（W ≥ 2 s 時負載結束當下本來就有
+        # W 秒份在等 flush，WSL2 時鐘倒退也會高估 backlog），只因 backlog 而 FAIL 的點仍納入延遲結果。
+        backlog_only = (verdict_text.startswith("FAIL") and m_reasons is not None and
+                        all(x.startswith("backlog=") for x in m_reasons.group(1).split(";")))
+        if not (verdict_text.startswith("PASS") or backlog_only):
             continue
         try:
             lat = fix_latency.fix(run_dir)

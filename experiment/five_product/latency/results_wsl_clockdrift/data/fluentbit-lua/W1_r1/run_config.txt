@@ -1,0 +1,39 @@
+date=2026-11-13T01:50:24+08:00
+product=fluentbit-lua image=fluent/fluent-bit:5.0.9 image_id=sha256:bbce9a7b36b0ddd4fcb01a5320815808d1b8b5e1e100725ac95c2b6714d64964
+rate=5000 load_secs=180 drain_secs=20 flush=1 gen_mode=json-fields1k
+cpus=1 mem=512m keep_ratio=0.4
+kernel=6.6.87.2-microsoft-standard-WSL2 clocksource=hyperv_clocksource_tsc_page
+----- conf -----
+# Fluent Bit + Lua filter。@...@ 由 common/lib/run_point.sh 代入；filter.lua 掛在 /work。
+
+[SERVICE]
+    Flush         1
+    Grace         5
+    Daemon        off
+    Log_Level     info
+    HTTP_Server   off
+
+[INPUT]
+    Name          tcp
+    Listen        0.0.0.0
+    Port          15140
+    Format        json
+    Tag           latency
+
+[FILTER]
+    Name            lua
+    Match           latency
+    Script          /work/filter.lua
+    Call            latency_filter
+    protected_mode  false
+
+[OUTPUT]
+    Name           http
+    Match          latency
+    Host           127.0.0.1
+    Port           18080
+    URI            /ingest
+    Format         json_lines
+    Json_date_key  false
+    Workers        1
+    Retry_Limit    False

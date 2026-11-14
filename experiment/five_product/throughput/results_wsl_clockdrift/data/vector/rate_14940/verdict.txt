@@ -1,0 +1,1 @@
+FAIL rate=14940 gen_avg=14780/s gen_mb_s=15.150 lag_p99=1000ms lag_max=659.5ms sink_total=358401 expected=358399 backlog=13342 win_out_eps=5846 win_out_mb_s=6.127 oom=false reasons=gen_blocked(avg=14780/14940,lag_p99=1000.0ms)

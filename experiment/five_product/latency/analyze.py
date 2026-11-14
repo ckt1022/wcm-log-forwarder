@@ -30,7 +30,14 @@ def main():
         product = os.path.basename(os.path.dirname(run_dir))
         m = re.match(r"W([\d.]+)_r(\d+)", os.path.basename(run_dir))
         window, rep = float(m.group(1)), int(m.group(2))
-        verdict = open(os.path.join(run_dir, "verdict.txt")).read().split()[0] if os.path.exists(os.path.join(run_dir, "verdict.txt")) else "MISSING"
+        verdict_text = open(os.path.join(run_dir, "verdict.txt")).read().strip() if os.path.exists(os.path.join(run_dir, "verdict.txt")) else "MISSING"
+        verdict = verdict_text.split()[0]
+        m_reasons = re.search(r"reasons=(\S+)", verdict_text)
+        reasons = m_reasons.group(1) if m_reasons else ""
+        # 積壓（backlog）是吞吐量的判定條件，不影響固定速率下的延遲：W ≥ 2 s 時負載結束當下本來就有 W 秒份在等 flush，
+        # WSL2 wall clock 倒退也會讓 backlog 被高估。只因 backlog 而 FAIL 的點仍納入延遲結果。
+        usable = verdict == "PASS" or (verdict == "FAIL" and reasons != "" and
+                                       all(x.startswith("backlog=") for x in reasons.split(";")))
         try:
             result = fix_latency.fix(run_dir)
             p99 = result["p99"]
@@ -38,6 +45,7 @@ def main():
             print(f"skip {run_dir}: {error}")
             continue
         rows.append({"product": product, "window_s": window, "rep": rep, "verdict": verdict,
+                     "reasons": reasons, "usable": usable,
                      "p50_ms": result.get("p50"), "p99_ms": p99, "excess_ms": p99 - 990 * window,
                      "clock_steps": result.get("n_steps"), "status": result.get("status")})
 
@@ -51,7 +59,7 @@ def main():
     for product in PRODUCTS:
         points = {}
         for r in rows:
-            if r["product"] == product and r["verdict"] == "PASS":
+            if r["product"] == product and r["usable"]:
                 points.setdefault(r["window_s"], []).append(r["excess_ms"])
         if not points:
             continue
@@ -62,8 +70,9 @@ def main():
         ax.set_xticks(range(len(windows)), [str(w) for w in windows])
         for w, value in zip(windows, medians):
             print(f"{product:15} W={w:<5} excess p99 median={value:7.1f} ms  (n={len(points[w])})")
+    ax.set_yscale("log")
     ax.set_xlabel("Flush window W (s)")
-    ax.set_ylabel("Excess latency: p99 − 0.99·W (ms)")
+    ax.set_ylabel("Excess latency: p99 − 0.99·W (ms, log scale)")
     ax.set_title("Latency beyond the flush window (5,000 records/s, median of reps)")
     ax.legend(frameon=False)
     ax.spines[["top", "right"]].set_visible(False)

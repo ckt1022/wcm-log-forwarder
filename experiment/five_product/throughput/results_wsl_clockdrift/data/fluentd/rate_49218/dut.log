@@ -1,0 +1,58 @@
+2026-11-12 16:17:19 +0000 [info]: init supervisor logger path=nil rotate_age=nil rotate_size=nil
+2026-11-12 16:17:19 +0000 [info]: parsing config file is succeeded path="/fluentd/etc/fluent.conf"
+2026-11-12 16:17:19 +0000 [info]: gem 'fluentd' version '1.16.3'
+2026-11-12 16:17:19 +0000 [warn]: Status code 503 is going to be removed from default `retryable_response_codes` from fluentd v2. Please add it by yourself if you wish
+2026-11-12 16:17:19 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    @type tcp
+    bind "0.0.0.0"
+    port 15140
+    tag "latency"
+    <parse>
+      @type "json"
+    </parse>
+  </source>
+  <filter latency>
+    @type latency_test
+  </filter>
+  <match latency>
+    @type http
+    endpoint "http://127.0.0.1:18080/ingest"
+    open_timeout 30
+    read_timeout 30
+    json_array false
+    <format>
+      @type "json"
+    </format>
+    <buffer>
+      @type "memory"
+      flush_mode interval
+      flush_interval 0.1
+      chunk_limit_size 128m
+      total_limit_size 256m
+      flush_thread_count 1
+      flush_thread_interval 0.1
+      flush_thread_burst_interval 0.01
+      flush_at_shutdown true
+      retry_max_times 0
+      overflow_action block
+    </buffer>
+  </match>
+</ROOT>
+2026-11-12 16:17:19 +0000 [info]: starting fluentd-1.16.3 pid=7 ruby="3.1.4"
+2026-11-12 16:17:19 +0000 [info]: spawn command to main:  cmdline=["/usr/local/bin/ruby", "-Eascii-8bit:ascii-8bit", "/usr/local/bundle/bin/fluentd", "--config", "/fluentd/etc/fluent.conf", "--plugin", "/fluentd/plugins", "--under-supervisor"]
+2026-11-12 16:17:20 +0000 [info]: #0 init worker0 logger path=nil rotate_age=nil rotate_size=nil
+2026-11-12 16:17:20 +0000 [info]: adding filter pattern="latency" type="latency_test"
+2026-11-12 16:17:20 +0000 [info]: adding match pattern="latency" type="http"
+2026-11-12 16:17:20 +0000 [warn]: #0 Status code 503 is going to be removed from default `retryable_response_codes` from fluentd v2. Please add it by yourself if you wish
+2026-11-12 16:17:20 +0000 [info]: adding source type="tcp"
+2026-11-12 16:17:20 +0000 [info]: #0 starting fluentd worker pid=16 ppid=7 worker=0
+2026-11-12 16:17:20 +0000 [info]: #0 listening tcp socket bind="0.0.0.0" port=15140
+2026-11-12 16:17:20 +0000 [info]: #0 fluentd worker is now running worker=0
+2026-11-12 16:18:41 +0000 [info]: Received graceful stop
+2026-11-12 16:18:42 +0000 [info]: #0 fluentd worker is now stopping worker=0
+2026-11-12 16:18:42 +0000 [info]: #0 shutting down fluentd worker worker=0
+2026-11-12 16:18:42 +0000 [info]: #0 shutting down input plugin type=:tcp plugin_id="object:898"
+2026-11-12 16:18:42 +0000 [info]: #0 shutting down filter plugin type=:latency_test plugin_id="object:85c"
+2026-11-12 16:18:42 +0000 [info]: #0 shutting down output plugin type=:http plugin_id="object:870"
+2026-11-12 16:18:43 +0000 [info]: Worker 0 finished with status 0

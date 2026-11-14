@@ -1,0 +1,60 @@
+01:18:51 wcm W=2 r1 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=19.4ms sink_total=359999 expected=359997 backlog=15872 
+01:22:10 fluentbit-lua W=2 r1 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=16.9ms sink_total=359999 expected=359998 backlog=11917 
+01:25:31 fluentbit-wasm W=2 r1 FAIL rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=16.7ms sink_total=288001 expected=287999 backlog=9096 w
+01:28:54 fluentd W=2 r1 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=19.7ms sink_total=359999 expected=359998 backlog=15571 
+01:32:14 vector W=2 r1 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=23.1ms sink_total=360001 expected=360000 backlog=14155 
+01:35:35 wcm W=5 r1 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=32.4ms sink_total=359999 expected=359998 backlog=17747 
+01:38:54 fluentbit-lua W=5 r1 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=17.3ms sink_total=359999 expected=359998 backlog=18033 
+01:42:15 fluentbit-wasm W=5 r1 FAIL rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=23.1ms sink_total=288000 expected=287999 backlog=14222 
+01:45:37 fluentd W=5 r1 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=19.1ms sink_total=360000 expected=359999 backlog=20364 
+01:48:56 vector W=5 r1 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=17.9ms sink_total=360000 expected=359999 backlog=15990 
+01:52:17 wcm W=2 r2 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=18.4ms sink_total=359999 expected=359998 backlog=11581 
+01:55:39 fluentbit-lua W=2 r2 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=14.2ms sink_total=359999 expected=359998 backlog=8644 w
+01:59:00 fluentbit-wasm W=2 r2 FAIL rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=5.8ms sink_total=288000 expected=287999 backlog=8710 wi
+02:02:24 fluentd W=2 r2 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=4.3ms sink_total=360001 expected=359999 backlog=12282 w
+02:05:44 vector W=2 r2 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.3ms sink_total=360001 expected=359999 backlog=13919 w
+02:09:06 wcm W=5 r2 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=4.1ms sink_total=359999 expected=359998 backlog=17745 w
+02:12:26 fluentbit-lua W=5 r2 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.3ms sink_total=360001 expected=359999 backlog=17850 w
+02:15:45 fluentbit-wasm W=5 r2 FAIL rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=2.6ms sink_total=288001 expected=287999 backlog=13350 w
+02:19:08 fluentd W=5 r2 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=3.0ms sink_total=360000 expected=359999 backlog=11499 w
+02:22:27 vector W=5 r2 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=3.3ms sink_total=359999 expected=359998 backlog=19575 w
+02:25:47 wcm W=2 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=15.1ms sink_total=359999 expected=359998 backlog=11711 
+02:29:08 fluentbit-lua W=2 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=21.2ms sink_total=360000 expected=359999 backlog=15150 
+02:32:28 fluentbit-wasm W=2 r3 FAIL rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=16.9ms sink_total=287993 expected=287992 backlog=12469 
+02:35:51 fluentd W=2 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=34.2ms sink_total=360000 expected=359999 backlog=14114 
+02:39:09 vector W=2 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=23.0ms sink_total=360001 expected=360000 backlog=14779 
+02:42:29 wcm W=5 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=18.7ms sink_total=359999 expected=359998 backlog=17670 
+02:45:48 fluentbit-lua W=5 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=20.5ms sink_total=359999 expected=359998 backlog=18417 
+02:49:08 fluentbit-wasm W=5 r3 FAIL rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=19.7ms sink_total=288001 expected=287999 backlog=13764 
+02:52:30 fluentd W=5 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=18.3ms sink_total=360001 expected=359999 backlog=18760 
+02:55:49 vector W=5 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=22.4ms sink_total=359999 expected=359998 backlog=25885 
+wcm             W=0.01  excess p99 median=   28.8 ms  (n=3)
+wcm             W=0.1   excess p99 median=   27.3 ms  (n=3)
+wcm             W=0.5   excess p99 median=   29.0 ms  (n=3)
+wcm             W=1.0   excess p99 median=   27.6 ms  (n=3)
+wcm             W=2.0   excess p99 median=   37.8 ms  (n=3)
+wcm             W=5.0   excess p99 median=   53.8 ms  (n=3)
+fluentbit-lua   W=0.01  excess p99 median=   19.4 ms  (n=3)
+fluentbit-lua   W=0.1   excess p99 median=   17.3 ms  (n=3)
+fluentbit-lua   W=0.5   excess p99 median=   18.5 ms  (n=3)
+fluentbit-lua   W=1.0   excess p99 median=   24.3 ms  (n=3)
+fluentbit-lua   W=2.0   excess p99 median=   30.6 ms  (n=3)
+fluentbit-lua   W=5.0   excess p99 median=   30.4 ms  (n=3)
+fluentbit-wasm  W=0.01  excess p99 median=   23.6 ms  (n=3)
+fluentbit-wasm  W=0.1   excess p99 median=   21.3 ms  (n=3)
+fluentbit-wasm  W=0.5   excess p99 median=   23.6 ms  (n=3)
+fluentbit-wasm  W=1.0   excess p99 median=   27.3 ms  (n=3)
+fluentbit-wasm  W=2.0   excess p99 median=   43.6 ms  (n=3)
+fluentbit-wasm  W=5.0   excess p99 median=   39.9 ms  (n=3)
+fluentd         W=0.01  excess p99 median=   24.3 ms  (n=3)
+fluentd         W=0.1   excess p99 median=   27.7 ms  (n=3)
+fluentd         W=0.5   excess p99 median=   23.7 ms  (n=3)
+fluentd         W=1.0   excess p99 median=   35.0 ms  (n=3)
+fluentd         W=2.0   excess p99 median=  679.9 ms  (n=3)
+fluentd         W=5.0   excess p99 median=  945.1 ms  (n=3)
+vector          W=0.01  excess p99 median=   29.7 ms  (n=3)
+vector          W=0.1   excess p99 median=   33.4 ms  (n=3)
+vector          W=0.5   excess p99 median=   42.9 ms  (n=3)
+vector          W=1.0   excess p99 median=   61.7 ms  (n=3)
+vector          W=2.0   excess p99 median=  170.6 ms  (n=3)
+vector          W=5.0   excess p99 median=  417.8 ms  (n=3)

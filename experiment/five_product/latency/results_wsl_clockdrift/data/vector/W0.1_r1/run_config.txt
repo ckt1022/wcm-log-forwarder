@@ -1,0 +1,131 @@
+date=2026-11-13T01:26:58+08:00
+product=vector image=timberio/vector:0.49.0-alpine image_id=sha256:30141ab1ce5a7f84ef63580863e4ec561291e7c43dd0d7252985c9f2bb87aa5e
+rate=5000 load_secs=180 drain_secs=20 flush=0.1 gen_mode=json-fields1k
+cpus=1 mem=512m keep_ratio=0.4
+kernel=6.6.87.2-microsoft-standard-WSL2 clocksource=hyperv_clocksource_tsc_page
+----- conf -----
+# Vector：VRL remap 實作與其他產品相同的 parse／filter／format。
+sources:
+  tcp_in:
+    type: socket
+    mode: tcp
+    address: "0.0.0.0:15140"
+    decoding:
+      codec: json
+
+transforms:
+  latency_filter:
+    type: remap
+    inputs: ["tcp_in"]
+    # rank < warn 的 event 以 abort 丟棄
+    drop_on_abort: true
+    drop_on_error: false
+    source: |
+      # ── 邏輯對齊 latency_filter.lua / filter_latency_test.rb ──
+      # parse : ts 原字串搬到 timestamp、level 字串/數值映射、msg → message、
+      #         根層非保留欄位與 att.* 攤平成 tags
+      # filter: 只保留 level >= warn（MIN_KEEP_RANK = 2）
+      # format: json-flat 欄位集合 id/timestamp/level/message/lang/<tags>
+      # 關鍵約束：timestamp 必須是 gen 原始 ts 字串原封不動，
+      # HTTP 接收端（common/tools/httpsink）靠這個欄位計算延遲。
+
+      # level → rank（字串不分大小寫；數值 0~6 取整；缺失/未知 → info=1）
+      rank = 1
+      if is_string(.level) {
+        r = get!({"debug": 0, "info": 1, "warn": 2, "error": 3,
+                  "crit": 4, "alert": 5, "emerg": 6},
+                 [downcase(string!(.level))])
+        if r != null { rank = int!(r) }
+      } else if is_integer(.level) || is_float(.level) {
+        n = to_int(floor(to_float!(.level)))
+        if n >= 0 && n <= 6 { rank = n }
+      }
+
+      # filter：drop debug / info
+      if rank < 2 { abort }
+
+      level_name = string!(get!(["debug", "info", "warn", "error",
+                                 "crit", "alert", "emerg"], [rank]))
+
+      ts_val = ""
+      if is_string(.ts) { ts_val = string!(.ts) }
+      msg_val = ""
+      if is_string(.msg) { msg_val = string!(.msg) }
+
+      out = {
+        "id":        0,
+        "timestamp": ts_val,
+        "level":     level_name,
+        "message":   msg_val,
+        "lang":      "VRL"
+      }
+
+      # 根層非保留欄位攤平成 tags（對應 collect_all_tags 的第一段）。
+      # 除 gen record 的保留欄位外，還須排除 vector 對 event 注入的欄位
+      # （socket source：host/port/source_type；legacy namespace：timestamp）
+      for_each(object(.)) -> |k, v| {
+        if k != "ts" && k != "level" && k != "msg" && k != "att" &&
+           k != "timestamp" && k != "source_type" && k != "host" && k != "port" {
+          sv = ""
+          if is_string(v) {
+            sv = string!(v)
+          } else if is_object(v) || is_array(v) {
+            sv = encode_json(v)
+          } else {
+            sv = to_string!(v)
+          }
+          out = set!(out, [k], sv)
+        }
+      }
+
+      # att 物件內欄位攤平（對應 collect_all_tags 的第二段）
+      if is_object(.att) {
+        for_each(object!(.att)) -> |k, v| {
+          sv = ""
+          if is_string(v) {
+            sv = string!(v)
+          } else if is_object(v) || is_array(v) {
+            sv = encode_json(v)
+          } else {
+            sv = to_string!(v)
+          }
+          out = set!(out, [k], sv)
+        }
+      }
+
+      . = out
+
+sinks:
+  out_http:
+    type: http
+    inputs: ["latency_filter"]
+    uri: "http://127.0.0.1:18080/ingest"
+    method: "post"
+    # NDJSON：json codec + newline_delimited framing
+    # （Content-Type: application/x-ndjson）
+    encoding:
+      codec: "json"
+    framing:
+      method: "newline_delimited"
+    compression: "none"
+    batch:
+      # DUT 變因：批次窗，由 latency.sh 以 FLUSH_INTERVAL 注入（預設 0.1）
+      timeout_secs: 0.1
+      # 延遲實驗預設 128 MiB；容量實驗以 VECTOR_BATCH_MAX_BYTES=1048576
+      # 固定為 1 MiB，與 WCM／Fluentd 的正式容量配置相同。
+      max_bytes: 134217728
+      max_events: 100000000
+    request:
+      # 單一 in-flight request，對齊單一 flush thread
+      concurrency: 1
+      # 對齊 forwarder transport plugin 的 request_timeout_ms=30000
+      timeout_secs: 30
+      # 對齊 fluentd retry_max_times 3
+      retry_attempts: 0
+    buffer:
+      type: memory
+      # 對齊 forwarder channel_capacity=150000
+      max_events: 150000
+    # server 只接受 POST /ingest，關閉啟動時的 GET healthcheck
+    healthcheck:
+      enabled: false

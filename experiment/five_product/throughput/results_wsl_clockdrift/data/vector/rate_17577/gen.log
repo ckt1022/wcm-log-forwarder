@@ -1,0 +1,30 @@
+[gen] output=tcp  addr=127.0.0.1:15140  send-unit=batch  conns=1  batch-lines=500
+[gen] start: rate=17577/s duration=60s mode=json-fields1k traffic=flat invalid-rate=0.05
+[gen] total=17596 inst=17576/s avg=17576/s mult=1.00x
+[gen] total=35186 inst=17578/s avg=17577/s mult=1.00x
+[gen] total=52766 inst=17577/s avg=17577/s mult=1.00x
+[gen] total=70542 inst=17577/s avg=17577/s mult=1.00x
+[gen] total=90595 inst=17577/s avg=17577/s mult=1.00x
+[gen] total=108485 inst=17577/s avg=17577/s mult=1.00x
+[gen] total=135095 inst=17577/s avg=17577/s mult=1.00x
+[gen] total=172547 inst=17577/s avg=17577/s mult=1.00x
+[gen] total=196453 inst=17577/s avg=17577/s mult=1.00x
+[gen] total=224517 inst=17577/s avg=17577/s mult=1.00x
+[gen] total=258139 inst=17577/s avg=17577/s mult=1.00x
+[gen-signal] t=15s: about to emit LOOP trigger log
+[gen] LOOP trigger emitted at t=16.90s
+[gen] total=297002 inst=17577/s avg=17577/s mult=1.00x
+[gen] total=341836 inst=17577/s avg=17577/s mult=1.00x
+[gen] total=391836 inst=15968/s avg=17354/s mult=1.00x
+[gen] total=441836 inst=14996/s avg=17050/s mult=1.00x
+[gen] total=491836 inst=14792/s avg=16790/s mult=1.00x
+[gen] total=541836 inst=14546/s avg=16554/s mult=1.00x
+[gen] total=591836 inst=14627/s avg=16372/s mult=1.00x
+[gen] total=641836 inst=14499/s avg=16209/s mult=1.00x
+[gen] total=691836 inst=14680/s avg=16088/s mult=1.00x
+[gen] total=741836 inst=15073/s avg=16015/s mult=1.00x
+[gen] total=791836 inst=14482/s avg=15909/s mult=1.00x
+[gen] total=841836 inst=14984/s avg=15851/s mult=1.00x
+[gen] total=891836 inst=14566/s avg=15773/s mult=1.00x
+[gen] done: total=891836 bytes=914131900 elapsed=60.244s avg=14804/s avg_mb_s=15.174
+[gen] send_lag: n=891836 p99<=8649ms p999<=8649ms max=8649.3ms hist=[ <=1ms:5.865% <=5ms:7.276% <=10ms:7.493% <=50ms:9.166% <=100ms:11.025% <=500ms:21.323% <=1000ms:30.698% >1000ms:100.000% ]

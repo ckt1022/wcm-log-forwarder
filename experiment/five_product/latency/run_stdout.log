@@ -1,0 +1,80 @@
+20:08:02 wcm W=0.01 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=4.3ms sink_total=360001 expected=360000 backlog=-1 win_
+20:11:28 fluentbit-lua W=0.01 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=17.9ms sink_total=359999 expected=359998 backlog=-1 win
+20:14:55 fluentbit-wasm W=0.01 r1 PASS rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=16.2ms sink_total=288001 expected=288000 backlog=-1 win
+20:18:24 fluentd W=0.01 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.2ms sink_total=359999 expected=359998 backlog=-1 win_
+20:21:51 vector W=0.01 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=6.0ms sink_total=360001 expected=359999 backlog=-2 win_
+20:25:18 wcm W=0.1 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.4ms sink_total=360000 expected=359999 backlog=238 win
+20:28:46 fluentbit-lua W=0.1 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.8ms sink_total=360001 expected=360000 backlog=641 win
+20:32:12 fluentbit-wasm W=0.1 r1 PASS rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=10.3ms sink_total=288000 expected=287999 backlog=-1 win
+20:35:41 fluentd W=0.1 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=6.7ms sink_total=360000 expected=359999 backlog=-1 win_
+20:39:08 vector W=0.1 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=3.3ms sink_total=360001 expected=359999 backlog=-2 win_
+20:42:36 wcm W=0.5 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.4ms sink_total=359999 expected=359998 backlog=677 win
+20:46:02 fluentbit-lua W=0.5 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.3ms sink_total=360001 expected=359999 backlog=-2 win_
+20:49:29 fluentbit-wasm W=0.5 r1 PASS rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=7.0ms sink_total=287999 expected=287998 backlog=105 win
+20:52:58 fluentd W=0.5 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.2ms sink_total=359999 expected=359998 backlog=-1 win_
+20:56:25 vector W=0.5 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.6ms sink_total=360000 expected=359999 backlog=-1 win_
+20:59:52 wcm W=1 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=3.4ms sink_total=359999 expected=359998 backlog=-1 win_
+21:03:20 fluentbit-lua W=1 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=4.5ms sink_total=359999 expected=359998 backlog=1593 wi
+21:06:47 fluentbit-wasm W=1 r1 PASS rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=21.8ms sink_total=288000 expected=287999 backlog=1062 w
+21:10:16 fluentd W=1 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=4.0ms sink_total=359999 expected=359998 backlog=875 win
+21:13:43 vector W=1 r1 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=5.6ms sink_total=360000 expected=359999 backlog=2444 wi
+21:17:10 wcm W=0.01 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.2ms sink_total=359999 expected=359998 backlog=-1 win_
+21:20:38 fluentbit-lua W=0.01 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.2ms sink_total=359999 expected=359998 backlog=-1 win_
+21:24:05 fluentbit-wasm W=0.01 r2 PASS rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=6.9ms sink_total=287999 expected=287998 backlog=-1 win_
+21:27:33 fluentd W=0.01 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=18.6ms sink_total=360001 expected=359999 backlog=1522 w
+21:31:00 vector W=0.01 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=35.2ms sink_total=359999 expected=359998 backlog=-1 win
+21:34:27 wcm W=0.1 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=3.6ms sink_total=360001 expected=359999 backlog=402 win
+21:37:55 fluentbit-lua W=0.1 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.9ms sink_total=360000 expected=359999 backlog=742 win
+21:41:22 fluentbit-wasm W=0.1 r2 PASS rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=20.6ms sink_total=288000 expected=287999 backlog=108 wi
+21:44:51 fluentd W=0.1 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.3ms sink_total=359999 expected=359998 backlog=1611 wi
+21:48:18 vector W=0.1 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.1ms sink_total=360001 expected=360000 backlog=306 win
+21:51:45 wcm W=0.5 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.2ms sink_total=359999 expected=359998 backlog=1515 wi
+21:55:12 fluentbit-lua W=0.5 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=8.7ms sink_total=359999 expected=359998 backlog=3133 wi
+21:58:40 fluentbit-wasm W=0.5 r2 PASS rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=16.6ms sink_total=287999 expected=287998 backlog=57 win
+22:02:09 fluentd W=0.5 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=6.7ms sink_total=360001 expected=360000 backlog=584 win
+22:05:36 vector W=0.5 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.3ms sink_total=360001 expected=360000 backlog=565 win
+22:09:03 wcm W=1 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=6.1ms sink_total=359999 expected=359998 backlog=-1 win_
+22:12:30 fluentbit-lua W=1 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=9.8ms sink_total=359999 expected=359998 backlog=1975 wi
+22:15:56 fluentbit-wasm W=1 r2 PASS rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=19.3ms sink_total=288001 expected=287999 backlog=2480 w
+22:19:25 fluentd W=1 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=15.4ms sink_total=359999 expected=359998 backlog=3333 w
+22:22:52 vector W=1 r2 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.0ms sink_total=360000 expected=359999 backlog=1992 wi
+22:26:17 wcm W=0.01 r3 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=6.2ms sink_total=360001 expected=360000 backlog=3591 wi
+22:29:44 fluentbit-lua W=0.01 r3 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.5ms sink_total=360001 expected=359999 backlog=478 win
+22:33:07 fluentbit-wasm W=0.01 r3 FAIL rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=298.8ms sink_total=288001 expected=287999 backlog=5176 
+22:36:36 fluentd W=0.01 r3 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.1ms sink_total=359999 expected=359998 backlog=1645 wi
+22:40:03 vector W=0.01 r3 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=7.2ms sink_total=360001 expected=359999 backlog=209 win
+22:43:29 wcm W=0.1 r3 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=4.9ms sink_total=359999 expected=359998 backlog=3503 wi
+22:46:56 fluentbit-lua W=0.1 r3 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=14.4ms sink_total=360001 expected=360000 backlog=263 wi
+22:50:19 fluentbit-wasm W=0.1 r3 PASS rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=7.0ms sink_total=287999 expected=287998 backlog=4586 wi
+22:53:45 fluentd W=0.1 r3 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.6ms sink_total=360000 expected=359999 backlog=5584 wi
+22:57:08 vector W=0.1 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.4ms sink_total=360000 expected=359999 backlog=6816 wi
+23:00:32 wcm W=0.5 r3 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.9ms sink_total=360001 expected=360000 backlog=5779 wi
+23:03:55 fluentbit-lua W=0.5 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.2ms sink_total=360001 expected=359999 backlog=6136 wi
+23:07:18 fluentbit-wasm W=0.5 r3 FAIL rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=4.4ms sink_total=288000 expected=287999 backlog=4864 wi
+23:10:44 fluentd W=0.5 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=10.5ms sink_total=359999 expected=359998 backlog=6506 w
+23:14:07 vector W=0.5 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=28.2ms sink_total=360000 expected=359999 backlog=6241 w
+23:17:32 wcm W=1 r3 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.7ms sink_total=359999 expected=359998 backlog=5687 wi
+23:20:57 fluentbit-lua W=1 r3 PASS rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=6.8ms sink_total=360000 expected=359999 backlog=5051 wi
+23:24:20 fluentbit-wasm W=1 r3 FAIL rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=6.6ms sink_total=287999 expected=287998 backlog=5501 wi
+23:27:47 fluentd W=1 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=2.5ms sink_total=360001 expected=359999 backlog=7097 wi
+23:31:09 vector W=1 r3 FAIL rate=5000 gen_avg=5000/s gen_mb_s=5.125 lag_p99=5ms lag_max=3.6ms sink_total=360001 expected=359999 backlog=9660 wi
+wcm             W=0.01  excess p99 median=   28.8 ms  (n=3)
+wcm             W=0.1   excess p99 median=   27.3 ms  (n=3)
+wcm             W=0.5   excess p99 median=   29.0 ms  (n=3)
+wcm             W=1.0   excess p99 median=   27.6 ms  (n=3)
+fluentbit-lua   W=0.01  excess p99 median=   19.4 ms  (n=3)
+fluentbit-lua   W=0.1   excess p99 median=   17.3 ms  (n=3)
+fluentbit-lua   W=0.5   excess p99 median=   18.0 ms  (n=2)
+fluentbit-lua   W=1.0   excess p99 median=   24.3 ms  (n=3)
+fluentbit-wasm  W=0.01  excess p99 median=   36.2 ms  (n=2)
+fluentbit-wasm  W=0.1   excess p99 median=   21.3 ms  (n=3)
+fluentbit-wasm  W=0.5   excess p99 median=   23.3 ms  (n=2)
+fluentbit-wasm  W=1.0   excess p99 median=   28.1 ms  (n=2)
+fluentd         W=0.01  excess p99 median=   24.3 ms  (n=3)
+fluentd         W=0.1   excess p99 median=   27.7 ms  (n=3)
+fluentd         W=0.5   excess p99 median=   22.8 ms  (n=2)
+fluentd         W=1.0   excess p99 median=   31.3 ms  (n=2)
+vector          W=0.01  excess p99 median=   29.7 ms  (n=3)
+vector          W=0.1   excess p99 median=   32.5 ms  (n=2)
+vector          W=0.5   excess p99 median=   43.6 ms  (n=2)
+vector          W=1.0   excess p99 median=   59.3 ms  (n=2)

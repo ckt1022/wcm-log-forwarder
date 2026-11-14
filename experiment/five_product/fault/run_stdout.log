@@ -1,0 +1,50 @@
+00:37:51 wcm none status=running exit_code=0 oom=false restarts=0
+00:39:26 fluentbit-lua none status=running exit_code=0 oom=false restarts=0
+00:41:01 fluentbit-wasm none status=running exit_code=0 oom=false restarts=0
+00:42:38 fluentd none status=running exit_code=0 oom=false restarts=0
+00:44:12 vector none status=running exit_code=0 oom=false restarts=0
+00:45:47 wcm FAULT_LOOP status=running exit_code=0 oom=false restarts=0
+00:47:58 fluentbit-lua FAULT_LOOP status=running exit_code=0 oom=false restarts=0
+00:50:11 fluentbit-wasm FAULT_LOOP status=running exit_code=0 oom=false restarts=0
+00:52:24 fluentd FAULT_LOOP status=running exit_code=0 oom=false restarts=0
+00:54:38 vector FAULT_LOOP status=running exit_code=0 oom=false restarts=0
+00:56:12 wcm FAULT_PANIC status=running exit_code=0 oom=false restarts=0
+00:57:46 fluentbit-lua FAULT_PANIC status=running exit_code=0 oom=false restarts=0
+00:59:19 fluentbit-wasm FAULT_PANIC status=running exit_code=0 oom=false restarts=0
+01:00:55 fluentd FAULT_PANIC status=running exit_code=0 oom=false restarts=0
+01:02:29 vector FAULT_PANIC status=running exit_code=0 oom=false restarts=0
+01:04:03 wcm FAULT_OOB status=running exit_code=0 oom=false restarts=0
+01:05:36 fluentbit-lua FAULT_OOB status=running exit_code=0 oom=false restarts=0
+01:07:09 fluentbit-wasm FAULT_OOB status=running exit_code=0 oom=false restarts=0
+01:08:45 fluentd FAULT_OOB status=running exit_code=0 oom=false restarts=0
+01:10:20 vector FAULT_OOB status=running exit_code=0 oom=false restarts=0
+01:11:54 wcm FAULT_MEM status=running exit_code=0 oom=false restarts=0
+01:12:44 fluentbit-lua FAULT_MEM status=exited exit_code=137 oom=true restarts=0
+01:13:33 fluentbit-wasm FAULT_MEM status=exited exit_code=137 oom=true restarts=0
+01:14:27 fluentd FAULT_MEM status=running exit_code=0 oom=true restarts=0
+01:15:20 vector FAULT_MEM status=exited exit_code=137 oom=true restarts=0
+wcm             none         ok           received=60000/60000 lost=0 stall=0s alive=True
+wcm             FAULT_LOOP   ok           received=59999/60000 lost=1 stall=7s alive=True
+wcm             FAULT_PANIC  ok           received=59999/60000 lost=1 stall=0s alive=True
+wcm             FAULT_OOB    ok           received=59999/60000 lost=1 stall=0s alive=True
+wcm             FAULT_MEM    ok           received=59999/60000 lost=1 stall=1s alive=True
+fluentbit-lua   none         ok           received=60000/60000 lost=0 stall=0s alive=True
+fluentbit-lua   FAULT_LOOP   stalled      received=14960/17000 lost=2040 stall=74s alive=True
+fluentbit-lua   FAULT_PANIC  extra records received=60015/60000 lost=-15 stall=0s alive=True
+fluentbit-lua   FAULT_OOB    extra records received=60015/60000 lost=-15 stall=0s alive=True
+fluentbit-lua   FAULT_MEM    exited (OOM) received=15000/16120 lost=1120 stall=0s alive=False
+fluentbit-wasm  none         ok           received=60000/60000 lost=0 stall=0s alive=True
+fluentbit-wasm  FAULT_LOOP   stalled      received=14916/16320 lost=1404 stall=74s alive=True
+fluentbit-wasm  FAULT_PANIC  ok           received=59999/60000 lost=1 stall=0s alive=True
+fluentbit-wasm  FAULT_OOB    ok           received=59999/60000 lost=1 stall=0s alive=True
+fluentbit-wasm  FAULT_MEM    exited (OOM) received=15000/15420 lost=420 stall=0s alive=False
+fluentd         none         ok           received=60000/60000 lost=0 stall=0s alive=True
+fluentd         FAULT_LOOP   stalled      received=15000/16320 lost=1320 stall=73s alive=True
+fluentd         FAULT_PANIC  ok           received=60000/60000 lost=0 stall=0s alive=True
+fluentd         FAULT_OOB    ok           received=60000/60000 lost=0 stall=0s alive=True
+fluentd         FAULT_MEM    stalled      received=15000/15920 lost=920 stall=0s alive=True
+vector          none         ok           received=60000/60000 lost=0 stall=0s alive=True
+vector          FAULT_LOOP   stalled      received=15000/17180 lost=2180 stall=74s alive=True
+vector          FAULT_PANIC  ok           received=59999/60000 lost=1 stall=0s alive=True
+vector          FAULT_OOB    ok           received=59999/60000 lost=1 stall=0s alive=True
+vector          FAULT_MEM    exited (OOM) received=15000/17180 lost=2180 stall=3s alive=False

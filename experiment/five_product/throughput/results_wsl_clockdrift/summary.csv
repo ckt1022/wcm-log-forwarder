@@ -1,0 +1,6 @@
+product,capacity_eps,first_fail_eps,trials,cpu_pct_at_capacity,mem_mb_at_capacity
+wcm,25781,26562,6,99.6,34.78
+fluentbit-lua,68554,70312,6,95.3,11.32
+fluentbit-wasm,5331,5468,6,98.7,279.11
+fluentd,47851,49218,7,91.5,126.42500000000001
+vector,14501,14940,7,91.4,34.62
