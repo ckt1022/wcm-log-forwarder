@@ -15,6 +15,7 @@ RESULTS = os.path.join(HERE, "results")
 KEEP = 0.4          # filter 保留 warn 以上的比例
 STABLE_SECS = 5     # 連續幾秒回到基準水準才算恢復
 TOLERANCE = 0.10
+COLORS = {"wcm": "#2a78d6", "fluentbit-lua": "#1baf7a", "fluentbit-wasm": "#8a8984", "fluentd": "#eda100", "vector": "#e87ba4"}
 LABELS = {"wcm": "WCM", "fluentbit-lua": "Fluent Bit (Lua)", "fluentbit-wasm": "Fluent Bit (WASM)",
           "fluentd": "Fluentd", "vector": "Vector"}
 
@@ -74,8 +75,11 @@ def main():
     for burst in sorted({r["burst_secs"] for r in results}):
         fig, ax = plt.subplots(figsize=(9, 4))
         for r in (x for x in results if x["burst_secs"] == burst):
+            wcm = r["product"] == "wcm"   # 本系統：粗線加星形標記
             ax.plot([t - r["burst_end"] for t, _ in r["series"]], [n / r["target"] for _, n in r["series"]],
-                    label=f"{LABELS.get(r['product'], r['product'])} (recovery {r['recovery_s']} s)")
+                    label=f"{LABELS.get(r['product'], r['product'])} (recovery {r['recovery_s']} s)",
+                    color=COLORS.get(r["product"]), linewidth=2.5 if wcm else 1.2, zorder=3 if wcm else 2,
+                    **(dict(marker="*", markersize=10, markevery=5) if wcm else {}))
         ax.axvspan(-burst, 0, color="#eeeeee", label=f"burst ({burst} s, 3× base)")
         ax.axhline(1.0, color="#888888", linewidth=1, linestyle="--")
         ax.set_xlabel("Seconds since burst end")

@@ -2,6 +2,8 @@
 
 WCM log forwarder 的實驗程式碼、設定與結果。所有產品都在 Docker 容器中以相同的資源限制執行，一個腳本跑完一種實驗的全部產品，並產生結果表與圖。
 
+**結果與解讀見 [RESULTS.md](RESULTS.md)**（2026-11 以目前的 `core/` 量測，含每個實驗的圖表、pattern 的效果與量測限制）。
+
 ```
 experiment/
 ├── common/                 各實驗共用
@@ -10,6 +12,7 @@ experiment/
 │   ├── tools/              負載產生器 gen、HTTP 接收端 httpsink（Go 原始碼）
 │   ├── lib/                run_point.sh（跑一個量測點）、判定、延遲校正、資源取樣、故障負載
 │   └── wcm/Dockerfile      由 core/ 建置 WCM 映像
+├── RESULTS.md              所有實驗的結果、圖表與解讀
 ├── five_product/           五產品比較，一種實驗一個目錄
 │   ├── throughput/         最大可持續吞吐量
 │   ├── latency/            不同 flush 時間窗下的延遲

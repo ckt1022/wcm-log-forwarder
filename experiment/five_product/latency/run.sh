@@ -16,7 +16,7 @@ if (( $# )); then PRODUCTS=("$@"); else PRODUCTS=(wcm fluentbit-lua fluentbit-wa
 
 declare -A RATE=([wcm]=5000 [fluentbit-lua]=5000 [fluentbit-wasm]=4000 [fluentd]=5000 [vector]=5000)
 declare -A CONF=([wcm]=forwarder.yaml [fluentbit-lua]=fluent-bit.conf [fluentbit-wasm]=fluent-bit.conf [fluentd]=fluent.conf [vector]=vector.yaml)
-WINDOWS=(${WINDOWS:-0.01 0.1 0.5 1})
+WINDOWS=(${WINDOWS:-0.01 0.1 0.5 1 2 5})
 
 if [[ "${QUICK:-0}" == 1 ]]; then
     export LOAD_SECS=20 DRAIN_SECS=5 LAT_WINDOW=5,15; REPS=1; WINDOWS=(0.1)

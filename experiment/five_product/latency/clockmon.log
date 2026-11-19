@@ -1,0 +1,235 @@
+00:37:28 START tick=10000 timesync=unbound
+00:47:28 OK steps_total=0 ticks_seen=[10000] freq=21.5ppm timesync=unbound wall-mono_change_total=-0ms
+--- 00:51:44 clockmon restarted with auto-fix
+00:51:44 START tick=10000 timesync=unbound
+01:01:44 OK steps_total=0 fixes_total=0 ticks_seen=[10000] freq=-7.9ppm timesync=unbound wall-mono_change_total=-0ms
+01:02:22 FIX#1 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound
+01:11:44 OK steps_total=0 fixes_total=1 ticks_seen=[10000, 10285] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+01:21:44 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-26.9ppm timesync=unbound wall-mono_change_total=-0ms
+01:31:45 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-24.7ppm timesync=unbound wall-mono_change_total=-0ms
+01:41:45 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-24.7ppm timesync=unbound wall-mono_change_total=-0ms
+01:51:45 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-24.7ppm timesync=unbound wall-mono_change_total=-0ms
+02:01:45 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-24.7ppm timesync=unbound wall-mono_change_total=-0ms
+02:11:45 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-27.1ppm timesync=unbound wall-mono_change_total=-0ms
+02:21:46 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-27.1ppm timesync=unbound wall-mono_change_total=-0ms
+02:31:46 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-27.1ppm timesync=unbound wall-mono_change_total=-0ms
+02:41:46 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-25.6ppm timesync=unbound wall-mono_change_total=-0ms
+02:51:46 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-25.6ppm timesync=unbound wall-mono_change_total=-0ms
+03:01:47 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-25.6ppm timesync=unbound wall-mono_change_total=-0ms
+03:11:47 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-25.6ppm timesync=unbound wall-mono_change_total=-0ms
+03:21:47 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-28.0ppm timesync=unbound wall-mono_change_total=-0ms
+03:31:47 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-28.0ppm timesync=unbound wall-mono_change_total=-0ms
+03:41:48 OK steps_total=0 fixes_total=1 ticks_seen=[10000] freq=-28.0ppm timesync=unbound wall-mono_change_total=-0ms
+03:49:03 FIX#2 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound
+03:51:48 OK steps_total=0 fixes_total=2 ticks_seen=[10000, 10285] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+04:01:48 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+04:11:48 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+04:21:49 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-25.7ppm timesync=unbound wall-mono_change_total=-0ms
+04:31:49 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-25.7ppm timesync=unbound wall-mono_change_total=-0ms
+04:41:49 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-25.7ppm timesync=unbound wall-mono_change_total=-0ms
+04:51:49 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-25.7ppm timesync=unbound wall-mono_change_total=-0ms
+05:01:50 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-28.7ppm timesync=unbound wall-mono_change_total=-0ms
+05:11:50 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-28.7ppm timesync=unbound wall-mono_change_total=-0ms
+05:21:50 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-28.7ppm timesync=unbound wall-mono_change_total=-0ms
+05:31:50 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-27.6ppm timesync=unbound wall-mono_change_total=-0ms
+05:41:50 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-27.6ppm timesync=unbound wall-mono_change_total=-0ms
+05:51:51 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-27.6ppm timesync=unbound wall-mono_change_total=-0ms
+06:01:51 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-27.6ppm timesync=unbound wall-mono_change_total=-0ms
+06:11:51 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-26.6ppm timesync=unbound wall-mono_change_total=-0ms
+06:21:52 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-26.6ppm timesync=unbound wall-mono_change_total=-0ms
+06:31:52 OK steps_total=0 fixes_total=2 ticks_seen=[10000] freq=-26.6ppm timesync=unbound wall-mono_change_total=-0ms
+06:35:42 FIX#3 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound
+06:41:52 OK steps_total=0 fixes_total=3 ticks_seen=[10000, 10285] freq=3.2ppm timesync=unbound wall-mono_change_total=-0ms
+06:51:53 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=3.2ppm timesync=unbound wall-mono_change_total=-0ms
+07:01:53 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=3.2ppm timesync=unbound wall-mono_change_total=-0ms
+07:11:53 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-14.2ppm timesync=unbound wall-mono_change_total=-0ms
+07:21:54 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-14.2ppm timesync=unbound wall-mono_change_total=-0ms
+07:31:54 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-14.2ppm timesync=unbound wall-mono_change_total=-0ms
+07:41:54 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-14.2ppm timesync=unbound wall-mono_change_total=-0ms
+07:51:54 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-28.8ppm timesync=unbound wall-mono_change_total=-0ms
+08:01:55 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-28.8ppm timesync=unbound wall-mono_change_total=-0ms
+08:11:55 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-28.8ppm timesync=unbound wall-mono_change_total=-0ms
+08:21:55 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-27.4ppm timesync=unbound wall-mono_change_total=-0ms
+08:31:56 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-27.4ppm timesync=unbound wall-mono_change_total=-0ms
+08:41:56 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-27.4ppm timesync=unbound wall-mono_change_total=-0ms
+08:51:56 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-27.4ppm timesync=unbound wall-mono_change_total=-0ms
+09:01:57 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-31.9ppm timesync=unbound wall-mono_change_total=-0ms
+09:11:57 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-31.9ppm timesync=unbound wall-mono_change_total=-0ms
+09:21:57 OK steps_total=0 fixes_total=3 ticks_seen=[10000] freq=-31.9ppm timesync=unbound wall-mono_change_total=-0ms
+09:22:22 FIX#4 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound
+09:31:58 OK steps_total=0 fixes_total=4 ticks_seen=[10000, 10285] freq=-6.3ppm timesync=unbound wall-mono_change_total=-0ms
+09:41:58 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-6.3ppm timesync=unbound wall-mono_change_total=-0ms
+09:51:58 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-6.3ppm timesync=unbound wall-mono_change_total=-0ms
+10:01:59 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-14.2ppm timesync=unbound wall-mono_change_total=-0ms
+10:11:59 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-14.2ppm timesync=unbound wall-mono_change_total=-0ms
+10:21:59 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-14.2ppm timesync=unbound wall-mono_change_total=-0ms
+10:31:59 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-14.2ppm timesync=unbound wall-mono_change_total=-0ms
+10:42:00 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-24.4ppm timesync=unbound wall-mono_change_total=-0ms
+10:52:00 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-24.4ppm timesync=unbound wall-mono_change_total=-0ms
+11:02:00 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-24.4ppm timesync=unbound wall-mono_change_total=-0ms
+11:12:01 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-29.7ppm timesync=unbound wall-mono_change_total=-0ms
+11:22:01 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-29.7ppm timesync=unbound wall-mono_change_total=-0ms
+11:32:01 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-29.7ppm timesync=unbound wall-mono_change_total=-0ms
+11:42:02 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-29.7ppm timesync=unbound wall-mono_change_total=-0ms
+11:52:02 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-25.0ppm timesync=unbound wall-mono_change_total=-0ms
+12:02:02 OK steps_total=0 fixes_total=4 ticks_seen=[10000] freq=-25.0ppm timesync=unbound wall-mono_change_total=-0ms
+12:09:02 FIX#5 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound
+12:12:02 OK steps_total=0 fixes_total=5 ticks_seen=[10000, 10285] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+12:22:03 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-18.4ppm timesync=unbound wall-mono_change_total=-0ms
+12:32:03 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-18.4ppm timesync=unbound wall-mono_change_total=-0ms
+12:42:03 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-18.4ppm timesync=unbound wall-mono_change_total=-0ms
+12:52:03 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-18.4ppm timesync=unbound wall-mono_change_total=-0ms
+13:02:03 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-22.9ppm timesync=unbound wall-mono_change_total=-0ms
+13:12:04 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-22.9ppm timesync=unbound wall-mono_change_total=-0ms
+13:22:04 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-22.9ppm timesync=unbound wall-mono_change_total=-0ms
+13:32:04 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-24.3ppm timesync=unbound wall-mono_change_total=-0ms
+13:42:04 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-24.3ppm timesync=unbound wall-mono_change_total=-0ms
+13:52:05 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-24.3ppm timesync=unbound wall-mono_change_total=-0ms
+14:02:05 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-24.3ppm timesync=unbound wall-mono_change_total=-0ms
+14:12:05 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-24.3ppm timesync=unbound wall-mono_change_total=-0ms
+14:22:06 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-24.8ppm timesync=unbound wall-mono_change_total=-0ms
+14:32:06 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-24.8ppm timesync=unbound wall-mono_change_total=-0ms
+14:42:06 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-24.8ppm timesync=unbound wall-mono_change_total=-0ms
+14:52:06 OK steps_total=0 fixes_total=5 ticks_seen=[10000] freq=-24.8ppm timesync=unbound wall-mono_change_total=-0ms
+14:55:43 FIX#6 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound
+15:02:07 OK steps_total=0 fixes_total=6 ticks_seen=[10000, 10285] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+15:12:07 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+15:22:07 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+15:32:07 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-17.0ppm timesync=unbound wall-mono_change_total=-0ms
+15:42:07 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-17.0ppm timesync=unbound wall-mono_change_total=-0ms
+15:52:07 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-17.0ppm timesync=unbound wall-mono_change_total=-0ms
+16:02:08 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-27.2ppm timesync=unbound wall-mono_change_total=-0ms
+16:12:08 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-27.2ppm timesync=unbound wall-mono_change_total=-0ms
+16:22:08 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-27.2ppm timesync=unbound wall-mono_change_total=-0ms
+16:32:08 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-27.2ppm timesync=unbound wall-mono_change_total=-0ms
+16:42:08 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-25.7ppm timesync=unbound wall-mono_change_total=-0ms
+16:52:08 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-25.7ppm timesync=unbound wall-mono_change_total=-0ms
+17:02:09 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-25.7ppm timesync=unbound wall-mono_change_total=-0ms
+17:12:09 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-22.0ppm timesync=unbound wall-mono_change_total=-0ms
+17:22:09 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-22.0ppm timesync=unbound wall-mono_change_total=-0ms
+17:32:09 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-22.0ppm timesync=unbound wall-mono_change_total=-0ms
+17:42:09 OK steps_total=0 fixes_total=6 ticks_seen=[10000] freq=-22.0ppm timesync=unbound wall-mono_change_total=-0ms
+17:42:22 FIX#7 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound
+17:52:09 OK steps_total=0 fixes_total=7 ticks_seen=[10000, 10285] freq=-11.2ppm timesync=unbound wall-mono_change_total=-0ms
+18:02:10 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-11.2ppm timesync=unbound wall-mono_change_total=-0ms
+18:12:10 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-11.2ppm timesync=unbound wall-mono_change_total=-0ms
+18:22:10 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-25.1ppm timesync=unbound wall-mono_change_total=-0ms
+18:32:10 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-25.1ppm timesync=unbound wall-mono_change_total=-0ms
+18:42:10 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-25.1ppm timesync=unbound wall-mono_change_total=-0ms
+18:52:10 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-25.5ppm timesync=unbound wall-mono_change_total=-0ms
+19:02:10 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-25.5ppm timesync=unbound wall-mono_change_total=-0ms
+19:12:11 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-25.5ppm timesync=unbound wall-mono_change_total=-0ms
+19:22:11 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-25.5ppm timesync=unbound wall-mono_change_total=-0ms
+19:32:11 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-25.1ppm timesync=unbound wall-mono_change_total=-0ms
+19:42:11 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-25.1ppm timesync=unbound wall-mono_change_total=-0ms
+19:52:11 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-25.1ppm timesync=unbound wall-mono_change_total=-0ms
+20:02:11 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-29.4ppm timesync=unbound wall-mono_change_total=-0ms
+20:12:12 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-29.4ppm timesync=unbound wall-mono_change_total=-0ms
+20:22:12 OK steps_total=0 fixes_total=7 ticks_seen=[10000] freq=-29.4ppm timesync=unbound wall-mono_change_total=-0ms
+20:29:03 FIX#8 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound
+20:32:12 OK steps_total=0 fixes_total=8 ticks_seen=[10000, 10285] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+20:42:12 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-7.1ppm timesync=unbound wall-mono_change_total=-0ms
+20:52:12 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-7.1ppm timesync=unbound wall-mono_change_total=-0ms
+21:02:13 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-7.1ppm timesync=unbound wall-mono_change_total=-0ms
+21:12:13 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-15.3ppm timesync=unbound wall-mono_change_total=-0ms
+21:22:13 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-15.3ppm timesync=unbound wall-mono_change_total=-0ms
+21:32:13 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-15.3ppm timesync=unbound wall-mono_change_total=-0ms
+21:42:13 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-15.3ppm timesync=unbound wall-mono_change_total=-0ms
+21:52:13 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-41.1ppm timesync=unbound wall-mono_change_total=-0ms
+22:02:14 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-41.1ppm timesync=unbound wall-mono_change_total=-0ms
+22:12:14 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-41.1ppm timesync=unbound wall-mono_change_total=-0ms
+22:22:14 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-41.1ppm timesync=unbound wall-mono_change_total=-0ms
+22:32:14 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-41.1ppm timesync=unbound wall-mono_change_total=-0ms
+22:42:14 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-8.8ppm timesync=unbound wall-mono_change_total=-0ms
+22:52:15 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-12.8ppm timesync=unbound wall-mono_change_total=-0ms
+23:02:15 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-12.8ppm timesync=unbound wall-mono_change_total=-0ms
+23:12:15 OK steps_total=0 fixes_total=8 ticks_seen=[10000] freq=-12.8ppm timesync=unbound wall-mono_change_total=-0ms
+23:15:42 FIX#9 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound
+23:22:15 OK steps_total=0 fixes_total=9 ticks_seen=[10000, 10285] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+23:32:15 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-13.3ppm timesync=unbound wall-mono_change_total=-0ms
+23:42:16 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-13.3ppm timesync=unbound wall-mono_change_total=-0ms
+23:52:16 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-13.3ppm timesync=unbound wall-mono_change_total=-0ms
+00:02:16 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-27.2ppm timesync=unbound wall-mono_change_total=-0ms
+00:12:16 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-27.2ppm timesync=unbound wall-mono_change_total=-0ms
+00:22:16 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-27.2ppm timesync=unbound wall-mono_change_total=-0ms
+00:32:16 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-27.2ppm timesync=unbound wall-mono_change_total=-0ms
+00:42:17 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-28.6ppm timesync=unbound wall-mono_change_total=-0ms
+00:52:17 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-28.6ppm timesync=unbound wall-mono_change_total=-0ms
+01:02:17 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-28.6ppm timesync=unbound wall-mono_change_total=-0ms
+01:12:17 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-30.1ppm timesync=unbound wall-mono_change_total=-0ms
+01:22:18 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-30.1ppm timesync=unbound wall-mono_change_total=-0ms
+01:32:18 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-30.1ppm timesync=unbound wall-mono_change_total=-0ms
+01:42:18 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-26.1ppm timesync=unbound wall-mono_change_total=-0ms
+01:52:18 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-26.1ppm timesync=unbound wall-mono_change_total=-0ms
+02:02:19 OK steps_total=0 fixes_total=9 ticks_seen=[10000] freq=-26.1ppm timesync=unbound wall-mono_change_total=-0ms
+02:02:23 FIX#10 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound
+02:12:19 OK steps_total=0 fixes_total=10 ticks_seen=[10000, 10285] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+02:22:19 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-15.0ppm timesync=unbound wall-mono_change_total=-0ms
+02:32:19 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-15.0ppm timesync=unbound wall-mono_change_total=-0ms
+02:42:20 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-15.0ppm timesync=unbound wall-mono_change_total=-0ms
+02:52:20 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-31.6ppm timesync=unbound wall-mono_change_total=-0ms
+03:02:21 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-31.6ppm timesync=unbound wall-mono_change_total=-0ms
+03:12:21 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-31.6ppm timesync=unbound wall-mono_change_total=-0ms
+03:22:21 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-31.6ppm timesync=unbound wall-mono_change_total=-0ms
+03:32:22 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-38.4ppm timesync=unbound wall-mono_change_total=-0ms
+03:42:22 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-38.4ppm timesync=unbound wall-mono_change_total=-0ms
+03:52:23 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-38.4ppm timesync=unbound wall-mono_change_total=-0ms
+04:02:23 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-22.9ppm timesync=unbound wall-mono_change_total=-0ms
+04:12:24 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-22.9ppm timesync=unbound wall-mono_change_total=-0ms
+04:22:24 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-22.9ppm timesync=unbound wall-mono_change_total=-0ms
+04:32:24 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-22.9ppm timesync=unbound wall-mono_change_total=-0ms
+04:42:25 OK steps_total=0 fixes_total=10 ticks_seen=[10000] freq=-22.0ppm timesync=unbound wall-mono_change_total=-0ms
+04:49:02 FIX#11 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound
+04:52:25 OK steps_total=0 fixes_total=11 ticks_seen=[10000, 10285] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+05:02:26 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+05:12:26 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-24.4ppm timesync=unbound wall-mono_change_total=-0ms
+05:22:27 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-24.4ppm timesync=unbound wall-mono_change_total=-0ms
+05:32:27 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-24.4ppm timesync=unbound wall-mono_change_total=-0ms
+05:42:27 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-25.9ppm timesync=unbound wall-mono_change_total=-0ms
+05:52:28 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-25.9ppm timesync=unbound wall-mono_change_total=-0ms
+06:02:28 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-25.9ppm timesync=unbound wall-mono_change_total=-0ms
+06:12:28 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-25.9ppm timesync=unbound wall-mono_change_total=-0ms
+06:22:29 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-35.5ppm timesync=unbound wall-mono_change_total=-0ms
+06:32:29 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-35.5ppm timesync=unbound wall-mono_change_total=-0ms
+06:42:30 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-35.5ppm timesync=unbound wall-mono_change_total=-0ms
+06:52:30 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-23.8ppm timesync=unbound wall-mono_change_total=-0ms
+07:02:30 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-23.8ppm timesync=unbound wall-mono_change_total=-0ms
+07:12:31 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-23.8ppm timesync=unbound wall-mono_change_total=-0ms
+07:22:31 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-23.8ppm timesync=unbound wall-mono_change_total=-0ms
+07:32:32 OK steps_total=0 fixes_total=11 ticks_seen=[10000] freq=-26.4ppm timesync=unbound wall-mono_change_total=-0ms
+07:35:43 FIX#12 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound
+07:42:32 OK steps_total=0 fixes_total=12 ticks_seen=[10000, 10285] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+07:52:33 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+08:02:33 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=-11.8ppm timesync=unbound wall-mono_change_total=-0ms
+08:12:33 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=-11.8ppm timesync=unbound wall-mono_change_total=-0ms
+08:22:34 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=-11.8ppm timesync=unbound wall-mono_change_total=-0ms
+08:32:34 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=-88.8ppm timesync=unbound wall-mono_change_total=-0ms
+08:42:35 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=-88.8ppm timesync=unbound wall-mono_change_total=-0ms
+08:52:35 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=-88.8ppm timesync=unbound wall-mono_change_total=-0ms
+09:02:35 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=155.0ppm timesync=unbound wall-mono_change_total=-0ms
+09:12:36 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=23.4ppm timesync=unbound wall-mono_change_total=-0ms
+09:22:36 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=6.1ppm timesync=unbound wall-mono_change_total=-0ms
+09:32:37 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=6.1ppm timesync=unbound wall-mono_change_total=-0ms
+09:42:37 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=-3.0ppm timesync=unbound wall-mono_change_total=-0ms
+09:52:38 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=-3.0ppm timesync=unbound wall-mono_change_total=-0ms
+10:02:38 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=-3.0ppm timesync=unbound wall-mono_change_total=-0ms
+10:12:38 OK steps_total=0 fixes_total=12 ticks_seen=[10000] freq=-17.6ppm timesync=unbound wall-mono_change_total=-0ms
+10:22:23 FIX#13 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound
+10:22:39 OK steps_total=0 fixes_total=13 ticks_seen=[10000, 10285] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+10:32:39 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+10:42:40 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=0.0ppm timesync=unbound wall-mono_change_total=-0ms
+10:52:40 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-18.4ppm timesync=unbound wall-mono_change_total=-0ms
+11:02:40 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-18.4ppm timesync=unbound wall-mono_change_total=-0ms
+11:12:41 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-18.4ppm timesync=unbound wall-mono_change_total=-0ms
+11:22:41 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-27.7ppm timesync=unbound wall-mono_change_total=-0ms
+11:32:42 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-27.7ppm timesync=unbound wall-mono_change_total=-0ms
+11:42:42 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-27.7ppm timesync=unbound wall-mono_change_total=-0ms
+11:52:43 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-29.0ppm timesync=unbound wall-mono_change_total=-0ms
+12:02:43 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-29.0ppm timesync=unbound wall-mono_change_total=-0ms
+12:12:43 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-29.0ppm timesync=unbound wall-mono_change_total=-0ms
+12:22:44 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-29.0ppm timesync=unbound wall-mono_change_total=-0ms
+12:32:44 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-30.2ppm timesync=unbound wall-mono_change_total=-0ms
+12:42:45 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-30.2ppm timesync=unbound wall-mono_change_total=-0ms
+12:52:45 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-30.2ppm timesync=unbound wall-mono_change_total=-0ms
+13:02:45 OK steps_total=0 fixes_total=13 ticks_seen=[10000] freq=-18.6ppm timesync=unbound wall-mono_change_total=-0ms
+13:09:03 FIX#14 reason=tick=10285 adjtimex_rc=0 tick_now=10000 timesync=unbound

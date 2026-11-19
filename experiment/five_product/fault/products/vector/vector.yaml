@@ -8,27 +8,96 @@ sources:
       codec: json
 
 transforms:
-  # 故障注入：VRL 無法寫迴圈，因此在 VRL 之前加一個 Lua transform；msg 含標記時在處理這一筆時故障
+  # 故障注入（VRL）：msg 含標記時，在處理這一筆時故障。與 latency_filter 分開成一個 remap，
+  # 對應其他產品「filter 中的故障」。drop_on_error 沿用預設值 false（出錯時原樣送出該筆）。
+  # VRL 沒有 while／loop 與遞迴，語言設計上保證會終止，所以：
+  #   FAULT_LOOP  以巢狀三層 for_each 走訪 2^16 個元素的陣列（約 2.8×10^14 次迭代），實際上等同不回傳
+  #   FAULT_PANIC assert!(false)，執行期錯誤
+  #   FAULT_OOB   讀取陣列越界的位置（VRL 回傳 null，不報錯），再當成整數使用而產生執行期錯誤
+  #   FAULT_MEM   字串連續倍增 40 次（理論上 1 TiB），持續配置記憶體
   fault:
-    type: lua
-    version: "2"
+    type: remap
     inputs: ["tcp_in"]
     source: |
-      function process(event, emit)
-        local msg = event.log.msg
-        if type(msg) == "string" then
-          if string.find(msg, "FAULT_LOOP", 1, true) then while true do end end
-          if string.find(msg, "FAULT_PANIC", 1, true) then error("injected FAULT_PANIC") end
-          if string.find(msg, "FAULT_OOB", 1, true) then local t = nil; local _ = t.missing end
-          if string.find(msg, "FAULT_MEM", 1, true) then
-            local chunks = {}
-            while true do chunks[#chunks + 1] = string.rep("x", 1048576) end
-          end
-        end
-        emit(event)
-      end
-    hooks:
-      process: process
+      msg = string(.msg) ?? ""
+      if contains(msg, "FAULT_LOOP") {
+        a = [0]
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        a = append(a, a)
+        n = 0
+        for_each(a) -> |_i, _x| {
+          for_each(a) -> |_j, _y| {
+            for_each(a) -> |_k, _z| {
+              n = n + 1
+            }
+          }
+        }
+      }
+      if contains(msg, "FAULT_PANIC") {
+        assert!(false, message: "injected FAULT_PANIC")
+      }
+      if contains(msg, "FAULT_OOB") {
+        v = [0]
+        _oob = int!(v[1])
+      }
+      if contains(msg, "FAULT_MEM") {
+        s = "x"
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        s = s + s
+        _mem = length(s)
+      }
 
   latency_filter:
     type: remap

@@ -2,11 +2,12 @@
 
 五個 pattern 各一個目錄。每個目錄只放有明確對照（開／關、參數掃描）或論文需要的存在性證據的實驗。
 WCM 都在 Docker 容器中執行（1 CPU、512 MiB、不允許 swap、host 網路），與 [five_product](../five_product/README.md) 共用 `common/` 的工具、映像與量測流程。
+結果、圖表與每個 pattern 的效果見 [../RESULTS.md](../RESULTS.md#第二部分pattern-實驗wcm)。
 
 | 目錄 | Pattern | 對照 | 主要指標 | 正式時間 | `QUICK=1` |
 |---|---|---|---|---|---|
 | [p1_amortized_boundary](p1_amortized_boundary/run.sh) | Amortized Boundary Crossing | 筆數上限 k = 1…1024 對位元組上限 1…512 KiB，三種日誌大小 | 飽和處理量（筆／秒） | 約 1.5 小時 | 約 3 分 |
-| [p2_streaming_micro_batch](p2_streaming_micro_batch/run.sh) | Streaming Micro-Batch | flush 時間窗 W = 0.01／0.1／0.5／1 s | p99、超額延遲（p99 − 0.99·W） | 約 45 分 | 約 1 分 |
+| [p2_streaming_micro_batch](p2_streaming_micro_batch/run.sh) | Streaming Micro-Batch | flush 時間窗 W = 0.01／0.1／0.5／1／2／5 s | p99、超額延遲（p99 − 0.99·W） | 約 1 小時 | 約 1 分 |
 | [p3_watchdog_respawn](p3_watchdog_respawn/run.sh) | Watchdog and Respawn | 呼叫時限 T = 1／2／5 s、watchdog 關閉；PANIC／OOB／MEM；watchdog 開／關的 CPU | 停頓秒數、恢復時間、遺失、CPU | 約 1 小時 | 約 5 分 |
 | [p4_poison_bisection](p4_poison_bisection/run.sh) | Poison Record Bisection | 二分開／關 × 壞資料 0／0.1／1／5%；trap 資料 0.1%；filter／format／transport 的故障 | 正常資料送達率、dead-letter、隔離呼叫次數、CPU | 約 45 分 | 約 3 分 |
 | [p5_capability_scoped](p5_capability_scoped/run.sh) | Capability-Scoped Stage | 授權 無／inert／endpoint；載入時、啟動時、執行期 | LOAD_OK／REFUSED、PROBE 結果、decoy 連線數 | 約 3 分 | 同左 |
@@ -49,7 +50,8 @@ WCM 的量測點另外有 `error.txt`（dead-letter）與 `dut.log` 結尾的 `[
 資料到達就以小批次處理，只有輸出端依 W 緩衝。直接呼叫 `five_product/latency/run.sh wcm`，條件與五產品比較相同：5,000 筆／秒，每點 180 s，取第 30–150 s，3 次。
 
 - 預期 p99 ≈ W + 固定的處理延遲，超額延遲不隨 W 成長。
-- 有其他產品的延遲資料時，圖中以細線一併畫出作為參考。
+- 有其他產品的延遲資料時，圖中以細線加圓點一併畫出作為參考；WCM 以粗線加星形標記表示。
+- 與 five_product/latency 相同，只因 backlog 而 FAIL 的點仍納入結果。
 - 已跑過完整的五產品延遲實驗時，用 `ANALYZE_ONLY=1 ./run.sh`。
 
 ### P3 Watchdog and Respawn

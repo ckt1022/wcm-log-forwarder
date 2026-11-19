@@ -1,0 +1,11 @@
+2026-11-13T17:00:56.945765Z  INFO vector::app: Log level is enabled. level="info"
+2026-11-13T17:00:56.946370Z  INFO vector::app: Loading configs. paths=["/etc/vector/vector.yaml"]
+2026-11-13T17:00:57.188230Z  INFO vector::topology::running: Running healthchecks.
+2026-11-13T17:00:57.188399Z  INFO vector: Vector has started. debug="false" version="0.49.0" arch="x86_64" revision="dc7e792 2025-08-12 13:47:08.632326804"
+2026-11-13T17:00:57.188412Z  INFO vector::app: API is disabled, enable by setting `api.enabled` to `true` and use commands like `vector top`.
+2026-11-13T17:00:57.188441Z  INFO vector::topology::builder: Healthcheck disabled.
+2026-11-13T17:00:57.188706Z  INFO source{component_kind="source" component_id=tcp_in component_type=socket}: vector::sources::util::net::tcp: Listening. addr=0.0.0.0:15140
+2026-11-13T17:01:15.214045Z ERROR transform{component_kind="transform" component_id=fault component_type=lua}: vector::internal_events::lua: Error in building lua script. error=RuntimeErrorHooksProcess { source: RuntimeError("[string \"src/transforms/lua/v2/mod.rs:263:17\"]:5: injected FAULT_PANIC\nstack traceback:\n\t[C]: in ?\n\t[C]: in function 'error'\n\t[string \"src/transforms/lua/v2/mod.rs:263:17\"]:5: in function 'process'") } error_type="script_failed" error_code="runtime_error_hook_process" stage="processing" internal_log_rate_limit=true
+2026-11-13T17:01:15.214186Z ERROR transform{component_kind="transform" component_id=fault component_type=lua}: vector_common::internal_event::component_events_dropped: Events dropped intentional=false count=1 reason="Error in building lua script." internal_log_rate_limit=true
+2026-11-13T17:02:28.702559Z  INFO vector::signal: Signal received. signal="SIGTERM"
+2026-11-13T17:02:28.702710Z  INFO vector: Vector has stopped.

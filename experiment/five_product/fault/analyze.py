@@ -12,12 +12,14 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import matplotlib.ticker  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RESULTS = os.path.join(HERE, "results")
 PRODUCTS = ["wcm", "fluentbit-lua", "fluentbit-wasm", "fluentd", "vector"]
 LABELS = {"wcm": "WCM", "fluentbit-lua": "Fluent Bit (Lua)", "fluentbit-wasm": "Fluent Bit (WASM)",
           "fluentd": "Fluentd", "vector": "Vector"}
+COLORS = {"wcm": "#2a78d6", "fluentbit-lua": "#1baf7a", "fluentbit-wasm": "#8a8984", "fluentd": "#eda100", "vector": "#e87ba4"}
 FAULTS = ["none", "FAULT_LOOP", "FAULT_PANIC", "FAULT_OOB", "FAULT_MEM"]
 
 
@@ -63,7 +65,8 @@ def analyse(run_dir):
     else:
         outcome = "lost data"
     return {"sent": summary["sent"], "expected": expected, "received": received, "lost": lost,
-            "longest_stall_s": longest, "alive": alive, "outcome": outcome, "series": series, "fault_at": fault_at}
+            "longest_stall_s": longest, "alive": alive, "outcome": outcome, "series": series, "fault_at": fault_at,
+            "load_end": load_end}
 
 
 def main():
@@ -85,20 +88,40 @@ def main():
         writer.writeheader()
         writer.writerows(rows)
 
-    # 每種故障一張圖：各產品每秒送達的筆數
+    # 每種故障一張圖：各產品累計收到的日誌筆數。故障後曲線持續上升 = 仍在送出；變成水平 = 停止送出。
+    # 灰色虛線是應收的累計量（負載期間每秒送達量固定，到負載結束時達到 expected）。
     os.makedirs(os.path.join(RESULTS, "figures"), exist_ok=True)
     for fault in FAULTS[1:]:
         subset = [r for r in rows if r["fault"] == fault]
         if not subset:
             continue
-        fig, ax = plt.subplots(figsize=(9, 4))
-        for r in subset:
-            ax.plot([t for t, _ in r["series"]], [n for _, n in r["series"]],
-                    label=f"{LABELS[r['product']]}: {r['outcome']}")
+        fig, ax = plt.subplots(figsize=(9, 4.5))
+        ref = next((r for r in rows if r["product"] == "wcm" and r["fault"] == "none"), None)
+        if ref:
+            ax.plot([0, ref["load_end"], max(t for t, _ in ref["series"])], [0, ref["expected"], ref["expected"]],
+                    ":", color="#555555", linewidth=1.5, label=f"expected ({ref['expected']:,})")
+        for r in sorted(subset, key=lambda x: x["product"] == "wcm"):   # WCM 最後畫，疊在最上層
+            wcm = r["product"] == "wcm"
+            total, ts, ys = 0, [], []
+            for t, n in r["series"]:
+                total += n
+                ts.append(t)
+                ys.append(total)
+            ax.plot(ts, ys, color=COLORS[r["product"]], linewidth=3 if wcm else 1.5, zorder=3 if wcm else 2,
+                    label=f"{LABELS[r['product']]}: {r['outcome']} ({r['received']:,})",
+                    **(dict(marker="*", markersize=11, markevery=6) if wcm else {}))
+        # 停止送出的產品曲線常常重疊成同一條水平線，標註是哪些產品
+        stopped = [r for r in subset if r["outcome"] not in ("ok", "extra records")]
+        if stopped:
+            level = max(r["received"] for r in stopped)
+            ax.annotate("stopped: " + ", ".join(LABELS[r["product"]] for r in stopped),
+                        xy=(subset[0]["fault_at"] + 15, level), xytext=(0, 8), textcoords="offset points",
+                        fontsize=8, color="#444444")
         ax.axvline(subset[0]["fault_at"], color="#b03a2e", linestyle="--", linewidth=1, label="fault injected")
         ax.set_xlabel("Seconds since load start")
-        ax.set_ylabel("Delivered per second")
-        ax.set_title(f"{fault}: delivery over time")
+        ax.set_ylabel("Cumulative records received")
+        ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:,.0f}"))
+        ax.set_title(f"{fault}: cumulative delivery (flat line = stopped delivering)")
         ax.legend(frameon=False, fontsize=8)
         ax.spines[["top", "right"]].set_visible(False)
         fig.tight_layout()

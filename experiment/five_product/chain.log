@@ -12,3 +12,25 @@
 05:08:17 p3_watchdog_respawn done exit=0
 05:44:05 p4_poison_bisection done exit=0
 05:45:31 p5_capability_scoped done exit=0
+2026-11-15 00:37:28 latency start
+2026-11-15 05:49:04 latency exit=0
+2026-11-15 05:49:25 p2 analyze exit=0
+2026-11-15 15:07:34 latency start
+2026-11-15 20:18:25 latency exit=0
+2026-11-15 20:18:43 p2 analyze exit=0
+2026-11-15 20:19:10 reliability chain start
+2026-11-15 20:19:21 httpsink build exit=0
+20:19:46 fluentbit-wasm W=0.5 r1 (rerun) FAIL reason=gen_no_done_line
+2026-11-15 20:20:21 latency re-analyze done
+wcm OK {'sent': 50000, 'expected': 25000, 'received': 25000, 'lost': 0, 'duplicates': 0, 'unexpected': 0, 'out_of_order': 0}
+fluentbit-lua OK {'sent': 50000, 'expected': 25000, 'received': 25000, 'lost': 0, 'duplicates': 0, 'unexpected': 0, 'out_of_order': 15848}
+fluentbit-wasm OK {'sent': 40000, 'expected': 20000, 'received': 20000, 'lost': 0, 'duplicates': 0, 'unexpected': 0, 'out_of_order': 15916}
+fluentd OK {'sent': 50000, 'expected': 25000, 'received': 25000, 'lost': 0, 'duplicates': 0, 'unexpected': 0, 'out_of_order': 0}
+vector OK {'sent': 50000, 'expected': 25000, 'received': 25000, 'lost': 0, 'duplicates': 0, 'unexpected': 0, 'out_of_order': 0}
+2026-11-15 20:22:11 smoke ok
+2026-11-15 21:02:31 outage exit=0
+2026-11-15 21:22:55 shutdown exit=0
+2026-11-16 02:26:21 soak exit=0
+2026-11-16 02:27:12 reliability analyze exit=0
+02:30:51 fluentbit-wasm W=0.5 r1 (rerun2) PASS rate=4000 gen_avg=4000/s gen_mb_s=4.100 lag_p99=5ms lag_max=3.4ms sink_total=287999 expected=287998 backlog=-1 win_
+2026-11-16 02:31:31 latency re-analyze (final) done

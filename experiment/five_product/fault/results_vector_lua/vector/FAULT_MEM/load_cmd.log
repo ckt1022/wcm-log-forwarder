@@ -1,0 +1,1 @@
+{"sent": 34360, "eps_target": 2000, "eps_actual": 1759.808840762595, "elapsed_sec": 19.524847929000316, "marker": "FAULT_MEM", "marker_count": 1, "fault_at_sec": 15, "fault_seq": 30000, "terminated": true, "malformed_rate": 0.0, "marker_rate": 0.0, "seed": 1, "malformed": 0, "marked": 0, "expected_normal_delivered": 17179}

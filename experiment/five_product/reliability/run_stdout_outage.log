@@ -1,0 +1,10 @@
+20:26:18 outage wcm r1 { "sent": 750000, "expected": 375000, "eps_target": 5000, "elapsed_sec": 149.981, "planned_sec": 150, "max_sen
+20:30:25 outage fluentbit-lua r1 { "sent": 750000, "expected": 375000, "eps_target": 5000, "elapsed_sec": 149.981, "planned_sec": 150, "max_sen
+20:34:31 outage fluentbit-wasm r1 { "sent": 600000, "expected": 300000, "eps_target": 4000, "elapsed_sec": 149.981, "planned_sec": 150, "max_sen
+20:38:40 outage fluentd r1 { "sent": 750000, "expected": 375000, "eps_target": 5000, "elapsed_sec": 149.981, "planned_sec": 150, "max_sen
+20:42:48 outage vector r1 { "sent": 750000, "expected": 375000, "eps_target": 5000, "elapsed_sec": 149.981, "planned_sec": 150, "max_sen
+20:46:55 outage wcm r2 { "sent": 750000, "expected": 375000, "eps_target": 5000, "elapsed_sec": 149.981, "planned_sec": 150, "max_sen
+20:51:03 outage fluentbit-lua r2 { "sent": 750000, "expected": 375000, "eps_target": 5000, "elapsed_sec": 149.981, "planned_sec": 150, "max_sen
+20:55:10 outage fluentbit-wasm r2 { "sent": 600000, "expected": 300000, "eps_target": 4000, "elapsed_sec": 149.982, "planned_sec": 150, "max_sen
+20:59:19 outage fluentd r2 { "sent": 750000, "expected": 375000, "eps_target": 5000, "elapsed_sec": 149.981, "planned_sec": 150, "max_sen
+21:02:31 outage vector r2 { "sent": 476600, "expected": 238300, "eps_target": 5000, "elapsed_sec": 95.321, "planned_sec": 150, "max_send

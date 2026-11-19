@@ -13,6 +13,9 @@
 #   LOAD_CMD     自訂負載指令（預設為 gen）；指令中的 @ADDR@ 會換成產品的接收位址
 #   DUT_ENV      傳給 WCM 容器的環境變數，空白分隔的 KEY=VALUE
 #   SUBST        額外的設定替換，空白分隔的 KEY=VALUE；設定模板中的 @KEY@ 會換成 VALUE（值不可含空白）
+#   SINK_ARGS    額外的接收端參數；@SINKDIR@ 會換成該接收端的輸出目錄（例：-seq-out @SINKDIR@/seq.bin）
+#   SINK_OUTAGE  下游中斷 "AT:DUR"：負載開始後 AT 秒停止接收端，DUR 秒後在同一連接埠重新啟動，
+#                第二個接收端輸出到 OUT_DIR/sink2/；時刻記錄在 outage.txt
 #
 # 輸出（OUT_DIR）
 #   conf.*          實際使用的設定        run_config.txt  映像、參數與條件
@@ -38,7 +41,8 @@ CONTAINER="exp-$PRODUCT"
 
 mkdir -p "$OUT_DIR"
 OUT_DIR="$(cd "$OUT_DIR" && pwd)"
-rm -f "$OUT_DIR"/*.csv "$OUT_DIR"/*.log "$OUT_DIR"/*.txt "$OUT_DIR"/*.json
+rm -f "$OUT_DIR"/*.csv "$OUT_DIR"/*.log "$OUT_DIR"/*.txt "$OUT_DIR"/*.json "$OUT_DIR"/*.bin
+rm -rf "$OUT_DIR/sink2"
 
 # 設定模板 → 實際設定
 ext="${CONF##*.}"
@@ -76,7 +80,7 @@ esac
     cat "$CONF_FILE"
 } > "$OUT_DIR/run_config.txt"
 
-SINK_PID="" LOGS_PID="" STATS_PID="" DRIFT_PID="" DONE=0
+SINK_PID="" LOGS_PID="" STATS_PID="" DRIFT_PID="" OUTAGE_PID="" DONE=0
 cleanup() {
     (( DONE )) && return
     DONE=1
@@ -89,11 +93,13 @@ cleanup() {
     docker inspect -f '{{.State.OOMKilled}}' "$CONTAINER" > "$OUT_DIR/oom.txt" 2>/dev/null || echo unknown > "$OUT_DIR/oom.txt"
     docker rm "$CONTAINER" >/dev/null 2>&1
     [[ -n "$LOGS_PID" ]] && kill "$LOGS_PID" 2>/dev/null
-    if [[ -n "$SINK_PID" ]]; then
-        kill -TERM "$SINK_PID" 2>/dev/null
-        for _ in $(seq 40); do kill -0 "$SINK_PID" 2>/dev/null || break; sleep 0.5; done
-        kill -9 "$SINK_PID" 2>/dev/null
-    fi
+    [[ -n "$OUTAGE_PID" ]] && kill "$OUTAGE_PID" 2>/dev/null
+    for pid in "$SINK_PID" $(cat "$OUT_DIR/sink2/pid" 2>/dev/null); do
+        [[ -n "$pid" ]] || continue
+        kill -TERM "$pid" 2>/dev/null
+        for _ in $(seq 40); do kill -0 "$pid" 2>/dev/null || break; sleep 0.5; done
+        kill -9 "$pid" 2>/dev/null
+    done
     [[ -n "$DRIFT_PID" ]] && kill "$DRIFT_PID" 2>/dev/null
 }
 trap cleanup EXIT INT TERM
@@ -103,7 +109,8 @@ docker rm -f "$CONTAINER" >/dev/null 2>&1
 python3 "$LIB/clock_drift_logger.py" "$OUT_DIR/clock_drift.csv" 0.02 &
 DRIFT_PID=$!
 date +%s.%N > "$OUT_DIR/sink_epoch.txt"
-"$COMMON/bin/httpsink" -port "$SINK_PORT" -out-dir "$OUT_DIR" -parse-ts="$PARSE_TS" > "$OUT_DIR/sink.log" 2>&1 &
+"$COMMON/bin/httpsink" -port "$SINK_PORT" -out-dir "$OUT_DIR" -parse-ts="$PARSE_TS" ${SINK_ARGS:+${SINK_ARGS//@SINKDIR@/$OUT_DIR}} \
+    > "$OUT_DIR/sink.log" 2>&1 &
 SINK_PID=$!
 
 # 2. 產品容器（host 網路；CPU 與記憶體受限，不允許 swap）
@@ -140,7 +147,24 @@ DUT_PID=$(docker inspect -f '{{.State.Pid}}' "$CONTAINER")
 "$LIB/sample_cgroup_stats.sh" "$DUT_PID" "$OUT_DIR/stats.csv" "$MEM_LIMIT" "$CPU_LIMIT" &
 STATS_PID=$!
 
-# 3. 負載
+# 3. 負載（SINK_OUTAGE：背景中依時刻停止、重新啟動接收端）
+if [[ -n "${SINK_OUTAGE:-}" ]]; then
+    (
+        sleep "${SINK_OUTAGE%%:*}"
+        echo "stop $(date +%s.%N)" > "$OUT_DIR/outage.txt"
+        kill -TERM "$SINK_PID"
+        for _ in $(seq 40); do kill -0 "$SINK_PID" 2>/dev/null || break; sleep 0.25; done
+        echo "stopped $(date +%s.%N)" >> "$OUT_DIR/outage.txt"
+        sleep "${SINK_OUTAGE#*:}"
+        mkdir -p "$OUT_DIR/sink2"
+        date +%s.%N > "$OUT_DIR/sink2/sink_epoch.txt"
+        "$COMMON/bin/httpsink" -port "$SINK_PORT" -out-dir "$OUT_DIR/sink2" -parse-ts="$PARSE_TS" \
+            ${SINK_ARGS:+${SINK_ARGS//@SINKDIR@/$OUT_DIR/sink2}} > "$OUT_DIR/sink2/sink.log" 2>&1 &
+        echo $! > "$OUT_DIR/sink2/pid"
+        echo "restart $(date +%s.%N)" >> "$OUT_DIR/outage.txt"
+    ) &
+    OUTAGE_PID=$!
+fi
 GEN_START=$(date +%s.%N)
 if [[ -n "${LOAD_CMD:-}" ]]; then
     bash -c "${LOAD_CMD//@ADDR@/127.0.0.1:$TCP_PORT}" > "$OUT_DIR/load_cmd.log" 2>&1

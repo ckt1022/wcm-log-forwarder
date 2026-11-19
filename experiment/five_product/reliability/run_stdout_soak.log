@@ -1,0 +1,5 @@
+22:23:34 soak wcm r1 { "sent": 18000000, "expected": 9000000, "eps_target": 5000, "elapsed_sec": 3599.982, "planned_sec": 3600, "ma
+23:24:16 soak fluentbit-lua r1 { "sent": 18000000, "expected": 9000000, "eps_target": 5000, "elapsed_sec": 3599.981, "planned_sec": 3600, "ma
+00:24:58 soak fluentbit-wasm r1 { "sent": 14400000, "expected": 7200000, "eps_target": 4000, "elapsed_sec": 3599.981, "planned_sec": 3600, "ma
+01:25:41 soak fluentd r1 { "sent": 18000000, "expected": 9000000, "eps_target": 5000, "elapsed_sec": 3599.981, "planned_sec": 3600, "ma
+02:26:21 soak vector r1 { "sent": 18000000, "expected": 9000000, "eps_target": 5000, "elapsed_sec": 3599.981, "planned_sec": 3600, "ma

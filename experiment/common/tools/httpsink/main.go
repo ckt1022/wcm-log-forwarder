@@ -33,6 +33,7 @@ var (
 	outDir   = flag.String("out-dir", ".", "output directory for CSVs")
 	parseTs  = flag.Bool("parse-ts", true, "parse per-line timestamp and record latency")
 	prealloc = flag.Int("prealloc", 0, "preallocate latency record capacity (avoid slice-growth memory spikes on high-volume runs)")
+	seqOut   = flag.String("seq-out", "", "記錄每行 \"seq\" 欄位（數字或字串皆可），結束時以 little-endian uint32 依接收順序寫入此檔；空 = 不記錄")
 )
 
 // 緊湊延遲記錄：receiveNs 秒級以下由 latUs 反推即可，不存 ts 字串
@@ -62,6 +63,32 @@ var secStats []secStat
 
 // tsKey 掃描：找 "timestamp":"<value>" 的 value 邊界
 var tsKey = []byte(`"timestamp":"`)
+
+// seq 掃描："seq":123 或 "seq":"123"；找不到時回傳 false
+var seqKey = []byte(`"seq":`)
+var seqBuf []uint32
+var seqMissing int64 // 有內容但沒有 seq 欄位的行數
+
+func extractSeq(line []byte) (uint32, bool) {
+	i := bytes.Index(line, seqKey)
+	if i < 0 {
+		return 0, false
+	}
+	rest := line[i+len(seqKey):]
+	for len(rest) > 0 && (rest[0] == ' ' || rest[0] == '"') {
+		rest = rest[1:]
+	}
+	var v uint64
+	n := 0
+	for n < len(rest) && rest[n] >= '0' && rest[n] <= '9' {
+		v = v*10 + uint64(rest[n]-'0')
+		n++
+	}
+	if n == 0 || v > 0xFFFFFFFF {
+		return 0, false
+	}
+	return uint32(v), true
+}
 
 func extractTs(line []byte) []byte {
 	i := bytes.Index(line, tsKey)
@@ -99,7 +126,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var recs []latRec
-	if *parseTs {
+	var seqs []uint32
+	var noSeq int64
+	if *parseTs || *seqOut != "" {
 		recs = make([]latRec, 0, nLines)
 		for len(body) > 0 {
 			nl := bytes.IndexByte(body, '\n')
@@ -110,6 +139,16 @@ func handler(w http.ResponseWriter, r *http.Request) {
 				line, body = body[:nl], body[nl+1:]
 			}
 			if len(line) == 0 {
+				continue
+			}
+			if *seqOut != "" {
+				if v, ok := extractSeq(line); ok {
+					seqs = append(seqs, v)
+				} else {
+					noSeq++
+				}
+			}
+			if !*parseTs {
 				continue
 			}
 			tsb := extractTs(line)
@@ -137,9 +176,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte(`{"status":"ok"}`))
 
-	if len(recs) > 0 {
+	if len(recs) > 0 || len(seqs) > 0 || noSeq > 0 {
 		mu.Lock()
 		latBuf = append(latBuf, recs...)
+		seqBuf = append(seqBuf, seqs...)
+		seqMissing += noSeq
 		mu.Unlock()
 	}
 }
@@ -167,6 +208,22 @@ func shutdown() {
 	fmt.Printf("[httpsink] done: batches=%d lines=%d bytes=%d elapsed=%.1fs avg=%.0f/s avg_mb_s=%.3f\n",
 		totalBatch, totalLines, totalBytes, elapsed,
 		float64(totalLines)/max(elapsed, 0.001), float64(totalBytes)/max(elapsed, 0.001)/1e6)
+
+	if *seqOut != "" {
+		if f, err := os.Create(*seqOut); err == nil {
+			w := bufio.NewWriterSize(f, 1<<20)
+			b := make([]byte, 4)
+			for _, v := range seqBuf {
+				b[0], b[1], b[2], b[3] = byte(v), byte(v>>8), byte(v>>16), byte(v>>24)
+				w.Write(b)
+			}
+			w.Flush()
+			f.Close()
+			fmt.Printf("[httpsink] seq file: %d records, lines_without_seq=%d\n", len(seqBuf), seqMissing)
+		} else {
+			fmt.Fprintf(os.Stderr, "[httpsink] create seq file: %v\n", err)
+		}
+	}
 
 	// 延遲 CSV（與 calc_latency.py 相容）
 	if *parseTs && len(latBuf) > 0 {

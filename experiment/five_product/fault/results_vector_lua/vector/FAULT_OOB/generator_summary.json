@@ -1,0 +1,17 @@
+{
+  "sent": 120000,
+  "eps_target": 2000,
+  "eps_actual": 2000.6452185863625,
+  "elapsed_sec": 59.98064968500057,
+  "marker": "FAULT_OOB",
+  "marker_count": 1,
+  "fault_at_sec": 15,
+  "fault_seq": 30000,
+  "terminated": false,
+  "malformed_rate": 0.0,
+  "marker_rate": 0.0,
+  "seed": 1,
+  "malformed": 0,
+  "marked": 0,
+  "expected_normal_delivered": 59999
+}

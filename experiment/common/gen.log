@@ -1,0 +1,2 @@
+[gen] output=stdout
+[gen] start: rate=5/s duration=1s mode=json-fields1k traffic=flat invalid-rate=0.05

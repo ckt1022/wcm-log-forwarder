@@ -1,0 +1,26 @@
+product,fault,outcome,sent,expected,received,lost,longest_stall_s,alive
+wcm,none,ok,120000,60000,60000,0,0,True
+wcm,FAULT_LOOP,ok,120000,60000,59999,1,7,True
+wcm,FAULT_PANIC,ok,120000,60000,59999,1,0,True
+wcm,FAULT_OOB,ok,120000,60000,59999,1,0,True
+wcm,FAULT_MEM,ok,120000,60000,59999,1,1,True
+fluentbit-lua,none,ok,120000,60000,60000,0,0,True
+fluentbit-lua,FAULT_LOOP,stalled,34000,17000,14960,2040,74,True
+fluentbit-lua,FAULT_PANIC,extra records,120000,60000,60015,-15,0,True
+fluentbit-lua,FAULT_OOB,extra records,120000,60000,60015,-15,0,True
+fluentbit-lua,FAULT_MEM,exited (OOM),32240,16120,15000,1120,0,False
+fluentbit-wasm,none,ok,120000,60000,60000,0,0,True
+fluentbit-wasm,FAULT_LOOP,stalled,32640,16320,14916,1404,74,True
+fluentbit-wasm,FAULT_PANIC,ok,120000,60000,59999,1,0,True
+fluentbit-wasm,FAULT_OOB,ok,120000,60000,59999,1,0,True
+fluentbit-wasm,FAULT_MEM,exited (OOM),30840,15420,15000,420,0,False
+fluentd,none,ok,120000,60000,60000,0,0,True
+fluentd,FAULT_LOOP,stalled,32640,16320,15000,1320,73,True
+fluentd,FAULT_PANIC,ok,120000,60000,60000,0,0,True
+fluentd,FAULT_OOB,ok,120000,60000,60000,0,0,True
+fluentd,FAULT_MEM,stalled,31840,15920,15000,920,0,True
+vector,none,ok,120000,60000,60000,0,0,True
+vector,FAULT_LOOP,stalled,34360,17180,15000,2180,74,True
+vector,FAULT_PANIC,ok,120000,60000,59999,1,0,True
+vector,FAULT_OOB,ok,120000,60000,59999,1,0,True
+vector,FAULT_MEM,exited (OOM),34360,17180,15000,2180,3,False

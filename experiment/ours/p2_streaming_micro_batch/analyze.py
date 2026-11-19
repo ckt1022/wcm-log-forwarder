@@ -83,7 +83,9 @@ def main():
             continue
         ws = list(points)
         wide = product == "wcm"
-        style = dict(color=COLORS[product], marker="o", linewidth=3 if wide else 1, alpha=1 if wide else 0.6,
+        # 本系統以星形標記，其他產品用圓點
+        style = dict(color=COLORS[product], marker="*" if wide else "o", markersize=14 if wide else 5,
+                     linewidth=3 if wide else 1, alpha=1 if wide else 0.6, zorder=3 if wide else 2,
                      label=LABELS[product])
         left.plot(ws, [points[w]["p99"] for w in ws], **style)
         right.plot(ws, [points[w]["excess"] for w in ws], **style)
